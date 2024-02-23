@@ -2,15 +2,47 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import SearchBar, { HomeSearchBar } from '../ui/common/searchbar'
+import { MiniReadingCard } from '../ui/reading/card'
+import { MiniVideoCard } from '../ui/video/card'
+import { Button } from '@material-tailwind/react'
+import { ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { NavigateButtonIcon } from '../ui/common/button-icon'
 
 const Home = () => {
   return (
     <div className='w-full relative'>
-      <div className='absolute w-full h-[70vh] bg-black/50 bg-gradient-to-r from-black/90 to-accent/50 text-white'>
-        <div className='font-semibold flex justify-center h-full px-16 flex-col tracking-wide'>
+      <div className='absolute w-full h-[70vh] bg-black/50 bg-gradient-to-r from-primary/80 to-accent/40 '>
+        <div className='font-semibold flex justify-center h-full px-16 flex-col tracking-wide text-white'>
           <div className='text-5xl'>LEARN & PLAY.</div>
           <div className='text-5xl pt-2'>Start a joyful journey mastering English.</div>
           <div className='font-normal mt-6 text-4xl'>Study English through most interesting stories and videos.</div>
+          <div className='pt-12'>
+            <HomeSearchBar />
+          </div>
+        </div>
+        <div className='mt-8 p-8 text-2xl font-semibold'>
+          <div className='flex justify-between'>
+            <h1 className='pb-4'>Trending videos</h1>
+            <NavigateButtonIcon linkTo='/videos' text='Watch more' />
+          </div>
+          <div className='flex gap-8'>
+            <MiniVideoCard />
+            <MiniVideoCard />
+            <MiniVideoCard />
+          </div>
+        </div>
+        <div className='mt-8 p-8 text-2xl font-semibold'>
+          <div className='flex justify-between'>
+            <h1 className='pb-4'>Best collected stories</h1>
+            <NavigateButtonIcon linkTo='/lessons' text='Read more' />
+          </div>
+          <div className='flex gap-8'>
+            <MiniReadingCard />
+            <MiniReadingCard />
+            <MiniReadingCard />
+          </div>
         </div>
       </div>
       <div className='w-full h-full'>

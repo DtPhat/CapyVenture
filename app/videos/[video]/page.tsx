@@ -14,7 +14,7 @@ import { LanguageIcon, PlayIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { formatSeconds } from '@/app/lib/utils';
 import TranslatableSection from '@/app/ui/translation/translatable-section';
 import next from 'next';
-import CollectionMenu from '@/app/ui/common/collection-menu';
+import CollectionMenu from '@/app/ui/collection/add';
 import Link from 'next/link';
 import VideoCard, { MiniVideoCard } from '@/app/ui/video/card';
 const YouTubePlayer = () => {
@@ -119,18 +119,7 @@ Years passed, and Tsao-fu served his master without receiving any instruction or
 But rather than becoming disheartened, he displayed commitment, convincing the charioteer that he was worthy of his teachings.
 
 One day, the master finally offered him a lesson.
-
-But it wasn’t what Tsao-fu expected.
-
-Instead of jumping straight into charioteering, the master put a couple of wooden posts into the ground and had Tsao-fu jump from one post to another repeatedly.
-
-After much practice, he could glide effortlessly across the wooden posts.
-
-And so, the master revealed the essence of the practice: it wasn’t just about strength or skill but about the union of intention and action.
-
-With the reins, hands, body, and mind in harmony, the chariot felt like an extension of Tsao-fu himself.
-
-The action was effortless as he found himself in a flow state.`
+`
 
   return (
     <div className='w-full px-16 py-8 max-w-7xl'>
@@ -203,18 +192,10 @@ The action was effortless as he found himself in a flow state.`
       <div>
         <h1 className="font-semibold pb-2">Related videos</h1>
         <div className="grid grid-cols-4 gap-4">
-          <Link href='/videos/thispage' className="space-y-2">
-            <MiniVideoCard />
-          </Link>
-          <Link href='/videos/thispage' className="space-y-2">
-            <MiniVideoCard />
-          </Link>
-          <Link href='/videos/thispage' className="space-y-2">
-            <MiniVideoCard />
-          </Link>
-          <Link href='/videos/thispage' className="space-y-2">
-            <MiniVideoCard />
-          </Link>
+          <MiniVideoCard />
+          <MiniVideoCard />
+          <MiniVideoCard />
+          <MiniVideoCard />
         </div>
       </div>
     </div>

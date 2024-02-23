@@ -7,6 +7,7 @@ import {
   CardHeader,
   Typography
 } from "@material-tailwind/react";
+import Link from "next/link";
 
 interface ReadingCardProps {
   data?: {
@@ -66,26 +67,31 @@ export default function ReadingCard(data: ReadingCardProps) {
 
 export function MiniReadingCard(data: ReadingCardProps) {
   return (
-    <Card className="hover:bg-accent/20 overflow-hidden relative">
-      <CardHeader
-        shadow={false}
-        color="transparent"
-        className="m-0 rounded-none"
-      >
-        <img
-          src="https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg"
-          alt="ui/ux review check"
-        />
-        <div className="flex items-center justify-center absolute bottom-2 left-2 border rounded-md">
-          <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">3</div>
-        </div>
-      </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-4">
-        <Typography className="text-base font-semibold" color="black">
-          Maze of Shadows
-        </Typography>
-        <p className="text-xs">Jan 08, 2024 · 10 min read</p>
-      </CardBody>
-    </Card>
+    <Link href='/lessons/thispage'>
+      <Card className="hover:bg-accent/20 overflow-hidden relative">
+        <CardHeader
+          shadow={false}
+          color="transparent"
+          className="m-0 rounded-none"
+        >
+          <img
+            src="https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg"
+            alt="ui/ux review check"
+          />
+          <div className="flex items-center justify-center absolute bottom-2 left-2 border rounded-md">
+            <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">3</div>
+          </div>
+        </CardHeader>
+        <CardBody className="flex flex-col gap-1 p-4">
+          <Typography className="text-lg font-semibold" color="black">
+            Maze of Shadows
+          </Typography>
+          <p className="text-xs text-black/50">Jan 08, 2024 · 10 min read</p>
+          <Typography className="font-normal text-sm text-black/80">
+            In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...
+          </Typography>
+        </CardBody>
+      </Card>
+    </Link>
   )
 }

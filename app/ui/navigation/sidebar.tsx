@@ -1,35 +1,43 @@
 'use client'
 import {
-  ArchiveBoxIcon,
-  Bars3Icon,
   BookOpenIcon,
   BookmarkSquareIcon,
-  Cog6ToothIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  ClipboardDocumentCheckIcon,
   HomeIcon,
-  InboxIcon,
-  PowerIcon,
+  PresentationChartBarIcon,
   PuzzlePieceIcon,
-  UserCircleIcon,
+  RectangleGroupIcon,
+  RectangleStackIcon,
+  ShoppingBagIcon,
   UserIcon,
   VideoCameraIcon,
   WalletIcon
 } from "@heroicons/react/24/solid";
 import {
   Card,
-  Chip,
   Drawer,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Typography
+  Typography,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { useContext, useEffect, useState } from "react";
 import { LayoutContext } from "../../providers";
-import { usePathname } from 'next/navigation'
 
 export default function Sidebar() {
+  const [open, setOpen] = useState(0);
+
+  const handleOpen = (value: number) => {
+    // setOpen(open === value ? 0 : value);
+    setOpen(open === value ? 0 : value);
+  };
   const navigationList = [
     {
       Icon: HomeIcon,
@@ -53,7 +61,21 @@ export default function Sidebar() {
       Icon: PuzzlePieceIcon,
       name: "Game Center",
       link: "/game",
-      index: 4
+      index: 4,
+      subPages: [
+        {
+          Icon: RectangleStackIcon,
+          name: "Flashcard",
+          link: "/game/flashcard",
+          index: 4.1
+        },
+        {
+          Icon: RectangleGroupIcon,
+          name: "Matching",
+          link: "/game/matching",
+          index: 4.2
+        }
+      ],
     },
 
     //personal navigation
@@ -86,7 +108,7 @@ export default function Sidebar() {
   }
 
   useEffect(() => {
-    
+
   }, [pathname]);
 
   return (
@@ -95,17 +117,54 @@ export default function Sidebar() {
         <Card className="fixed top-0 h-screen p-2 pt-16 flex flex-col gap-4 w-64 shadow-xl rounded-none select-none border-r-2">
           <List>
             {navigationList.map((item) =>
-              <Link href={item.link} key={item.index}>
-                <ListItem selected={pathname.includes(item.link)}>
-                  <ListItemPrefix>
-                    <item.Icon className="h-6 w-6" />
-                  </ListItemPrefix>
-                  <Typography className="mr-auto tracking-wide">
-                    {item.name}
-                  </Typography>
-                </ListItem>
-                {item.link === '/game' && <hr className="my-2 border-black" />}
-              </Link>
+              item.subPages ?
+                <>
+                  <Accordion
+                    open={open === 1}
+                    icon={
+                      <ChevronDownIcon
+                        strokeWidth={2.5}
+                        className={`mx-auto h-5 w-5 transition-transform ${open === 1 ? "rotate-180" : ""}`}
+                      />
+                    }
+                  >
+                    <ListItem className="p-0" >
+                      <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
+                        <ListItemPrefix>
+                          <item.Icon className="h-6 w-6 text-black" />
+                        </ListItemPrefix>
+                        <Typography className="mr-auto tracking-wide text-black">
+                          {item.name}
+                        </Typography>
+                      </AccordionHeader>
+                    </ListItem>
+                    <AccordionBody className="p-1 text-black flex flex-col gap-1">
+                      {item.subPages.map(subItem =>
+                        <Link href={subItem.link} >
+                          <ListItem selected={pathname.includes(subItem.link)} key={subItem.index}>
+                            <ListItemPrefix>
+                              <subItem.Icon className="h-6 w-6" />
+                            </ListItemPrefix>
+                            <Typography>
+                              {subItem.name}
+                            </Typography>
+                          </ListItem>
+                        </Link>
+                      )}
+                    </AccordionBody>
+                  </Accordion >
+                  {item.link === '/game' && <hr className="my-2 border-black" />}
+                </>
+                : <Link href={item.link} key={item.index}>
+                  <ListItem selected={pathname.includes(item.link)}>
+                    <ListItemPrefix>
+                      <item.Icon className="h-6 w-6" />
+                    </ListItemPrefix>
+                    <Typography className="mr-auto tracking-wide">
+                      {item.name}
+                    </Typography>
+                  </ListItem>
+                </Link>
             )}
           </List>
         </Card>

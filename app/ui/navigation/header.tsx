@@ -77,7 +77,7 @@ export default function Header() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <button onClick={() => setOpenSidebar(opening => !opening)}>
-            <Bars3Icon className="h-10 w-10 stroke-2 hover:bg-primary/20 rounded-3xl p-1 text-black" />
+            <Bars3Icon className="h-10 w-10 stroke-2 hover:bg-primarybrown/20 rounded-3xl p-1 text-black" />
           </button>
           <Link href='/' className="flex items-center justify-between">
             <img src="/icon.png" alt="brand" className="w-9 h-9" />

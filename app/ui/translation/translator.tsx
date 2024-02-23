@@ -22,19 +22,23 @@ import {
   ChevronRightIcon,
   PlusIcon
 } from "@heroicons/react/24/solid";
+import { CreateCollection } from "../collection/create";
 export default function Translator({ position, textToTranslate }: TranslatorProps) {
   const [translatedText, setTranslatedText] = useState()
   const [showingTranslation, setShowingTranslation] = useState(false)
+  const [loading, setLoading] = useState(false)
   const callTranslateAPI = async () => {
-    if(showingTranslation){
+    if (showingTranslation) {
       setShowingTranslation(false);
       return;
     }
-    setShowingTranslation(true)
+    setLoading(true);
     await fetch('/api/translation', {
       method: "POST",
       body: JSON.stringify({ text: textToTranslate }),
-    }).then(response => response.json()).then(data => { setTranslatedText(data.text); })
+    })
+      .then(response => { setShowingTranslation(true); return response.json() })
+      .then(data => { setTranslatedText(data.text); }).finally(() => setLoading(false))
   }
 
   const TranslationContent = <div className="min-w-40 max-w-sm mt-1">
@@ -57,8 +61,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
         <MenuHandler>
           <Button className="py-0.5 px-2 rounded flex items-center gap-1 bg-primary">
             <PlusIcon className="w-4 h-4" />
-            Add
-            {/* <span className=" normal-case text-sm">Add</span> */}
+            <span className="normal-case text-xs">Add</span>
             {/* <ChevronRightIcon className="w-4 h-4"/> */}
           </Button>
         </MenuHandler>
@@ -75,7 +78,13 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
             <span>Sports</span>
             <Chip value="11" size="sm" variant="ghost" className="rounded-full" />
           </MenuItem>
-
+          <CreateCollection CustomButton={
+            <Button variant='text' className="flex items-center p-1 w-full justify-center">
+              <PlusIcon className="w-4 h-4"/>
+              <span className="normal-case text-xs">Create Collection</span>
+            </Button>
+          }
+          />
         </MenuList>
       </Menu>
     </div>
@@ -90,7 +99,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
         <IconButton
           onClick={callTranslateAPI}
           className="bg-primary border w-7 h-7 rounded-lg">
-          <LanguageIcon className="w-5" />
+          {loading ? "..." : <LanguageIcon className="w-5" />}
         </IconButton>
       </Tooltip>
 
