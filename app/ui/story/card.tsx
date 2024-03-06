@@ -12,7 +12,7 @@ import Link from "next/link";
 interface StoryCard {
   data: {
     image: string,
-    name: string,
+    title: string,
     lastUpdated: string,
     length: number,
     summary: string,
@@ -20,7 +20,7 @@ interface StoryCard {
     topic?: string,
   }
 }
-export default function StoryCard({ data: { image, name, lastUpdated, length, summary, level, topic } }: StoryCard) {
+export default function StoryCard({ data: { image, title, lastUpdated, length, summary, level, topic } }: StoryCard) {
   return (
     <Card className="hover:bg-accent/20 overflow-hidden relative">
       <CardHeader
@@ -39,7 +39,7 @@ export default function StoryCard({ data: { image, name, lastUpdated, length, su
       </CardHeader>
       <CardBody className="flex flex-col gap-1 p-4">
         <Typography className="text-lg font-semibold" color="black">
-          {name}
+          {title}
         </Typography>
         <p className="text-xs">{lastUpdated} · {length} min read</p>
         <Typography color="gray" className="font-normal text-sm">
@@ -66,7 +66,7 @@ export default function StoryCard({ data: { image, name, lastUpdated, length, su
   )
 }
 
-export function MiniStoryCard({ data: { image, name, lastUpdated, length, summary, level, topic } }: StoryCard) {
+export function MiniStoryCard({ data: { image, title, lastUpdated, length, summary, level, topic } }: StoryCard) {
   return (
     <Link href='/stories/thispage'>
       <Card className="hover:bg-accent/20 overflow-hidden relative">
@@ -86,7 +86,7 @@ export function MiniStoryCard({ data: { image, name, lastUpdated, length, summar
         </CardHeader>
         <CardBody className="flex flex-col gap-1 p-4">
           <Typography className="text-lg font-semibold" color="black">
-            {name}
+            {title}
           </Typography>
           <p className="text-xs text-black/50">{lastUpdated} · {length} min read</p>
           <Typography className="font-normal text-sm text-black/80">

@@ -56,7 +56,7 @@ export const videoList: Video[] = [
 export const storyList: Story[] = [
   {
     image: "https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg",
-    name: "Sunflowers at sunset",
+    title: "Sunflowers at sunset",
     lastUpdated: "Jan 08, 2024",
     length: 10,
     summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
@@ -65,7 +65,7 @@ export const storyList: Story[] = [
   },
   {
     image: "https://e1.pxfuel.com/desktop-wallpaper/321/39/desktop-wallpaper-sakura-blossom-petals-scenery-sky-cherry-cherry-blossom-anime-aesthetic.jpg",
-    name: "Spring with blue sky",
+    title: "Spring with blue sky",
     lastUpdated: "Jan 08, 2024",
     length: 10,
     summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
@@ -74,7 +74,7 @@ export const storyList: Story[] = [
   },
   {
     image: "https://st2.depositphotos.com/2769299/9083/i/450/depositphotos_90835898-stock-photo-dark-mysterious-street.jpg",
-    name: "Maze of Shadows",
+    title: "Maze of Shadows",
     lastUpdated: "Jan 08, 2024",
     length: 10,
     summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",

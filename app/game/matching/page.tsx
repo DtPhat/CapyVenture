@@ -25,10 +25,10 @@ const Page = () => {
         <div className='flex gap-4 flex-wrap justify-center'>
           {
             data.map(item =>
-              <Card className="w-80 h-40 border-2 hover:bg-accent/10 cursor-pointer"
+              <Card className="w-80 h-40 border-2 hover:bg-accent/10 cursor-pointer" key={item.text}
                 onClick={() => handleSelectCard(item.text)}
               >
-                <CardBody className='flex justify-center items-center h-full'>
+                <CardBody className='flex justify-center items-center h-full' >
                   <Typography className='font-semibold'>
                     {item.text}
                   </Typography>

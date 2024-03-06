@@ -30,7 +30,7 @@ export default function Lessons() {
       <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {
           storyList.map(item =>
-            <Link href='/storeis/story'>
+            <Link href='/storeis/story' key={item.title}>
               <ReadingCard data={item} />
             </Link>
           )

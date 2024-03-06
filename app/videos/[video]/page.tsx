@@ -261,7 +261,7 @@ One day, the master finally offered him a lesson.
         <div className="grid grid-cols-4 gap-4">
           {
             videoList.map((video: Video) =>
-              <Link href='/videos/video'>
+              <Link href='/videos/video' key={video.title}>
                 <MiniVideoCard data={video} />
               </Link>
             )

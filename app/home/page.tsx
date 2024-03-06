@@ -32,7 +32,7 @@ const Home = () => {
           <div className='flex gap-8'>
             {
               videoList.map(item =>
-                <MiniVideoCard data={item} />
+                <MiniVideoCard data={item} key={item.title}/>
               )
             }
           </div>
@@ -45,7 +45,7 @@ const Home = () => {
           </div>
           <div className='flex gap-8'>
             {
-              storyList.map(item => <MiniStoryCard data={item}/>)
+              storyList.map(item => <MiniStoryCard data={item} key={item.title}/>)
             }
           </div>
         </div>

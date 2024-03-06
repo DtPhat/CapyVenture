@@ -16,7 +16,7 @@ export type Video = {
 
 export type Story = {
   image: string,
-  name: string,
+  title: string,
   lastUpdated: string,
   length: number,
   summary: string,

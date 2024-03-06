@@ -30,7 +30,7 @@ export default function Videos() {
       <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {
           videoList.map((video : Video) =>
-            <Link href='/videos/video'>
+            <Link href='/videos/video' key={video.title}>
               <VideoCard data={video} />
             </Link>
           )
