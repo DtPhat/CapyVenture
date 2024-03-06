@@ -1,4 +1,4 @@
-import React from "react";
+import { LegacyRef, MutableRefObject, useRef, useState } from "react";
 import {
   Button,
   Dialog,
@@ -18,7 +18,8 @@ interface Props {
 }
 
 export function CreateCollection({ CustomButton }: Props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const imgInput = useRef<HTMLInputElement>(null)
 
   const handleOpen = () => setOpen(!open);
 
@@ -68,6 +69,24 @@ export function CreateCollection({ CustomButton }: Props) {
               <button className="border rounded-full w-16 h-16 p-2 hover:bg-gray-100">
                 <NewspaperIcon className="w-full h-full" />
               </button>
+              <button className="border rounded-full w-16 h-16 p-2 hover:bg-gray-100">
+                <HomeIcon className="w-full h-full" />
+              </button>
+              <button className="border rounded-full w-16 h-16 p-2 hover:bg-gray-100">
+                <AcademicCapIcon className="w-full h-full" />
+              </button>
+              <button className="border rounded-full w-16 h-16 p-2 hover:bg-gray-100">
+                <GlobeAmericasIcon className="w-full h-full" />
+              </button>
+              <button className="border rounded-full w-16 h-16 p-2 hover:bg-gray-100">
+                <LanguageIcon className="w-full h-full" />
+              </button>
+              
+              <button className='border-2 border-dashed border-gray-400 rounded-full w-16 h-16 p-2 hover:bg-gray-100 items-center justify-center'
+                onClick={() => imgInput.current?.click()}>
+                  <PlusIcon className="w-12 h-12 text-gray-400"/>
+              </button>
+              <input type='file' className='hidden' accept="image/*" ref={imgInput} />
             </div>
           </div>
         </DialogBody>

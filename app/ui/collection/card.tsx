@@ -23,7 +23,7 @@ export default function CollectionCard() {
             <HomeIcon className="w-12 h-12" />
           </div>
           <Typography color="blue-gray" className="text-lg font-semibold hover:text-primary cursor-pointer">
-            Technical Vocabulary
+            Academic Writing
           </Typography>
           <Menu>
             <MenuHandler>

@@ -4,7 +4,8 @@ import Translator from "../../ui/translation/translator";
 import { Card, CardFooter } from "@material-tailwind/react";
 import Link from "next/link";
 import TranslatableSection from "@/app/ui/translation/translatable-section";
-import { MiniReadingCard } from "@/app/ui/reading/card";
+import { MiniStoryCard } from "@/app/ui/story/card";
+import { storyList, videoList } from "@/app/lib/placeholder-data";
 export default function Lesson() {
   const [open, setOpen] = useState(0);
   // const [selectedText, setSelectedText] = useState("");
@@ -33,7 +34,7 @@ export default function Lesson() {
         <div className="flex justify-between gap-1 text text-black/90">
           <div>
             <p>Level: Intermediate</p>
-            <p>Tags: Short story, Mystery</p>
+            <p>Topic: Mystery</p>
           </div>
           <div className="text-end">
             <p>Jan 08, 2024 · 10 min read</p>
@@ -63,18 +64,12 @@ export default function Lesson() {
         <div>
           <h1 className="font-semibold pb-2">Related lessons</h1>
           <div className="grid grid-cols-4 gap-4">
-            <Link href='/lessons/thispage' className="space-y-2">
-              <MiniReadingCard />
-            </Link>
-            <Link href='/lessons/thispage' className="space-y-2">
-              <MiniReadingCard />
-            </Link>
-            <Link href='/lessons/thispage' className="space-y-2">
-              <MiniReadingCard />
-            </Link>
-            <Link href='/lessons/thispage' className="space-y-2">
-              <MiniReadingCard />
-            </Link>
+            {
+              storyList.map(item =>
+                <Link href='/stories/thispage' className="space-y-2">
+                  <MiniStoryCard data={item} />
+                </Link>)
+            }
           </div>
         </div>
       </div>

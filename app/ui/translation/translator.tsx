@@ -65,7 +65,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
             {/* <ChevronRightIcon className="w-4 h-4"/> */}
           </Button>
         </MenuHandler>
-        <MenuList className="p-1 text-black bg-purewhite flex flex-col gap-1">
+        <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1">
           <MenuItem className="flex gap-4 border-2 items-center justify-between py-1">
             <span>Family</span>
             <Chip value="5" size="sm" variant="ghost" className="rounded-full" />
@@ -94,7 +94,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
     <div className="pt-2 z-50"
       style={{ position: position ? 'absolute' : 'static', left: position?.x, top: position?.y }}>
       <Tooltip open={showingTranslation}
-        className='bg-purewhite text-black border-2 p-0'
+        className='bg-foreground text-black border-2 p-0'
         content={TranslationContent}>
         <IconButton
           onClick={callTranslateAPI}

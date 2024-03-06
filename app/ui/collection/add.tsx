@@ -28,7 +28,7 @@ const CollectionMenu = ({ handlerButton }: CollectionMenuProps) => {
           </Button>
         }
       </MenuHandler>
-      <MenuList className="p-1 text-black bg-purewhite flex flex-col gap-1">
+      <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1">
         <MenuItem className="flex gap-4 border-2 items-center justify-between py-1">
           <span>Family</span>
           <Chip value="5" size="sm" variant="ghost" className="rounded-full" />

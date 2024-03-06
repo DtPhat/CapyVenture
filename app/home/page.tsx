@@ -3,12 +3,14 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import SearchBar, { HomeSearchBar } from '../ui/common/searchbar'
-import { MiniReadingCard } from '../ui/reading/card'
+import { MiniStoryCard } from '../ui/story/card'
 import { MiniVideoCard } from '../ui/video/card'
 import { Button } from '@material-tailwind/react'
 import { ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { NavigateButtonIcon } from '../ui/common/button-icon'
+import Separator from '../ui/common/separator'
+import { storyList, videoList } from '../lib/placeholder-data'
 
 const Home = () => {
   return (
@@ -19,7 +21,7 @@ const Home = () => {
           <div className='text-5xl pt-2'>Start a joyful journey mastering English.</div>
           <div className='font-normal mt-6 text-4xl'>Study English through most interesting stories and videos.</div>
           <div className='pt-12'>
-            <HomeSearchBar />
+            <HomeSearchBar placeholder='Search videos, stories,..' />
           </div>
         </div>
         <div className='mt-8 p-8 text-2xl font-semibold'>
@@ -28,20 +30,23 @@ const Home = () => {
             <NavigateButtonIcon linkTo='/videos' text='Watch more' />
           </div>
           <div className='flex gap-8'>
-            <MiniVideoCard />
-            <MiniVideoCard />
-            <MiniVideoCard />
+            {
+              videoList.map(item =>
+                <MiniVideoCard data={item} />
+              )
+            }
           </div>
         </div>
+        <Separator />
         <div className='mt-8 p-8 text-2xl font-semibold'>
           <div className='flex justify-between'>
             <h1 className='pb-4'>Best collected stories</h1>
-            <NavigateButtonIcon linkTo='/lessons' text='Read more' />
+            <NavigateButtonIcon linkTo='/stories' text='Read more' />
           </div>
           <div className='flex gap-8'>
-            <MiniReadingCard />
-            <MiniReadingCard />
-            <MiniReadingCard />
+            {
+              storyList.map(item => <MiniStoryCard data={item}/>)
+            }
           </div>
         </div>
       </div>

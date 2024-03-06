@@ -8,9 +8,12 @@ import {
   HomeIcon,
   PresentationChartBarIcon,
   PuzzlePieceIcon,
+  QuestionMarkCircleIcon,
   RectangleGroupIcon,
   RectangleStackIcon,
   ShoppingBagIcon,
+  Square2StackIcon,
+  Squares2X2Icon,
   UserIcon,
   VideoCameraIcon,
   WalletIcon
@@ -47,8 +50,8 @@ export default function Sidebar() {
     },
     {
       Icon: BookOpenIcon,
-      name: "Reading",
-      link: "/lessons",
+      name: "Stories",
+      link: "/stories",
       index: 2
     },
     {
@@ -64,7 +67,7 @@ export default function Sidebar() {
       index: 4,
       subPages: [
         {
-          Icon: RectangleStackIcon,
+          Icon: Square2StackIcon,
           name: "Flashcard",
           link: "/game/flashcard",
           index: 4.1
@@ -74,7 +77,20 @@ export default function Sidebar() {
           name: "Matching",
           link: "/game/matching",
           index: 4.2
-        }
+        },
+        {
+          Icon: QuestionMarkCircleIcon,
+          name: "Word Guessing",
+          link: "/game/word-guessing",
+          index: 4.3
+        },
+        {
+          Icon: Squares2X2Icon,
+          name: "Multiple Choice",
+          link: "/game/multiple-choice",
+          index: 4.2
+        },
+        
       ],
     },
 
@@ -118,7 +134,7 @@ export default function Sidebar() {
           <List>
             {navigationList.map((item) =>
               item.subPages ?
-                <>
+                <div key={item.name}>
                   <Accordion
                     open={open === 1}
                     icon={
@@ -138,9 +154,9 @@ export default function Sidebar() {
                         </Typography>
                       </AccordionHeader>
                     </ListItem>
-                    <AccordionBody className="p-1 text-black flex flex-col gap-1">
+                    <AccordionBody className="p-1 text-black flex flex-col gap-1 pl-1.5">
                       {item.subPages.map(subItem =>
-                        <Link href={subItem.link} >
+                        <Link href={subItem.link} key={subItem.index}>
                           <ListItem selected={pathname.includes(subItem.link)} key={subItem.index}>
                             <ListItemPrefix>
                               <subItem.Icon className="h-6 w-6" />
@@ -154,7 +170,7 @@ export default function Sidebar() {
                     </AccordionBody>
                   </Accordion >
                   {item.link === '/game' && <hr className="my-2 border-black" />}
-                </>
+                </div>
                 : <Link href={item.link} key={item.index}>
                   <ListItem selected={pathname.includes(item.link)}>
                     <ListItemPrefix>

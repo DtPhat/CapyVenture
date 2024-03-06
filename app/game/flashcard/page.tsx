@@ -7,6 +7,7 @@ import { ChevronDownIcon, ChevronRightIcon, PlusIcon, RectangleGroupIcon, Rectan
 import { CreateCollection } from '@/app/ui/collection/create';
 import Link from 'next/link';
 import Separator from '@/app/ui/common/separator';
+import { collection } from '@/app/lib/placeholder-data';
 const GamePage = () => {
   const data = {
     question: "string 1",
@@ -14,7 +15,7 @@ const GamePage = () => {
   };
   return (
     <div className=''>
-      <Flashcard />
+      <Flashcard data={collection}/>
     </div>
   )
 }

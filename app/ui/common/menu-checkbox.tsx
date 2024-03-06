@@ -12,7 +12,7 @@ import {
 
 interface MenuCheckbox {
   name?: string,
-  checklist?: any,
+  checklist?: string[],
 }
 
 export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
@@ -28,49 +28,24 @@ export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
           <ChevronDownIcon className="w-6 h-6 stroke-2" />
         </Button>
       </MenuHandler>
-      <MenuList className="bg-purewhite border-2 border-black/50">
-        <MenuItem className="p-0">
-          <label
-            htmlFor="item-1"
-            className="flex cursor-pointer items-center gap-2 p-2"
-          >
-            <Checkbox
-              ripple={false}
-              id="item-1"
-              containerProps={{ className: "p-0" }}
-              className="hover:before:content-none"
-            />
-            Comedy
-          </label>
-        </MenuItem>
-        <MenuItem className="p-0">
-          <label
-            htmlFor="item-2"
-            className="flex cursor-pointer items-center gap-2 p-2"
-          >
-            <Checkbox
-              ripple={false}
-              id="item-2"
-              containerProps={{ className: "p-0" }}
-              className="hover:before:content-none"
-            />
-            Music
-          </label>
-        </MenuItem>
-        <MenuItem className="p-0">
-          <label
-            htmlFor="item-3"
-            className="flex cursor-pointer items-center gap-2 p-2"
-          >
-            <Checkbox
-              ripple={false}
-              id="item-3"
-              containerProps={{ className: "p-0" }}
-              className="hover:before:content-none"
-            />
-            Health
-          </label>
-        </MenuItem>
+      <MenuList className="bg-foreground border-2 border-black/50">
+        {
+          checklist?.map(item =>
+            <MenuItem className="p-0" key={item}>
+              <label
+                htmlFor={item}
+                className="flex cursor-pointer items-center gap-2 p-2"
+              >
+                <Checkbox
+                  ripple={false}
+                  id={item}
+                  containerProps={{ className: "p-0" }}
+                  className="hover:before:content-none"
+                />
+                {item}
+              </label>
+            </MenuItem>
+          )}
       </MenuList>
     </Menu>
   );

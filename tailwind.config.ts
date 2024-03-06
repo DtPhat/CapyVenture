@@ -15,13 +15,15 @@ module.exports = withMT({
         tertiary: "#8eb84b",
         accent: "#6fc6c1",
         background: "#fcfdf9",
+        foreground: "#ffffff",
         black: "#1c1d0b",
         white: "#fcfdf9",
-        whitebrown: "#f5f2eb",
-        primarybrown: "#655129",
-        secondarybrown: "#d9bc82",
-        accentbrown: "#d9bc82",
-        purewhite: "#ffffff"
+        brown: {
+          background: "#f5f2eb",
+          primary: "#655129",
+          secondary: "#d9bc82",
+          accent: "#d9bc82"
+        }
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
