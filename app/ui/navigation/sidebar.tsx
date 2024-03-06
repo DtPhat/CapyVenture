@@ -88,7 +88,7 @@ export default function Sidebar() {
           Icon: Squares2X2Icon,
           name: "Multiple Choice",
           link: "/game/multiple-choice",
-          index: 4.2
+          index: 4.4
         },
         
       ],
