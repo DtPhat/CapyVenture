@@ -220,7 +220,7 @@ One day, the master finally offered him a lesson.
                         </div>
                         : <div className='flex flex-col item-center overflow-auto'>
                           {videoTranscripts.map((transcript, index) =>
-                            <div className={`py-1 flex gap-2 ${checkPlaying(index) ? 'bg-black/10' : ''} px-2 items-center border-b border-gray-300`}>
+                            <div key={index} className={`py-1 flex gap-2 ${checkPlaying(index) ? 'bg-black/10' : ''} px-2 items-center border-b border-gray-300`}>
                               <div className='my-auto'>
                                 <button
                                   onClick={() => jumpToTimestamp(transcript.timestamp)}

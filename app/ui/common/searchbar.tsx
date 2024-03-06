@@ -38,8 +38,8 @@ export const HomeSearchBar = ({ givenKeyword, handleEnter, placeholder = 'Search
   fullRounded = fullRounded || true
   const [keyword, setKeyword] = useState(givenKeyword || "")
   const searchRef = useRef<HTMLInputElement>(null)
-  autoFocus && useEffect(() => {
-    if (searchRef.current) {
+  useEffect(() => {
+    if (autoFocus && searchRef.current) {
       searchRef.current.focus();
     }
   }, [keyword]);
