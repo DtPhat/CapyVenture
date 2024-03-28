@@ -27,11 +27,13 @@ const listTheme = {
           lightHeight: "leading-tight",
           transition: "transition-all",
           bg: "hover:bg-secondary/20 hover:bg-opacity-80 focus:bg-secondary/50 active:bg-secondary/50 active:bg-opacity-80",
+          // bg: "hover:bg-blue-gray-50 hover:bg-opacity-80 focus:bg-blue-gray-50 active:bg-blue-gray-50 active:bg-opacity-80",
           color: "focus:text-primary active:text-primary",
           outline: "outline-none",
         },
         selected: {
-          bg: "bg-secondary/50 hover:bg-secondary/50",
+          // bg: "bg-secondary/50 hover:bg-secondary/50",
+          bg: "bg-blue-gray-50 hover:bg-blue-gray-50",
           color: "text-primary",
         },
         disabled: {

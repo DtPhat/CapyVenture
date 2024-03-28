@@ -3,7 +3,7 @@
 //   Response.json("Tao la Doan Tien Phat")
 // }
 
-import translateText from "../../lib/actions"
+import translateText from "@/app/actions"
 
 export async function POST(req: Request) {
   const {text} = await req.json()

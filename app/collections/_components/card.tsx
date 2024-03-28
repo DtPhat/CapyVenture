@@ -12,7 +12,7 @@ import {
   IconButton,
   Avatar,
 } from "@material-tailwind/react";
-import { NavigateButtonIcon } from "../common/button-icon";
+import { NavigateButtonIcon } from "@/components/button-icon";
 
 export default function CollectionCard() {
   return (

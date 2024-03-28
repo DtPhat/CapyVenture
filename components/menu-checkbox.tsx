@@ -28,7 +28,7 @@ export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
           <ChevronDownIcon className="w-6 h-6 stroke-2" />
         </Button>
       </MenuHandler>
-      <MenuList className="bg-foreground border-2 border-black/50">
+      <MenuList className="bg-white border-2 border-black/50">
         {
           checklist?.map(item =>
             <MenuItem className="p-0" key={item}>

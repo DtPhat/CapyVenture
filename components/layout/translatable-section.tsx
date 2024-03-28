@@ -1,6 +1,6 @@
 'use client'
 import { MouseEvent, ReactNode, useState } from "react";
-import Translator from "./translator";
+import Translator from "../translator";
 interface TranslatableSectionProps {
   children: ReactNode
 }

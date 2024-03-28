@@ -1,24 +1,20 @@
 'use client'
-import React, { useRef, useState } from 'react';
-import YouTube, { YouTubePlayer } from 'react-youtube';
+import { formatSeconds } from '@/lib/helpers/dateUtils';
+import { MiniVideoCard } from '@/app/videos/_components/card';
+import TranslatableSection from '@/components/layout/translatable-section';
+import { Video } from '@/lib/definitions';
+import { videoList } from '@/lib/placeholder-data';
+import { LanguageIcon, PlayIcon } from '@heroicons/react/24/solid';
 import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
   Tab,
   TabPanel,
-  IconButton,
+  Tabs,
+  TabsBody,
+  TabsHeader
 } from "@material-tailwind/react";
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { LanguageIcon, PlayIcon, PlusIcon } from '@heroicons/react/24/solid';
-import { formatSeconds } from '@/app/lib/utils';
-import TranslatableSection from '@/app/ui/translation/translatable-section';
-import next from 'next';
-import CollectionMenu from '@/app/ui/collection/add';
 import Link from 'next/link';
-import VideoCard, { MiniVideoCard } from '@/app/ui/video/card';
-import { videoList } from '@/app/lib/placeholder-data';
-import { Video } from '@/app/lib/definitions';
+import { useRef, useState } from 'react';
+import YouTube, { YouTubePlayer } from 'react-youtube';
 const YouTubePlayer = () => {
   const playerRef = useRef<YouTubePlayer>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);

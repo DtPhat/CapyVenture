@@ -11,7 +11,6 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { AcademicCapIcon, GlobeAmericasIcon, HomeIcon, LanguageIcon, NewspaperIcon, PlusIcon, PuzzlePieceIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import Home from "@/app/home/page";
 
 interface Props {
   CustomButton?: JSX.Element
@@ -28,7 +27,6 @@ export function CreateCollection({ CustomButton }: Props) {
       {
         CustomButton ?
           <button onClick={handleOpen}> {CustomButton}</button>
-
           : <Button onClick={handleOpen} className="flex items-center justify-center gap-1 bg-primary text-lg max-w-64 py-2 rounded-lg">
             <PlusIcon className="w-8 h-8" />
             <span className='normal-case'>Create Collection</span>

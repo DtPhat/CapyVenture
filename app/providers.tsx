@@ -1,7 +1,7 @@
 "use client"
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react';
 import { ThemeProvider } from "@material-tailwind/react";
-import { theme } from './lib/theme';
+import { theme } from '../lib/theme';
 
 
 

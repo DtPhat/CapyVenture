@@ -6,9 +6,6 @@ const RootPage = () => {
   useEffect(() => {
     router.push('/home')
   }, []);
-  return <div>
-
-  </div>
 }
 
 export default RootPage

@@ -1,5 +1,6 @@
 "use client"
-import { Video } from "@/app/lib/definitions";
+import { Video } from "@/lib/definitions";
+import { capText } from "@/lib/helpers/stringUtils";
 import { PlayCircleIcon, TagIcon } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -33,13 +34,13 @@ export default function VideoCard({ data: { title, channel, duration, thumbnail,
           <div className="bg-black px-2 text-center rounded text-white">{duration}</div>
         </div>
       </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-4 group-hover:bg-accent/10">
+      <CardBody className="flex flex-col gap-1 p-4 group-hover:bg-primary/5">
         <Typography className="text-lg font-semibold h-16" color="black">
-          {title}
+          {capText(title, 52)}
         </Typography>
         <p className="text-sm">{channel}</p>
       </CardBody>
-      <CardFooter className="flex items-center px-4 pt-0 group-hover:bg-accent/10">
+      <CardFooter className="flex items-center px-4 pt-0 group-hover:bg-primary/5">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 justify-between">
             <div className="bg-primary w-6 h-6 text-center rounded-md text-white">3</div>

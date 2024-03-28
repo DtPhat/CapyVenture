@@ -2,15 +2,15 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import SearchBar, { HomeSearchBar } from '../ui/common/searchbar'
-import { MiniStoryCard } from '../ui/story/card'
-import { MiniVideoCard } from '../ui/video/card'
+import SearchBar, { HomeSearchBar } from '@/components/searchbar'
+import { MiniStoryCard } from '../stories/_components/card'
+import { MiniVideoCard } from '../videos/_components/card'
 import { Button } from '@material-tailwind/react'
 import { ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { NavigateButtonIcon } from '../ui/common/button-icon'
-import Separator from '../ui/common/separator'
-import { storyList, videoList } from '../lib/placeholder-data'
+import { NavigateButtonIcon } from '@/components/button-icon'
+import Separator from '@/components/separator'
+import { storyList, videoList } from '../../lib/placeholder-data'
 
 const Home = () => {
   return (
@@ -18,10 +18,13 @@ const Home = () => {
       <div className='absolute w-full h-[70vh] bg-black/50 bg-gradient-to-r from-primary/80 to-accent/40 '>
         <div className='font-semibold flex justify-center h-full px-16 flex-col tracking-wide text-white'>
           <div className='text-5xl'>LEARN & PLAY.</div>
-          <div className='text-5xl pt-2'>Start a joyful journey mastering English.</div>
+          <div className='text-5xl pt-2'>Start a joyful journey of mastering English.</div>
           <div className='font-normal mt-6 text-4xl'>Study English through most interesting stories and videos.</div>
           <div className='pt-12'>
             <HomeSearchBar placeholder='Search videos, stories,..' />
+          </div>
+          <div className='mt-6'>
+            <Button className='font-normal text-2xl underline underline-offset-4 bg-transparent px-2'>Getting Started</Button>
           </div>
         </div>
         <div className='mt-8 p-8 text-2xl font-semibold'>
@@ -32,12 +35,14 @@ const Home = () => {
           <div className='flex gap-8'>
             {
               videoList.map(item =>
-                <MiniVideoCard data={item} key={item.title}/>
+                <MiniVideoCard data={item} key={item.title} />
               )
             }
           </div>
         </div>
-        <Separator />
+        <div className='mx-8'>
+          <Separator />
+        </div>
         <div className='mt-8 p-8 text-2xl font-semibold'>
           <div className='flex justify-between'>
             <h1 className='pb-4'>Best collected stories</h1>
@@ -45,7 +50,7 @@ const Home = () => {
           </div>
           <div className='flex gap-8'>
             {
-              storyList.map(item => <MiniStoryCard data={item} key={item.title}/>)
+              storyList.map(item => <MiniStoryCard data={item} key={item.title} />)
             }
           </div>
         </div>

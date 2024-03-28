@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import SearchBar from '../ui/common/searchbar'
+import SearchBar from '@/components/searchbar'
 import { Select, Option, Button } from "@material-tailwind/react";
 import { PlusIcon } from '@heroicons/react/24/solid';
-import CollectionCard from '../ui/collection/card';
-import { CreateCollection } from '../ui/collection/create';
+import CollectionCard from './_components/card';
+import { CreateCollection } from './_components/create';
 export default function Collections() {
  
   return (

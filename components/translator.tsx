@@ -20,9 +20,11 @@ interface TranslatorProps {
 import {
   LanguageIcon,
   ChevronRightIcon,
-  PlusIcon
+  PlusIcon,
+  ArrowPathIcon
 } from "@heroicons/react/24/solid";
-import { CreateCollection } from "../collection/create";
+import { CreateCollection } from "@/app/collections/_components/create";
+import Loader from "@/components/loader";
 export default function Translator({ position, textToTranslate }: TranslatorProps) {
   const [translatedText, setTranslatedText] = useState()
   const [showingTranslation, setShowingTranslation] = useState(false)
@@ -80,7 +82,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
           </MenuItem>
           <CreateCollection CustomButton={
             <Button variant='text' className="flex items-center p-1 w-full justify-center">
-              <PlusIcon className="w-4 h-4"/>
+              <PlusIcon className="w-4 h-4" />
               <span className="normal-case text-xs">Create Collection</span>
             </Button>
           }
@@ -99,7 +101,9 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
         <IconButton
           onClick={callTranslateAPI}
           className="bg-primary border w-7 h-7 rounded-lg">
-          {loading ? "..." : <LanguageIcon className="w-5" />}
+          {loading ?
+            <Loader />
+            : <LanguageIcon className="w-5" />}
         </IconButton>
       </Tooltip>
 

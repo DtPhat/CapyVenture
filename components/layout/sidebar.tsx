@@ -32,7 +32,7 @@ import {
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useContext, useEffect, useState } from "react";
-import { LayoutContext } from "../../providers";
+import { LayoutContext } from "@/app/providers";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(0);
@@ -49,16 +49,16 @@ export default function Sidebar() {
       index: 1
     },
     {
-      Icon: BookOpenIcon,
-      name: "Stories",
-      link: "/stories",
-      index: 2
-    },
-    {
       Icon: VideoCameraIcon,
       name: "Videos",
       link: "/videos",
       index: 3
+    },
+    {
+      Icon: BookOpenIcon,
+      name: "Stories",
+      link: "/stories",
+      index: 2
     },
     {
       Icon: PuzzlePieceIcon,
@@ -90,7 +90,6 @@ export default function Sidebar() {
           link: "/game/multiple-choice",
           index: 4.4
         },
-        
       ],
     },
 
@@ -167,6 +166,16 @@ export default function Sidebar() {
                           </ListItem>
                         </Link>
                       )}
+                      <Link href={'/game/capyventure'}>
+                        <ListItem selected={pathname.includes('/game/capyventure')} className="border-2 bg-accent/20 border-accent p-2">
+                          <ListItemPrefix>
+                            <img src="/game-icon.png" className="h-6 w-6 rounded-full" />
+                          </ListItemPrefix>
+                          <Typography className="font-semibold">
+                            CapyVenture
+                          </Typography>
+                        </ListItem>
+                      </Link>
                     </AccordionBody>
                   </Accordion >
                   {item.link === '/game' && <hr className="my-2 border-black" />}

@@ -44,7 +44,7 @@ export const HomeSearchBar = ({ givenKeyword, handleEnter, placeholder = 'Search
     }
   }, [keyword]);
   return (
-    <div className={`py-2 flex items-center border-4 border-white focus-within:border-white relative bottom-1 flex-1 w-full cursor-pointer bg-accent/50 text-black ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} `}>
+    <div className={`py-2 flex items-center border-4 border-white focus-within:border-white relative bottom-1 flex-1 w-full cursor-pointer bg-accent/10 text-black ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} `}>
       <label htmlFor='search' className='absolute left-2'>
         <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-white/70 stroke-2' />
       </label>

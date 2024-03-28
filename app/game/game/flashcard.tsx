@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { Stepper, Step, Progress } from "@material-tailwind/react";
 import { ChevronLeftIcon, ChevronRightIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
-import ButtonIcon from '../common/button-icon';
-import { CollectionItem } from '@/app/lib/definitions';
+import ButtonIcon from '@/components/button-icon';
+import { CollectionItem } from '@/lib/definitions';
 
 
 const Flashcard = ({ data }: { data: CollectionItem[] }) => {
@@ -14,7 +14,7 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const styles = {
-    card: `bg-accent/20 text-black w-[52rem] h-96 rounded-xl cursor-pointer flex justify-center items-center font-semibold shadow-md text-xl transition-transform duration-100`
+    card: `bg-foreground  text-black w-[52rem] h-96 rounded-xl cursor-pointer flex justify-center items-center font-semibold shadow-xl text-xl transition-transform duration-100`
   }
 
   let isLastStep = activeStep == data.length - 1

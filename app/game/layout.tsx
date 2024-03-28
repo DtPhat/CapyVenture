@@ -1,12 +1,12 @@
 'use client'
 import React from 'react'
-import Flashcard from '@/app/ui/game/flashcard';
-import TranslatableSection from '@/app/ui/translation/translatable-section';
+import Flashcard from '@/app/game/game/flashcard';
+import TranslatableSection from '@/components/layout/translatable-section';
 import { Button, Card, CardBody, CardHeader, Chip, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 import { ChevronDownIcon, ChevronRightIcon, PlusIcon, QuestionMarkCircleIcon, RectangleGroupIcon, RectangleStackIcon, Square2StackIcon, Squares2X2Icon } from '@heroicons/react/24/solid';
-import { CreateCollection } from '@/app/ui/collection/create';
+import { CreateCollection } from '@/app/ui/collections/create';
 import Link from 'next/link';
-import Separator from '@/app/ui/common/separator';
+import Separator from '@/components/separator';
 const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <div className='px-16 py-8 flex flex-col gap-4 w-full'>

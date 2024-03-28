@@ -22,7 +22,7 @@ interface StoryCard {
 }
 export default function StoryCard({ data: { image, title, lastUpdated, length, summary, level, topic } }: StoryCard) {
   return (
-    <Card className="hover:bg-accent/20 overflow-hidden relative">
+    <Card className="hover:bg-accent/10 overflow-hidden relative">
       <CardHeader
         shadow={false}
         color="transparent"
@@ -69,7 +69,7 @@ export default function StoryCard({ data: { image, title, lastUpdated, length, s
 export function MiniStoryCard({ data: { image, title, lastUpdated, length, summary, level, topic } }: StoryCard) {
   return (
     <Link href='/stories/thispage'>
-      <Card className="hover:bg-accent/20 overflow-hidden relative">
+      <Card className="hover:bg-secondary/20 overflow-hidden relative">
         <CardHeader
           shadow={false}
           color="transparent"
