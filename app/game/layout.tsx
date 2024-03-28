@@ -4,7 +4,7 @@ import Flashcard from '@/app/game/game/flashcard';
 import TranslatableSection from '@/components/layout/translatable-section';
 import { Button, Card, CardBody, CardHeader, Chip, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 import { ChevronDownIcon, ChevronRightIcon, PlusIcon, QuestionMarkCircleIcon, RectangleGroupIcon, RectangleStackIcon, Square2StackIcon, Squares2X2Icon } from '@heroicons/react/24/solid';
-import { CreateCollection } from '@/app/ui/collections/create';
+import { CreateCollection } from "@/app/collections/_components/create";
 import Link from 'next/link';
 import Separator from '@/components/separator';
 const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
