@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import {
   Menu,
   MenuHandler,
@@ -25,10 +25,21 @@ import {
 } from "@heroicons/react/24/solid";
 import { CreateCollection } from "@/app/collections/_components/create";
 import Loader from "@/components/loader";
+import useSWR from "swr";
+import { Collection } from "@/lib/definitions";
+import { postFetcher } from "@/lib/config/fetchter";
+import { toast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
+import { useRouter } from 'next/navigation'
+
 export default function Translator({ position, textToTranslate }: TranslatorProps) {
   const [translatedText, setTranslatedText] = useState<string>()
   const [showingTranslation, setShowingTranslation] = useState(false)
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { data, isLoading } = useSWR('/collection')
+  const collections: Collection[] = data?.data
+  
   const callTranslateAPI = async () => {
     if (showingTranslation) {
       setShowingTranslation(false);
@@ -45,7 +56,29 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
       .finally(() => setLoading(false))
   }
 
-  const TranslationContent = (
+  const addVocabToCollection = async (collection: string) => {
+    if (!collection) return
+    await postFetcher('/vocabulary', {
+      sourceText: textToTranslate,
+      translation: translatedText,
+      collection: collection
+    }).finally(() => {
+      toast({
+        title: `Add to ${collection}`,
+        description: "The source text and its translation has been added.",
+        variant: "default",
+        action: <ToastAction
+          onClick={() => router.push('/collections')}
+          altText="My Collection"
+          className="border-black hover:bg-gray-200">
+          My Collection
+        </ToastAction>,
+      })
+    })
+  }
+
+
+  const TranslationContent: ReactNode = (
     <div className="min-w-40 max-w-sm mt-1">
       <div className="flex flex-col gap-4 p-2">
         <div className="">
@@ -67,24 +100,27 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
             <Button className="py-0.5 px-2 rounded flex items-center gap-1 bg-primary">
               <PlusIcon className="w-4 h-4" />
               <span className="normal-case text-xs">Add</span>
-              {/* <ChevronRightIcon className="w-4 h-4"/> */}
             </Button>
           </MenuHandler>
           <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1">
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1">
-              <span>Family</span>
-              <Chip value="5" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1">
-              <span>Academic Writing</span>
-              <Chip value="11" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1">
-              <span>Sports</span>
-              <Chip value="11" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
+            {
+              collections?.map(collection =>
+                <MenuItem
+                  className="flex gap-4 border-2 items-center justify-between py-0.5"
+                  onClick={() => addVocabToCollection(collection?.name)}>
+                  <div className="rounded-full border-2">
+                    <img className="w-8 h-8" src={collection.picture} />
+                  </div>
+                  <div className="text-ellipsis max-w-32">
+                    <p className="truncate">
+                      {collection?.name}
+                    </p>
+                  </div>
+                  <Chip value={collection.totalVocab} size="sm" variant="ghost" className="rounded-full" />
+                </MenuItem>)
+            }
             <CreateCollection CustomButton={
-              <Button variant='text' className="flex items-center p-1 w-full justify-center">
+              <Button variant='text' className="flex items-center p-1 w-full justify-center gap-1">
                 <PlusIcon className="w-4 h-4" />
                 <span className="normal-case text-xs">Create Collection</span>
               </Button>
@@ -93,7 +129,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
           </MenuList>
         </Menu>
       </div>
-    </div>
+    </div >
   )
 
   return (

@@ -1,7 +1,18 @@
+import { LEVELS_NUMBER } from "./constants"
+
 export type CollectionItem = {
   id: number
   sourceText: string,
   translation: string
+}
+
+export type Collection = {
+  id: string
+  accountId: string,
+  name: string,
+  picture: string,
+  totalVocab?: number,
+  description: string
 }
 
 export type Video = {
@@ -41,3 +52,6 @@ export type Story = {
   comment?: []
   level?: string
 }
+
+
+export type Level = keyof typeof LEVELS_NUMBER;

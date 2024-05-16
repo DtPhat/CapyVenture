@@ -14,7 +14,7 @@ const fetcherJWT = (method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
   });
 
 if (!response.ok) {
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
     window.location.href = '/'

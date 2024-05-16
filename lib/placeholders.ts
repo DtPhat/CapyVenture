@@ -85,7 +85,7 @@ export const videoList: Video[] = [
 
 export const storyList: any[] = [
   {
-    image: "https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg",
+    display_image: "https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg",
     title: "Sunflowers at sunset",
     lastUpdated: "Jan 08, 2024",
     length: 10,
@@ -94,7 +94,7 @@ export const storyList: any[] = [
     topic: "Mystery",
   },
   {
-    image: "https://e1.pxfuel.com/desktop-wallpaper/321/39/desktop-wallpaper-sakura-blossom-petals-scenery-sky-cherry-cherry-blossom-anime-aesthetic.jpg",
+    display_image: "https://e1.pxfuel.com/desktop-wallpaper/321/39/desktop-wallpaper-sakura-blossom-petals-scenery-sky-cherry-cherry-blossom-anime-aesthetic.jpg",
     title: "Spring with blue sky",
     lastUpdated: "Jan 08, 2024",
     length: 10,
@@ -103,7 +103,7 @@ export const storyList: any[] = [
     topic: "Mystery",
   },
   {
-    image: "https://st2.depositphotos.com/2769299/9083/i/450/depositphotos_90835898-stock-photo-dark-mysterious-street.jpg",
+    display_image: "https://st2.depositphotos.com/2769299/9083/i/450/depositphotos_90835898-stock-photo-dark-mysterious-street.jpg",
     title: "Maze of Shadows",
     lastUpdated: "Jan 08, 2024",
     length: 10,

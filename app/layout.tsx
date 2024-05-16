@@ -33,9 +33,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="w-full flex justify-center">
               {children}
             </div>
-            <Toaster />
           </section>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Flashcard from '@/app/game/game/flashcard';
 import TranslatableSection from '@/components/layout/translatable-section';
 import { Button, Card, CardBody, CardHeader, Chip, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
@@ -7,37 +7,48 @@ import { ChevronDownIcon, ChevronRightIcon, PlusIcon, QuestionMarkCircleIcon, Re
 import { CreateCollection } from "@/app/collections/_components/create";
 import Link from 'next/link';
 import Separator from '@/components/separator';
+import useSWR from 'swr';
+import { Collection } from '@/lib/definitions';
 const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+  const { data, isLoading } = useSWR('/collection')
+  const [chosenCollection, setChosenCollection] = useState('')
+  const collections: Collection[] = data?.data
+  useEffect(() => {
+    if (collections?.length) {
+      setChosenCollection(collections[0].name)
+    }
+  }, [data]);
   return (
     <div className='px-16 py-8 flex flex-col gap-4 w-full'>
-      <div className="text-lg w-full">
+      <div className="flex w-full justify-center">
         <Menu offset={10}>
-          <div className='flex justify-center items-center gap-4'>
-            <div className='text-lg font-bold'>PLAY WITH: </div>
-            <MenuHandler>
-              <Button variant='outlined' className="px-2 py-1 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary">
-                <span className="normal-case text-lg">Academic Writing</span>
-                <ChevronDownIcon className="w-6 h-6" />
-              </Button>
-            </MenuHandler>
-          </div>
-          <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1 min-w-52">
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1 font-semibold">
-              <span>Family</span>
-              <Chip value="5" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1 font-semibold">
-              <span>Academic Writing</span>
-              <Chip value="11" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
-            <MenuItem className="flex gap-4 border-2 items-center justify-between py-1 font-semibold">
-              <span>Sports</span>
-              <Chip value="11" size="sm" variant="ghost" className="rounded-full" />
-            </MenuItem>
+          <MenuHandler>
+            <Button variant='outlined' className="px-2 py-1 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary">
+              <span className="normal-case text-lg">{chosenCollection || "Choose collection"}</span>
+              <ChevronDownIcon className="w-6 h-6" />
+            </Button>
+          </MenuHandler>
+          <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1">
+            {
+              collections?.map(collection =>
+                <MenuItem
+                  className="flex gap-4 border-2 items-center justify-between py-0.5"
+                  onClick={() => { setChosenCollection(collection?.name) }}>
+                  <div className="rounded-full border-2">
+                    <img className="w-8 h-8" src={collection.picture} />
+                  </div>
+                  <div className="text-ellipsis max-w-64">
+                    <p className="truncate">
+                      {collection?.name}
+                    </p>
+                  </div>
+                  <Chip value={collection.totalVocab} size="sm" variant="ghost" className="rounded-full" />
+                </MenuItem>)
+            }
           </MenuList>
         </Menu>
-        <Separator />
       </div>
+      <Separator />
       <div className='w-full'>
         <TranslatableSection>
           {children}
@@ -97,7 +108,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           </Link>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

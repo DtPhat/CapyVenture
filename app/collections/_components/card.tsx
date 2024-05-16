@@ -13,18 +13,43 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import { NavigateButtonIcon } from "@/components/button-icon";
+import { deleteFetcher } from "@/lib/config/fetchter";
+import { useToast } from "@/components/ui/use-toast";
 
-export default function CollectionCard() {
+interface CollectionCardProps {
+  name?: string,
+  description?: string,
+  picture?: string,
+  accountId?: string,
+  totalVocab?: number,
+  id?: string
+}
+export default function CollectionCard({ name, description, picture = "", totalVocab, accountId, id }: CollectionCardProps) {
+  const { toast } = useToast()
+  const deleteCollection = async () => {
+    await deleteFetcher(`/collection/${id}`)
+      .finally(() => {
+        toast({
+          title: "Collection deleted",
+          description: "Your action was successful",
+        })
+      })
+  }
   return (
-    <Card className="mt-6 w-96 border-2">
+    <Card className="mt-4 border-2">
       <CardBody className='py-2'>
-        <div className='flex justify-between gap-2 py-4'>
-          <div className="rounded-full">
-            <HomeIcon className="w-12 h-12" />
+        <div className='flex justify-between gap-2 py-2 items-center'>
+          <div className="rounded-full border-2 bg-gradient-to-r from-primary/80 to-accent/40">
+            <img className="w-20 h-20" src={picture} />
           </div>
-          <Typography color="blue-gray" className="text-lg font-semibold hover:text-primary cursor-pointer">
-            Academic Writing
-          </Typography>
+          <div>
+            <Typography color="blue-gray" className="text-lg font-semibold hover:text-primary cursor-pointer line-clamp-1">
+              {name}
+            </Typography>
+            <Typography color="blue-gray" className="">
+              {totalVocab} saved words
+            </Typography>
+          </div>
           <Menu>
             <MenuHandler>
               <IconButton variant="text">
@@ -34,7 +59,7 @@ export default function CollectionCard() {
             <MenuList className="flex flex-col divide-y-2 border-black/20 p-1">
               <MenuItem className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <EyeIcon className="w-5 h-5"/>
+                  <EyeIcon className="w-5 h-5" />
                   <Typography color="gray" className="font-semibold">
                     View
                   </Typography>
@@ -42,15 +67,15 @@ export default function CollectionCard() {
               </MenuItem>
               <MenuItem className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <PencilIcon className="w-5 h-5"/>
+                  <PencilIcon className="w-5 h-5" />
                   <Typography color="gray" className="font-semibold">
                     Edit
                   </Typography>
                 </div>
               </MenuItem>
-              <MenuItem className="flex items-center gap-4 ">
+              <MenuItem className="flex items-center gap-4 " onClick={() => deleteCollection()}>
                 <div className="flex items-center gap-2 ">
-                  <TrashIcon className="w-5 h-5"/>
+                  <TrashIcon className="w-5 h-5" />
                   <Typography color="gray" className="font-semibold">
                     Delete
                   </Typography>
@@ -59,15 +84,18 @@ export default function CollectionCard() {
             </MenuList>
           </Menu>
         </div>
-        <div className='flex justify-between font-semibold px-2'>
+        <p className="line-clamp-1">
+          {description}
+        </p>
+        {/* <div className='flex justify-between font-semibold px-2'>
           <p className='text-inherit'>29 total</p>
           |<p className='text-blue-700'>5 new</p>
           |<p className='text-red-700'>4 due</p>
           |<p className='text-green-700'>5 active</p>
-        </div>
+        </div> */}
       </CardBody>
       <CardFooter className="p-2 flex justify-end pr-4">
-          <NavigateButtonIcon linkTo="/game/flashcard" text="Go Practice"/>
+        <NavigateButtonIcon linkTo="/game/flashcard" text="Go Practice" />
       </CardFooter>
     </Card>
   )

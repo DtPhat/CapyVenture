@@ -3,7 +3,7 @@ import { ENGLISH_LEVELS } from "@/lib/constants";
 import MenuCheckbox from "@/components/menu-checkbox";
 import SearchBar from "@/components/searchbar";
 import Container from "@/components/container";
-import Storylist from "./_components/storyList";
+import Storylist from "./_components/story-list";
 
 export default function Stories() {
   

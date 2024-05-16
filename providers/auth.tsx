@@ -1,3 +1,5 @@
+"use client"
+import { isNull } from 'lodash';
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
 // Define types for user information

@@ -22,9 +22,7 @@ const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
   const [openMobileNav, setOpenMobileNav] = useState(false);
-  const {  login } = useAuth()
-  const storedUserInfo = localStorage.getItem("userInfo");
-  const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null
+  const {  login, userInfo } = useAuth()
   const googleAuthenticate = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     signInWithPopup(auth, provider)
