@@ -5,9 +5,8 @@ import { Providers } from "./providers";
 import Sidebar from "@/components/layout/sidebar";
 import Drawer from "../components/layout/drawer";
 import Header from "@/components/layout/header";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers/utils";
 import { Toaster } from "@/components/ui/toaster";
-
 // const inter = Inter({ subsets: ["latin"] });
 
 const fontSans = FontSans({
@@ -34,8 +33,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="w-full flex justify-center">
               {children}
             </div>
+            <Toaster />
           </section>
-          <Toaster />
         </Providers>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client"
 import { Video } from "@/lib/definitions";
-import { capText } from "@/lib/helpers/stringUtils";
+import { capText } from "@/lib/helpers/string";
 import { PlayCircleIcon, TagIcon } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -16,7 +16,7 @@ interface VideoCardProps {
 }
 export default function VideoCard({ data: { title, channel, duration, thumbnail, url, topic, level } }: VideoCardProps) {
   return (
-    <Card className="overflow-hidden group relative">
+    <Card className="overflow-hidden group relative hover:bg-primary/5 bg-foreground">
       <CardHeader
         shadow={false}
         color="transparent"
@@ -34,13 +34,13 @@ export default function VideoCard({ data: { title, channel, duration, thumbnail,
           <div className="bg-black px-2 text-center rounded text-white">{duration}</div>
         </div>
       </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-4 group-hover:bg-primary/5">
+      <CardBody className="flex flex-col gap-1 p-4">
         <Typography className="text-lg font-semibold h-16" color="black">
           {capText(title, 52)}
         </Typography>
         <p className="text-sm">{channel}</p>
       </CardBody>
-      <CardFooter className="flex items-center px-4 pt-0 group-hover:bg-primary/5">
+      <CardFooter className="flex items-center px-4 pt-0">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 justify-between">
             <div className="bg-primary w-6 h-6 text-center rounded-md text-white">3</div>
@@ -84,7 +84,7 @@ export function MiniVideoCard({ data: { title, channel, duration, thumbnail, url
             <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">3</div>
           </div>
         </CardHeader>
-        <CardBody className="flex flex-col gap-1 pt-2 pb-4 px-4 group-hover:bg-accent/10">
+        <CardBody className="flex flex-col gap-1 pt-2 pb-4 px-4 group-hover:bg-primary/5">
           <Typography className="font-semibold text-lg h-16" color="black">
             {title}
           </Typography>

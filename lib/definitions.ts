@@ -10,16 +10,34 @@ export type Video = {
   thumbnail: string,
   channel: string,
   duration: string,
-  level: number
-  topic: string
+  level?: number
+  topic?: string
 }
 
+// export type Story = {
+//   image: string,
+//   title: string,
+//   lastUpdated: string,
+//   length: number,
+//   summary: string,
+//   level?: number,
+//   topic?: string,
+// }
+
+
 export type Story = {
-  image: string,
+  _id: string,
   title: string,
-  lastUpdated: string,
-  length: number,
-  summary: string,
-  level: number,
-  topic: string,
+  author: string,
+  views: number,
+  description: string,
+  contents: {
+    chapter: number,
+    title: string,
+    text: string
+  }[],
+  display_image: string,
+  category?: string,
+  comment?: []
+  level?: string
 }

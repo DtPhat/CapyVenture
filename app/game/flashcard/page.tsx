@@ -7,7 +7,7 @@ import { ChevronDownIcon, ChevronRightIcon, PlusIcon, RectangleGroupIcon, Rectan
 import { CreateCollection } from "@/app/collections/_components/create";
 import Link from 'next/link';
 import Separator from '@/components/loader';
-import { collection } from '@/lib/placeholder-data';
+import { collection } from '@/lib/placeholders';
 const GamePage = () => {
   const data = {
     question: "string 1",

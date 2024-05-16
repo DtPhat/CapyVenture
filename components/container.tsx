@@ -1,10 +1,14 @@
 import React from 'react'
 
-type Props = {}
+type ContainerProps = {
+  children: React.ReactNode
+}
 
-const Container = (props: Props) => {
+const Container = ({ children }: Readonly<ContainerProps>) => {
   return (
-    <div>Container</div>
+    <section className='px-16 py-8 flex flex-col gap-4 max-w-7xl w-full'>
+      {children}
+    </section>
   )
 }
 

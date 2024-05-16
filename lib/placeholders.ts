@@ -2,25 +2,55 @@ import { CollectionItem, Story, Video } from "./definitions";
 
 export const collection: CollectionItem[] = [
   {
-    id: 11,
-    sourceText: "Dog",
-    translation: "Cho"
+    id: 1,
+    sourceText: "Hello, how are you?",
+    translation: "Xin chào, bạn khỏe không?"
   },
   {
-    id: 21,
-    sourceText: "Driven by a relentless curiosity",
-    translation: "Được thúc đẩy bởi sự tò mò không ngừng"
+    id: 2,
+    sourceText: "What is your name?",
+    translation: "Tên bạn là gì?"
   },
   {
-    id: 32,
-    sourceText: "Driven by a relentless curiosity",
-    translation: "Được thúc đẩy bởi sự tò mò không ngừng"
+    id: 3,
+    sourceText: "I love programming.",
+    translation: "Tôi yêu lập trình."
   },
   {
-    id: 17,
-    sourceText: "In the dimly lit city of Noirville",
-    translation: "Ở thành phố thiếu ánh sáng Noirville"
+    id: 4,
+    sourceText: "This is a beautiful day.",
+    translation: "Hôm nay là một ngày đẹp."
   },
+  {
+    id: 5,
+    sourceText: "Can you help me?",
+    translation: "Bạn có thể giúp tôi không?"
+  },
+  {
+    id: 6,
+    sourceText: "Where is the nearest restaurant?",
+    translation: "Nhà hàng gần nhất ở đâu?"
+  },
+  {
+    id: 7,
+    sourceText: "I am learning Vietnamese.",
+    translation: "Tôi đang học tiếng Việt."
+  },
+  {
+    id: 8,
+    sourceText: "How much does this cost?",
+    translation: "Cái này giá bao nhiêu?"
+  },
+  {
+    id: 9,
+    sourceText: "Thank you for your help.",
+    translation: "Cảm ơn bạn đã giúp đỡ."
+  },
+  {
+    id: 10,
+    sourceText: "Good morning!",
+    translation: "Chào buổi sáng!"
+  }
 ]
 
 export const videoList: Video[] = [
@@ -53,7 +83,7 @@ export const videoList: Video[] = [
   },
 ]
 
-export const storyList: Story[] = [
+export const storyList: any[] = [
   {
     image: "https://img.freepik.com/premium-photo/summer-with-sunflower-field-anime-art-style_685067-1842.jpg",
     title: "Sunflowers at sunset",

@@ -10,7 +10,7 @@ import { ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { NavigateButtonIcon } from '@/components/button-icon'
 import Separator from '@/components/separator'
-import { storyList, videoList } from '../../lib/placeholder-data'
+import { storyList, videoList } from '../../lib/placeholders'
 
 const Home = () => {
   return (

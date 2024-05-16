@@ -5,10 +5,11 @@ import { Select, Option, Button } from "@material-tailwind/react";
 import { PlusIcon } from '@heroicons/react/24/solid';
 import CollectionCard from './_components/card';
 import { CreateCollection } from './_components/create';
+import Container from '@/components/container';
 export default function Collections() {
- 
+
   return (
-    <section className="px-16 py-8 flex flex-col gap-4 w-full">
+    <Container>
       <div className='grid grid-cols-2'>
         <h1 className='text-2xl font-semibold '>Manage Your Collections</h1>
         <div>
@@ -32,7 +33,7 @@ export default function Collections() {
         <CollectionCard />
         <CollectionCard />
       </div>
-    </section>
+    </Container>
   )
 }
 

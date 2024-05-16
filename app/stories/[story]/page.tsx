@@ -5,8 +5,8 @@ import { Card, CardFooter } from "@material-tailwind/react";
 import Link from "next/link";
 import TranslatableSection from "@/components/layout/translatable-section";
 import { MiniStoryCard } from "@/app/stories/_components/card";
-import { storyList } from "@/lib/placeholder-data";
-export default function Lesson() {
+import { storyList } from "@/lib/placeholders";
+export default function Story() {
   const [open, setOpen] = useState(0);
   // const [selectedText, setSelectedText] = useState("");
   // const [showingTranslator, setShowingTranslator] = useState(false);
@@ -58,7 +58,7 @@ export default function Lesson() {
         </TranslatableSection>
         <hr className="mt-16 mb-4 border-black/20" />
         <div>
-          <h1 className="font-semibold pb-2">Related lessons</h1>
+          <h1 className="font-semibold pb-2">Similar stories</h1>
           <div className="grid grid-cols-4 gap-4">
             {
               storyList.map(item =>

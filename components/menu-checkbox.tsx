@@ -23,12 +23,12 @@ export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
       }}
     >
       <MenuHandler>
-        <Button variant='text' className="normal-case text-md flex gap-2 py-2 px-4 border-black/50 border-2">
+        <Button variant='text' className="normal-case text-md flex gap-2 py-2 px-4 border-black/50 border-2 bg-foreground">
           <span>{name}</span>
           <ChevronDownIcon className="w-6 h-6 stroke-2" />
         </Button>
       </MenuHandler>
-      <MenuList className="bg-white border-2 border-black/50">
+      <MenuList className="bg-foreground border-2 border-black/50">
         {
           checklist?.map(item =>
             <MenuItem className="p-0" key={item}>

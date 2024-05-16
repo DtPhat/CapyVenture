@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Separator = () => {
+interface Props extends React.ComponentProps<'div'> {
+
+}
+
+const Separator = ({ }: Props) => {
   return (
     <hr className="my-4 border border-black/20" />
   )

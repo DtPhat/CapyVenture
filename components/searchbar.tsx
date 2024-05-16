@@ -21,7 +21,7 @@ const SearchBar = ({ givenKeyword, handleEnter, placeholder = 'Search', autoFocu
     }
   }, [keyword]);
   return (
-    <div className={`flex items-center border-2 border-black/50 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} `}>
+    <div className={`flex items-center border-2 border-black/50 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
       <label htmlFor='search' className='absolute left-2'>
         <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-black/50' />
       </label>

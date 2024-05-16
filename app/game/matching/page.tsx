@@ -7,13 +7,12 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { collection } from '@/lib/placeholder-data';
-import { splitAndShuffleCollection } from '@/lib/helpers/arrayUtils';
+import { collection } from '@/lib/placeholders';
+import { splitAndShuffleCollection } from '@/lib/helpers/array';
 const data = splitAndShuffleCollection(collection)
 
 const Page = () => {
   const [selectedCards, setSelectedCards] = useState()
-  console.log(data)
   const handleSelectCard = (text: string) => {
   }
   return (

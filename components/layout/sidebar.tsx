@@ -32,7 +32,7 @@ import {
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useContext, useEffect, useState } from "react";
-import { LayoutContext } from "@/app/providers";
+import { DisplayContext } from "@/providers/display";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(0);
@@ -116,7 +116,7 @@ export default function Sidebar() {
   const pathname = usePathname()
 
 
-  const { openSidebar } = useContext(LayoutContext)
+  const { openSidebar } = useContext(DisplayContext)
 
   const dismiss: DismissType = {
     outsidePress: false
@@ -166,7 +166,7 @@ export default function Sidebar() {
                           </ListItem>
                         </Link>
                       )}
-                      <Link href={'/game/capyventure'}>
+                      {/* <Link href={'/game/capyventure'}>
                         <ListItem selected={pathname.includes('/game/capyventure')} className="border-2 bg-accent/20 border-accent p-2">
                           <ListItemPrefix>
                             <img src="/game-icon.png" className="h-6 w-6 rounded-full" />
@@ -175,7 +175,7 @@ export default function Sidebar() {
                             CapyVenture
                           </Typography>
                         </ListItem>
-                      </Link>
+                      </Link> */}
                     </AccordionBody>
                   </Accordion >
                   {item.link === '/game' && <hr className="my-2 border-black" />}

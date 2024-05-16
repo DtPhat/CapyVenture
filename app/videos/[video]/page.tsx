@@ -1,9 +1,9 @@
 'use client'
-import { formatSeconds } from '@/lib/helpers/dateUtils';
+import { formatSeconds } from '@/lib/helpers/date';
 import { MiniVideoCard } from '@/app/videos/_components/card';
 import TranslatableSection from '@/components/layout/translatable-section';
 import { Video } from '@/lib/definitions';
-import { videoList } from '@/lib/placeholder-data';
+import { videoList } from '@/lib/placeholders';
 import { LanguageIcon, PlayIcon } from '@heroicons/react/24/solid';
 import {
   Tab,
@@ -19,6 +19,7 @@ const YouTubePlayer = () => {
   const playerRef = useRef<YouTubePlayer>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [translatingsenteces, setTranslatingSentences] = useState<string[]>([])
+  const [videoWidth, videoHeight] = [720, 500]
   console.log(currentTime)
 
   const jumpToTimestamp = (timestamp: number) => {
@@ -45,7 +46,7 @@ const YouTubePlayer = () => {
     // setCurrentTime(await playerRef.current.internalPlayer.getCurrentTime())
   };
 
-  const checkPlaying = (index: number) => {
+  const isVideoPlaying = (index: number) => {
     const currentTranscript = videoTranscripts[index];
     const nextTranscript = videoTranscripts[index + 1];
     if (currentTime >= currentTranscript.timestamp &&
@@ -55,8 +56,8 @@ const YouTubePlayer = () => {
     return false;
   }
   const opts = {
-    height: '496',
-    width: '720',
+    height: videoHeight,
+    width: videoWidth,
     playerVars: {
       autoplay: 1,
     },
@@ -216,12 +217,12 @@ One day, the master finally offered him a lesson.
                         </div>
                         : <div className='flex flex-col item-center overflow-auto'>
                           {videoTranscripts.map((transcript, index) =>
-                            <div key={index} className={`py-1 flex gap-2 ${checkPlaying(index) ? 'bg-black/10' : ''} px-2 items-center border-b border-gray-300`}>
+                            <div key={index} className={`py-1 flex gap-2 ${isVideoPlaying(index) ? 'bg-black/10' : ''} px-2 items-center border-b border-gray-300`}>
                               <div className='my-auto'>
                                 <button
                                   onClick={() => jumpToTimestamp(transcript.timestamp)}
-                                  className={`group border border-black/50 rounded-lg w-[3.75rem] gap-0.5 flex justify-center items-center hover:text-white hover:bg-black ${checkPlaying(index) ? 'bg-black/90 text-white' : ''}`}>
-                                  <PlayIcon className={`w-4 h-4 ${checkPlaying(index) ? 'block' : 'hidden'} group-hover:block`} />
+                                  className={`group border border-black/50 rounded-lg w-[3.75rem] gap-0.5 flex justify-center items-center hover:text-white hover:bg-black ${isVideoPlaying(index) ? 'bg-black/90 text-white' : ''}`}>
+                                  <PlayIcon className={`w-4 h-4 ${isVideoPlaying(index) ? 'block' : 'hidden'} group-hover:block`} />
                                   <span>
                                     {formatSeconds(transcript.timestamp)}
                                   </span>
@@ -253,7 +254,7 @@ One day, the master finally offered him a lesson.
       </TranslatableSection>
       <hr className="mt-16 mb-4 border-black/20" />
       <div>
-        <h1 className="font-semibold pb-2">Related videos</h1>
+        <h1 className="font-semibold pb-2">Similar videos</h1>
         <div className="grid grid-cols-4 gap-4">
           {
             videoList.map((video: Video) =>

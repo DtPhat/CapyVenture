@@ -1,30 +1,58 @@
 'use client'
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Navbar,
-  // MobileNav,
   Typography,
   Button,
   IconButton,
   Card,
+  MobileNav,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import { Bars3Icon } from "@heroicons/react/24/solid";
+import { Bars3Icon, Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Abril_Fatface } from "next/font/google";
-import { LayoutContext } from "@/app/providers";
+import { DisplayContext } from "@/providers/display";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, provider } from "@/firebase/config";
+import { useAuth } from "@/providers/auth";
+import UserMenu from "../user-menu";
+import useSWR from "swr";
+import { postFetcher } from "@/lib/config/fetchter";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openMobileNav, setOpenMobileNav] = useState(false);
+  const {  login } = useAuth()
+  const storedUserInfo = localStorage.getItem("userInfo");
+  const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null
+  const googleAuthenticate = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const googleToken = credential?.accessToken
+        console.log(googleToken)
+        if (googleToken) {
+          const response = await postFetcher('/auth/login/google',
+            { token: googleToken }
+          )
+          console.log("login response" , response)
+          login(response?.userInfo, response?.token)
+        }
 
-  React.useEffect(() => {
+      }).catch((error) => {
+        console.log(error)
+      });
+  }
+
+  useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+      () => window.innerWidth >= 960 && setOpenMobileNav(false),
     );
   }, []);
 
-  const { setOpenSidebar } = useContext(LayoutContext)
+  const { setOpenSidebar } = useContext(DisplayContext)
 
 
   const navList = (
@@ -74,7 +102,7 @@ export default function Header() {
 
   return (
     <div className="mb-14">
-      <Navbar className="fixed top-0 z-40 max-h-20 max-w-full rounded-none py-2 px-5 shadow">
+      <Navbar className={`fixed top-0 z-40 ${openMobileNav ? 'h-auto' : 'max-h-16'} max-w-full rounded-none py-2 px-5 shadow`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
             <button onClick={() => setOpenSidebar(opening => !opening)}>
@@ -87,71 +115,70 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            {/* <div className="mr-4 hidden lg:block">{navList}</div> */}
-            <div className="flex items-center gap-x-2">
-              <Button
-                variant="text"
-                className="hidden lg:inline-block px-8"
-              >
-                <span>Sign up</span>
-              </Button>
-              <Button
-                className="hidden lg:inline-block bg-primary px-8"
-              >
-                Login
-              </Button>
-            </div>
-            <IconButton
+            {
+              userInfo?.email
+                ? <div>
+                  <UserMenu />
+                </div>
+                : <div className="flex items-center gap-x-2">
+                  <Button
+                    variant="text"
+                    className="px-8"
+                  >
+                    <span>Sign up</span>
+                  </Button>
+                  <Button
+                    onClick={(e) => googleAuthenticate(e)}
+                    className="bg-primary px-8"
+                  >
+                    Login
+                  </Button>
+                </div>
+            }
+            {/* <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="ml-auto h-6 w-6 text-black hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
-              onClick={() => setOpenNav(!openNav)}
+              onClick={() => setOpenMobileNav(!openMobileNav)}
             >
-              {openNav ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+              {openMobileNav ? (
+                <XMarkIcon width={24} />
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+                <Bars2Icon width={24} />
               )}
-            </IconButton>
+            </IconButton> */}
           </div>
         </div>
-        {/* <MobileNav open={openNav}>
-        {navList}
-        <div className="flex items-center gap-x-1">
-          <Button fullWidth variant="text" size="sm" className="">
-          <span>Sign Up</span>
-          </Button>
-          <Button fullWidth variant="gradient" size="sm" className="bg-primary">
-          <span>Login</span>
-          </Button>
-          </div>
+        {/* <MobileNav open={openMobileNav} className="py-2">
+          {
+            userInfo?.email
+              ? <div>
+                <UserMenu />
+              </div>
+              : < div className="flex items-center gap-x-1">
+                <Button fullWidth variant="text" size="sm" className="">
+                  <span>Sign Up</span>
+                </Button>
+                <Button fullWidth variant="filled" size="sm" className="bg-primary" onClick={(e) => googleAuthenticate(e)}>
+                  <span>Login</span>
+                </Button>
+
+                <Button
+                  variant="text"
+                  className="hidden lg:inline-block px-8"
+                >
+                  <span>Sign up</span>
+                </Button>
+                <Button
+
+                  className="hidden lg:inline-block bg-primary px-8"
+                >
+                  Login
+                </Button>
+              </div>
+          }
         </MobileNav> */}
       </Navbar>
-    </div>
+    </div >
   );
 }
