@@ -35,6 +35,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             {
               collections?.map(collection =>
                 <MenuItem
+                  key={collection.id}
                   className="flex gap-4 border-2 items-center justify-between py-0.5"
                   onClick={() => { setChosenCollection(collection?.name) }}>
                   <div className="rounded-full border-2">

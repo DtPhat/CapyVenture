@@ -106,6 +106,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
             {
               collections?.map(collection =>
                 <MenuItem
+                  key={collection.id}
                   className="flex gap-4 border-2 items-center justify-between py-0.5"
                   onClick={() => addVocabToCollection(collection?.name)}>
                   <div className="rounded-full border-2">
