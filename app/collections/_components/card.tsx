@@ -1,3 +1,4 @@
+"use client"
 import { EllipsisVerticalIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Button,
@@ -15,6 +16,7 @@ import {
 import { NavigateButtonIcon } from "@/components/button-icon";
 import { deleteFetcher } from "@/lib/config/fetchter";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface CollectionCardProps {
   name?: string,
@@ -26,6 +28,9 @@ interface CollectionCardProps {
 }
 export default function CollectionCard({ name, description, picture = "", totalVocab, accountId, id }: CollectionCardProps) {
   const { toast } = useToast()
+  const router = useRouter()
+
+
   const deleteCollection = async () => {
     await deleteFetcher(`/collection/${id}`)
       .finally(() => {
@@ -43,7 +48,9 @@ export default function CollectionCard({ name, description, picture = "", totalV
             <img className="w-20 h-20" src={picture} />
           </div>
           <div>
-            <Typography color="blue-gray" className="text-lg font-semibold hover:text-primary cursor-pointer line-clamp-1">
+            <Typography color="blue-gray"
+              className="text-lg font-semibold hover:text-primary cursor-pointer line-clamp-1"
+              onClick={() => router.push("/collections/" + name)}>
               {name}
             </Typography>
             <Typography color="blue-gray" className="">
@@ -57,7 +64,7 @@ export default function CollectionCard({ name, description, picture = "", totalV
               </IconButton>
             </MenuHandler>
             <MenuList className="flex flex-col divide-y-2 border-black/20 p-1">
-              <MenuItem className="flex items-center gap-4">
+              <MenuItem className="flex items-center gap-4" onClick={() => router.push("/collections/" + name)}>
                 <div className="flex items-center gap-2">
                   <EyeIcon className="w-5 h-5" />
                   <Typography color="gray" className="font-semibold">

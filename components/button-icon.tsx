@@ -25,9 +25,9 @@ const ButtonIcon = ({ Icon, iconDirection, text, className, onClick }: ButtonIco
     </Button>
   )
 }
-export const NavigateButtonIcon = ({ text, className, linkTo }: ButtonIconProps) => {
+export const NavigateButtonIcon = ({ text, className, linkTo = '/' }: ButtonIconProps) => {
   return (
-    <Link href={linkTo || '/'} className='group'>
+    <Link href={linkTo} className='group'>
       <Button variant="text" className={`text-sm flex items-center gap-2 px-4 py-2 !${className}`}>
         <span className='transition duration-400 group-hover:-translate-x-1'>{text}</span>
         <div>

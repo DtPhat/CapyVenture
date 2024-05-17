@@ -71,7 +71,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
           onClick={() => router.push('/collections')}
           altText="My Collection"
           className="border-black hover:bg-gray-200">
-          My Collection
+          My Collections
         </ToastAction>,
       })
     })

@@ -1,51 +1,15 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
-import SearchBar from '@/components/searchbar'
-import CollectionCard from './_components/card';
-import { CreateCollection } from './_components/create';
 import Container from '@/components/container';
-import useSWR from 'swr';
+import SearchBar from '@/components/searchbar';
 import { Collection } from '@/lib/definitions';
 import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Textarea,
-  Typography,
-  IconButton,
-  Select,
-  Option
+  Option,
+  Select
 } from "@material-tailwind/react";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { AcademicCapIcon, GlobeAmericasIcon, HomeIcon, LanguageIcon, NewspaperIcon, PlusIcon, PuzzlePieceIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { collectionPictures } from '@/lib/constants';
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { cn } from '@/lib/helpers/utils';
-import { postFetcher } from '@/lib/config/fetchter';
-import { useToast } from '@/components/ui/use-toast';
+import useSWR from 'swr';
+import CollectionCard from './_components/card';
+import { CreateCollection } from './_components/create';
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  description: z.string().min(2, {
-    message: "Description must be at least 2 characters.",
-  }),
-  picture: z.string(),
-})
 export default function Collections() {
   const { data, isLoading, error } = useSWR('/collection')
   const collectionList: Collection[] = data?.data || []
