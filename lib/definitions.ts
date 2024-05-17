@@ -1,7 +1,7 @@
 import { LEVELS_NUMBER } from "./constants"
 
 export type CollectionItem = {
-  id: string
+  id: string,
   sourceText: string,
   translation: string,
   collection?: string

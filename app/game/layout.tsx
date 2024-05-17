@@ -22,12 +22,15 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     <div className='px-16 py-8 flex flex-col gap-4 w-full'>
       <div className="flex w-full justify-center">
         <Menu offset={10}>
-          <MenuHandler>
-            <Button variant='outlined' className="px-2 py-1 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary">
-              <span className="normal-case text-lg">{chosenCollection || "Choose collection"}</span>
-              <ChevronDownIcon className="w-6 h-6" />
-            </Button>
-          </MenuHandler>
+          <div className='flex items-center text-xl font-semibold gap-4'>
+            <div>Playing with:</div>
+            <MenuHandler>
+              <Button variant='outlined' className="px-2 py-1 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary">
+                <span className="normal-case text-lg">{chosenCollection || "Choose collection"}</span>
+                <ChevronDownIcon className="w-6 h-6" />
+              </Button>
+            </MenuHandler>
+          </div>
           <MenuList className="p-1 text-black bg-foreground flex flex-col gap-1">
             {
               collections?.map(collection =>
@@ -37,7 +40,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                   <div className="rounded-full border-2">
                     <img className="w-8 h-8" src={collection.picture} />
                   </div>
-                  <div className="text-ellipsis max-w-64">
+                  <div className="text-ellipsis min-w-32 max-w-64">
                     <p className="truncate">
                       {collection?.name}
                     </p>

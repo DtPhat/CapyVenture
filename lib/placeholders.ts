@@ -2,52 +2,52 @@ import { CollectionItem, Story, Video } from "./definitions";
 
 export const collection: CollectionItem[] = [
   {
-    id: 1,
+    id: "1",
     sourceText: "Hello, how are you?",
     translation: "Xin chào, bạn khỏe không?"
   },
   {
-    id: 2,
+    id: "2",
     sourceText: "What is your name?",
     translation: "Tên bạn là gì?"
   },
   {
-    id: 3,
+    id: "3",
     sourceText: "I love programming.",
     translation: "Tôi yêu lập trình."
   },
   {
-    id: 4,
+    id: "4",
     sourceText: "This is a beautiful day.",
     translation: "Hôm nay là một ngày đẹp."
   },
   {
-    id: 5,
+    id: "5",
     sourceText: "Can you help me?",
     translation: "Bạn có thể giúp tôi không?"
   },
   {
-    id: 6,
+    id: "6",
     sourceText: "Where is the nearest restaurant?",
     translation: "Nhà hàng gần nhất ở đâu?"
   },
   {
-    id: 7,
+    id: "7",
     sourceText: "I am learning Vietnamese.",
     translation: "Tôi đang học tiếng Việt."
   },
   {
-    id: 8,
+    id: "8",
     sourceText: "How much does this cost?",
     translation: "Cái này giá bao nhiêu?"
   },
   {
-    id: 9,
+    id: "9",
     sourceText: "Thank you for your help.",
     translation: "Cảm ơn bạn đã giúp đỡ."
   },
   {
-    id: 10,
+    id: "10",
     sourceText: "Good morning!",
     translation: "Chào buổi sáng!"
   }
