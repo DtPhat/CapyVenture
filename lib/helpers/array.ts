@@ -20,6 +20,6 @@ export const splitAndShuffleCollection = (data: CollectionItem[]) => {
 }
 
 type DataToSplit = {
-  id: number,
+  id: string,
   text: string
 }[]
