@@ -53,9 +53,9 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
                 </IconButton>
               </div>
               <div className="flex gap-6 items-center">
-                <ButtonIcon Icon={<ChevronLeftIcon className='w-6 h-6' />} iconDirection='left' text='PREV' onClick={handlePrev} />
+                <ButtonIcon className='text-primary' Icon={<ChevronLeftIcon className='w-6 h-6' />} iconDirection='left' text='PREV' onClick={handlePrev} />
                 <div className='font-semibold text-2xl'>{activeStep + 1} / {data.length}</div>
-                <ButtonIcon Icon={<ChevronRightIcon className='w-6 h-6' />} iconDirection='right' text='NEXT' onClick={handleNext} />
+                <ButtonIcon className='text-primary' Icon={<ChevronRightIcon className='w-6 h-6' />} iconDirection='right' text='NEXT' onClick={handleNext} />
               </div>
               <div>
                 <IconButton className='text-primary' variant='text'>

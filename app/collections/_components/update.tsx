@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from '@/components/ui/use-toast';
-import { postFetcher } from '@/lib/config/fetchter';
+import { postFetcher, putFetcher } from '@/lib/config/fetchter';
 import { collectionPictures } from '@/lib/constants';
 import { Collection } from '@/lib/definitions';
 import { cn } from '@/lib/helpers/utils';
@@ -27,9 +27,14 @@ import {
 } from "@material-tailwind/react";
 import { ReactNode, useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import useSWRMutation from "swr/mutation";
 import { z } from "zod";
+
+interface UpdateCollectionProps {
+  OpenButton?: ReactNode;
+  collection: Collection;
+}
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -40,25 +45,27 @@ const formSchema = z.object({
   }),
   picture: z.string(),
 })
-export function CreateCollection({ OpenButton }: { OpenButton?: ReactNode }) {
+export function UpdateCollection({ OpenButton, collection }: UpdateCollectionProps) {
   const [open, setOpen] = useState(false);
   const imgInput = useRef<HTMLInputElement>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      picture: collectionPictures[0],
+      name: collection.name,
+      description: collection.description,
+      picture: collection.picture,
     },
   })
   const { toast } = useToast()
   console.log(form.getValues())
   form.watch('picture')
-  const {trigger} = useSWRMutation("/collection", postFetcher, {revalidate: true})
+  const {trigger} = useSWRMutation(`/collection/${collection.id}`, putFetcher)
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await trigger(values)
       .finally(() => {
+        mutate('/collection')
+        mutate(`vocabulary/${collection.name}`)
         form.reset()
         handleOpen();
         toast({
@@ -86,16 +93,12 @@ export function CreateCollection({ OpenButton }: { OpenButton?: ReactNode }) {
               variant="filled" 
               />
           </div>
-        // : <Button onClick={handleOpen} className="flex items-center justify-center gap-1 bg-primary text-lg max-w-64 py-2 rounded-lg">
-        //   <PlusIcon className="w-8 h-8" />
-        //   <span className='normal-case'>Create Collection</span>
-        // </Button>
       }
       <Dialog open={open} size="md" handler={handleOpen}>
         <div className="flex items-center justify-between ">
           <DialogHeader className="flex flex-col items-start">
             <Typography className="mb-1" variant="h4">
-              Create new collection
+              Update collection
             </Typography>
           </DialogHeader>
           <IconButton className="mx-4" variant="text" onClick={handleOpen}>

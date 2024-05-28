@@ -2,25 +2,29 @@ import { ArrowRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { Button } from '@material-tailwind/react'
 import Link from 'next/link'
 import React from 'react'
+import type { variant } from '@material-tailwind/react/types/components/button'
 
 interface ButtonIconProps extends React.ComponentProps<"button"> {
-  Icon?: any,
+  Icon?: React.ReactNode,
   iconDirection?: "left" | "right",
   text?: string,
   className?: string,
   onClick?: () => void
-  linkTo?: string
+  linkTo?: string,
+  variant?: variant
 }
 
-const ButtonIcon = ({ Icon, iconDirection, text, className, onClick }: ButtonIconProps) => {
+const ButtonIcon = ({ Icon, iconDirection, text, className, onClick, variant = 'text' }: ButtonIconProps) => {
   return (
-    <Button variant='text' className={`p-2 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary text-base hover:bg-secondary/20
-    !${className}
-    ${iconDirection === 'left' ? 'pr-4' : ''} ${iconDirection === 'right' ? 'pl-4' : ''}
-    `}
+    <Button
+      variant={variant}
+      color='green'
+      className={`p-2 rounded-lg flex items-center gap-1 text-lg border-primary ${className}
+        ${iconDirection === 'left' ? 'pr-4' : ''} ${iconDirection === 'right' ? 'pl-4' : ''}
+      `}
       onClick={onClick}>
       {iconDirection === "left" ? Icon : ""}
-      <span className="normal-case">{text}</span>
+        <span className="normal-case">{text}</span>
       {(!iconDirection || iconDirection === "right") ? Icon : ""}
     </Button>
   )

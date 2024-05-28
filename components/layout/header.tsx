@@ -16,13 +16,13 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, provider } from "@/firebase/config";
 import { useAuth } from "@/providers/auth";
 import UserMenu from "../user-menu";
-import useSWR from "swr";
 import { postFetcher } from "@/lib/config/fetchter";
+import { BASE_URL } from "@/lib/constants";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
   const [openMobileNav, setOpenMobileNav] = useState(false);
-  const {  login, userInfo } = useAuth()
+  const { login, userInfo } = useAuth()
   const googleAuthenticate = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     signInWithPopup(auth, provider)
@@ -31,10 +31,15 @@ export default function Header() {
         const googleToken = credential?.accessToken
         console.log(googleToken)
         if (googleToken) {
-          const response = await postFetcher('/auth/login/google',
-            { token: googleToken }
-          )
-          console.log("login response" , response)
+          const response = await fetch(`${BASE_URL}/auth/login/google`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token: googleToken })
+          })
+            .then(response => response.json())
+          console.log("login response", response)
           login(response?.userInfo, response?.token)
         }
 
@@ -123,7 +128,7 @@ export default function Header() {
                     variant="text"
                     className="px-8"
                   >
-                    <span>Sign up</span>
+                    <span>Register</span>
                   </Button>
                   <Button
                     onClick={(e) => googleAuthenticate(e)}

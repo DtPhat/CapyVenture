@@ -1,7 +1,7 @@
 import { BASE_URL } from '../constants';
 
-const fetcherJWT = (method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
-  async (endpoint: string, data?: {}) => {
+const mutationFetcher = (method: 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
+  async (endpoint: string, { arg }: { arg?: any }) => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -10,29 +10,45 @@ const fetcherJWT = (method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
         'Content-Type': 'application/json',
         'Authorization': `${token}`
       },
-      ...(data && { body: JSON.stringify(data) })
-  });
+      ...(arg && { body: JSON.stringify(arg) })
+    });
 
-if (!response.ok) {
-  if (response.status === 401 || response.status === 403) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userInfo');
-    window.location.href = '/'
-    throw new Error('Unauthorized');
-  }
-  throw new Error('An error occurred while fetching the data.');
-}
+    if (!response.ok) {
+      if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
+        window.location.href = '/'
+        throw new Error('Unauthorized');
+      }
+      throw new Error('An error occurred while fetching the data.');
+    }
 
-return response.json();
+    return response.json();
   };
 
-export const fetcherPublic = async (endpoint: string) => {
-  const response = await fetch(`${BASE_URL}${endpoint}`)
+export const fetcher = async (endpoint: string) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    },
+  });
+
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userInfo');
+      window.location.href = '/'
+      throw new Error('Unauthorized');
+    }
+    throw new Error('An error occurred while fetching the data.');
+  }
+
   return response.json();
 };
 
-export const fetcher = fetcherJWT('GET')
-export const postFetcher = fetcherJWT('POST')
-export const deleteFetcher = fetcherJWT('DELETE')
-export const putFetcher = fetcherJWT('PUT')
+export const postFetcher = mutationFetcher('POST')
+export const deleteFetcher = mutationFetcher('DELETE')
+export const putFetcher = mutationFetcher('PUT')
 

@@ -25,12 +25,13 @@ import {
 } from "@heroicons/react/24/solid";
 import { CreateCollection } from "@/app/collections/_components/create";
 import Loader from "@/components/loader";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { Collection } from "@/lib/definitions";
 import { postFetcher } from "@/lib/config/fetchter";
 import { toast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { useRouter } from 'next/navigation'
+import useSWRMutation from "swr/mutation";
 
 export default function Translator({ position, textToTranslate }: TranslatorProps) {
   const [translatedText, setTranslatedText] = useState<string>()
@@ -39,7 +40,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
   const router = useRouter()
   const { data, isLoading } = useSWR('/collection')
   const collections: Collection[] = data?.data
-  
+
   const callTranslateAPI = async () => {
     if (showingTranslation) {
       setShowingTranslation(false);
@@ -55,14 +56,16 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
       .then(data => { setTranslatedText(data.text); })
       .finally(() => setLoading(false))
   }
-
+  const { trigger } = useSWRMutation('/vocabulary', postFetcher)
   const addVocabToCollection = async (collection: string) => {
     if (!collection) return
-    await postFetcher('/vocabulary', {
+    await trigger({
       sourceText: textToTranslate,
       translation: translatedText,
       collection: collection
     }).finally(() => {
+      mutate('/collection')
+      mutate(`/vocabulary/${collection}`)
       toast({
         title: `Add to ${collection}`,
         description: "The source text and its translation has been added.",
@@ -120,7 +123,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
                   <Chip value={collection.totalVocab} size="sm" variant="ghost" className="rounded-full" />
                 </MenuItem>)
             }
-            <CreateCollection CustomButton={
+            <CreateCollection OpenButton={
               <Button variant='text' className="flex items-center p-1 w-full justify-center gap-1">
                 <PlusIcon className="w-4 h-4" />
                 <span className="normal-case text-xs">Create Collection</span>

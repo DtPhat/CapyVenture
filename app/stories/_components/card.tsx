@@ -10,7 +10,7 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { estimateReadingTime } from "../_lib/utils";
-import { LEVELS_NUMBER } from "@/lib/constants";
+import { LEVEL_NUMBERS } from "@/lib/constants";
 interface StoryCard {
   data: Story
 }
@@ -43,7 +43,7 @@ export default function StoryCard({ data: { display_image, title, description, l
       <CardFooter className="flex items-center px-4 pt-0">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 justify-between">
-            <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVELS_NUMBER[level as Level]}</div>
+            <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVEL_NUMBERS[level as Level]}</div>
             <div className="text-sm">
               {level}
             </div>
@@ -63,7 +63,7 @@ export default function StoryCard({ data: { display_image, title, description, l
 export function MiniStoryCard({ data: { display_image, title, description, contents } }: StoryCard) {
   return (
     <Link href='/stories/thispage'>
-      <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground">
+      <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground w-72">
         <CardHeader
           shadow={false}
           color="transparent"
@@ -72,7 +72,7 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
           <img
             src={display_image}
             alt="Display image"
-            className="h-56 w-full object-cover"
+            className="h-48 w-full object-cover"
           />
           <div className="flex items-center justify-center absolute bottom-2 left-2 border rounded-md">
             <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">3</div>
@@ -80,12 +80,14 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
         </CardHeader>
         <CardBody className="flex flex-col gap-1 p-4">
           <Typography className="text-lg font-semibold" color="black">
-            {title}
+            <p className="line-clamp-1">
+              {title}
+            </p>
           </Typography>
           <p className="text-xs text-black/50">{"Jan 08, 2024"} · {"10"} min read</p>
-          <Typography className="font-normal text-sm text-black/80">
+          <p className="font-normal text-sm text-black/80 line-clamp-2">
             {description}
-          </Typography>
+          </p>
         </CardBody>
       </Card>
     </Link>

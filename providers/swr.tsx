@@ -5,13 +5,10 @@ const SWRProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SWRConfig
       value={{
-        refreshInterval: 3000,
+        revalidateIfStale: true,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
         fetcher: fetcher,
-        // onError: (error) => {
-        //   if (error.message === 'Unauthorized') {
-        //     window.location.href = '/';
-        //   }
-        // }
       }}
     >
       {children}

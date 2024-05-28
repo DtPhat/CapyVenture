@@ -1,7 +1,7 @@
-import { LEVELS_NUMBER } from "./constants"
+import { LEVEL_NUMBERS } from "./constants"
 
 export type CollectionItem = {
-  id: string,
+  _id: string,
   sourceText: string,
   translation: string,
   collection?: string
@@ -15,15 +15,22 @@ export type Collection = {
   totalVocab?: number,
   description: string
 }
+export type Transcript = {
+  sentence: string,
+  timestamp: number,
+  translation: string 
+}
 
 export type Video = {
-  url: string,
-  title: string,
+  _id: string,
+  videoId: string,
+  category: string,
   thumbnail: string,
+  duration: number,
+  caption: string,
   channel: string,
-  duration: string,
-  level?: number
-  topic?: string
+  level: string,
+  transcripts: Transcript[]
 }
 
 // export type Story = {
@@ -55,4 +62,4 @@ export type Story = {
 }
 
 
-export type Level = keyof typeof LEVELS_NUMBER;
+export type Level = keyof typeof LEVEL_NUMBERS;

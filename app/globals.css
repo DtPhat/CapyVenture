@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -28,12 +29,14 @@ body {
 
 
 
-@layer base {
-  
-}
+@layer base {}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
   }
 }

@@ -29,7 +29,7 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center rounded bg-transparent hover:bg-slate-50 border p-1 gap-2 justify-between cursor-pointer text-black !bg-foreground">
+        <div className="flex items-center rounded bg-transparent hover:bg-slate-50 border-2 hover:bg-gray-100 border-gray-200 p-1 gap-2 justify-between cursor-pointer text-black">
           <img
             src={userInfo?.picture || anonymous}
             alt="avatar"

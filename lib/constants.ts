@@ -7,7 +7,7 @@ export const ENGLISH_LEVELS = [
   "5 - Proficiency"
 ]
 
-export const LEVELS_NUMBER = {
+export const LEVEL_NUMBERS = {
   "Beginner": 1,
   "Elementary": 2,
   "Intermediate": 3,

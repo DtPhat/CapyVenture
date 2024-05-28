@@ -2,52 +2,52 @@ import { CollectionItem, Story, Video } from "./definitions";
 
 export const collection: CollectionItem[] = [
   {
-    id: "1",
+    _id: "1",
     sourceText: "Hello, how are you?",
     translation: "Xin chào, bạn khỏe không?"
   },
   {
-    id: "2",
+    _id: "2",
     sourceText: "What is your name?",
     translation: "Tên bạn là gì?"
   },
   {
-    id: "3",
+    _id: "3",
     sourceText: "I love programming.",
     translation: "Tôi yêu lập trình."
   },
   {
-    id: "4",
+    _id: "4",
     sourceText: "This is a beautiful day.",
     translation: "Hôm nay là một ngày đẹp."
   },
   {
-    id: "5",
+    _id: "5",
     sourceText: "Can you help me?",
     translation: "Bạn có thể giúp tôi không?"
   },
   {
-    id: "6",
+    _id: "6",
     sourceText: "Where is the nearest restaurant?",
     translation: "Nhà hàng gần nhất ở đâu?"
   },
   {
-    id: "7",
+    _id: "7",
     sourceText: "I am learning Vietnamese.",
     translation: "Tôi đang học tiếng Việt."
   },
   {
-    id: "8",
+    _id: "8",
     sourceText: "How much does this cost?",
     translation: "Cái này giá bao nhiêu?"
   },
   {
-    id: "9",
+    _id: "9",
     sourceText: "Thank you for your help.",
     translation: "Cảm ơn bạn đã giúp đỡ."
   },
   {
-    id: "10",
+    _id: "10",
     sourceText: "Good morning!",
     translation: "Chào buổi sáng!"
   }
@@ -55,31 +55,43 @@ export const collection: CollectionItem[] = [
 
 export const videoList: Video[] = [
   {
-    url: "https://www.youtube.com/watch?v=oqGuJhOeMek",
-    title: "Cell vs. virus: A battle for health - Shannon Stiles",
+    _id: "https://www.youtube.com/watch?v=oqGuJhOeMek",
+    videoId: "oqGuJhOeMek",
+    caption: "Cell vs. virus: A battle for health - Shannon Stiles",
     thumbnail: "https://i3.ytimg.com/vi/oqGuJhOeMek/maxresdefault.jpg",
     channel: "TED-ed",
-    duration: "3:58",
-    level: 3,
-    topic: "Health"
+    duration: 238,
+    level: "Intermediate",
+    category: "Health",
+    transcripts: [
+
+    ]
   },
   {
-    url: "https://www.youtube.com/watch?v=ER0Cu0KQFqM",
-    title: "Who were the Vestal Virgins, and what was their job? - Peta Greenfield",
+    _id: "https://www.youtube.com/watch?v=ER0Cu0KQFqM",
+    videoId: "ER0Cu0KQFqM",
+    caption: "Who were the Vestal Virgins, and what was their job? - Peta Greenfield",
     thumbnail: "https://i3.ytimg.com/vi/ER0Cu0KQFqM/maxresdefault.jpg",
     channel: "TED-ed",
-    duration: "4:33",
-    level: 3,
-    topic: "History"
+    duration: 200,
+    level: "Beginner",
+    category: "History",
+    transcripts: [
+
+    ]
   },
   {
-    url: "https://www.youtube.com/watch?v=z-IR48Mb3W0",
-    title: "What is depression? - Helen M. Farrell",
+    _id: "https://www.youtube.com/watch?v=z-IR48Mb3W0",
+    videoId: "z-IR48Mb3W0",
+    caption: "What is depression? - Helen M. Farrell",
     thumbnail: "https://i3.ytimg.com/vi/z-IR48Mb3W0/maxresdefault.jpg",
     channel: "TED-ed",
-    duration: "4:28",
-    level: 3,
-    topic: "Education"
+    duration: 120,
+    level: "Beginner",
+    category: "Education",
+    transcripts: [
+
+    ]
   },
 ]
 
@@ -89,7 +101,7 @@ export const storyList: any[] = [
     title: "Sunflowers at sunset",
     lastUpdated: "Jan 08, 2024",
     length: 10,
-    summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
+    description: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
     level: 3,
     topic: "Mystery",
   },
@@ -98,7 +110,7 @@ export const storyList: any[] = [
     title: "Spring with blue sky",
     lastUpdated: "Jan 08, 2024",
     length: 10,
-    summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
+    description: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
     level: 3,
     topic: "Mystery",
   },
@@ -107,7 +119,16 @@ export const storyList: any[] = [
     title: "Maze of Shadows",
     lastUpdated: "Jan 08, 2024",
     length: 10,
-    summary: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
+    description: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
+    level: 3,
+    topic: "Mystery",
+  },
+  {
+    display_image: "https://w0.peakpx.com/wallpaper/146/116/HD-wallpaper-anime-original-sky-snow-winter.jpg",
+    title: "Alone in snow",
+    lastUpdated: "Jan 08, 2024",
+    length: 10,
+    description: "In Noirville, Detective Alex Mercer navigates a perilous maze in a deserted warehouse...",
     level: 3,
     topic: "Mystery",
   },

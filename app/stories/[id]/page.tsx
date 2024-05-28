@@ -1,6 +1,5 @@
 import { MiniStoryCard } from "@/app/stories/_components/card";
 import TranslatableSection from "@/components/layout/translatable-section";
-import { fetcherPublic } from "@/lib/config/fetchter";
 import { Story } from "@/lib/definitions";
 import { storyList } from "@/lib/placeholders";
 import Link from "next/link";
@@ -18,23 +17,24 @@ export default async function Story({ params }: { params: { id: string } }) {
   const story: Story = response.data
   return (
     <div className="max-w-7xl">
-      {/* {showingTranslator && <Translator position={position} textToTranslate={selectedText} />} */}
-      <div className="py-8 px-16 bg-white translatable">
-        <div className="flex justify-between gap-1 text text-black/90">
-          <div>
-            <p>Level: <span className="font-semibold">{story.level}</span></p>
-            <p>Topic: <span className="font-semibold">{story.category}</span></p>
+      <div className={`py-8 px-16`}>
+        <div>
+          <div className="flex justify-between gap-1 text text-black/90">
+            <div>
+              <p>Level: <span className="font-semibold">{story.level}</span></p>
+              <p>Topic: <span className="font-semibold">{story.category}</span></p>
+            </div>
+            <div className="text-end">
+              <p>Jan 08, 2024 · {estimateReadingTime(story.contents[0].text)} minute{story.contents[0].text.length > 1 ? 's' : ''} read</p>
+            </div>
           </div>
-          <div className="text-end">
-            <p>Jan 08, 2024 · {estimateReadingTime(story.contents[0].text)} minute{story.contents[0].text.length > 1 ? 's' : ''} read</p>
-          </div>
+          <h1 className="text-xl text-center font-semibold mb-4">{story.title}</h1>
+          <TranslatableSection>
+            <p className="text-lg whitespace-pre-line">
+              {story.contents[0].text}
+            </p>
+          </TranslatableSection>
         </div>
-        <h1 className="text-xl text-center font-semibold mb-4">{story.title}</h1>
-        <TranslatableSection>
-          <p className="text-lg whitespace-pre-line">
-            {story.contents[0].text}
-          </p>
-        </TranslatableSection>
         <hr className="mt-16 mb-4 border-black/20" />
         <div>
           <h1 className="font-semibold pb-2">Similar stories</h1>
@@ -47,6 +47,7 @@ export default async function Story({ params }: { params: { id: string } }) {
             }
           </div>
         </div>
+
       </div>
     </div>
   );
