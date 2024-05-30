@@ -33,3 +33,9 @@ export const collectionPictures = [
   '/collections/glassware.png',
   '/collections/calendar.png',
 ]
+
+export const subscriptionPlans = {
+  MONTHLY: "MONTHLY",
+  YEARLY: "YEARLY",
+  LIFETIME: "LIFETIME"
+}

@@ -1,5 +1,7 @@
 "use client"
+import { LEVEL_NUMBERS } from "@/lib/constants";
 import { Level, Story } from "@/lib/definitions";
+import { convertDateFormat } from "@/lib/helpers/time";
 import { TagIcon } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -10,57 +12,58 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { estimateReadingTime } from "../_lib/utils";
-import { LEVEL_NUMBERS } from "@/lib/constants";
+import Premium from "@/components/premium";
 interface StoryCard {
   data: Story
 }
-export default function StoryCard({ data: { display_image, title, description, level, category, contents } }: StoryCard) {
-  console.log(contents)
+export default function StoryCard({ data: { _id, display_image, title, description, level, category, contents, isPremium, updatedAt } }: StoryCard) {
   return (
-    <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground">
-      <CardHeader
-        shadow={false}
-        color="transparent"
-        className="m-0 rounded-none"
-      >
-        <img
-          src={display_image}
-          alt="story picture"
-          className="h-56 w-full object-cover"
-        />
-      </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-4">
-        <Typography className="text-lg font-semibold" color="black">
-          {title}
-        </Typography>
-        <p className="text-xs">{'Jan 08, 2024'} · {estimateReadingTime(contents[0].text)} min read</p>
-        <Typography color="gray" className="font-normal text-sm h-14">
-          <p className="line-clamp-3">
-            {description}
-          </p>
-        </Typography>
-      </CardBody>
-      <CardFooter className="flex items-center px-4 pt-0">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 justify-between">
-            <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVEL_NUMBERS[level as Level]}</div>
-            <div className="text-sm">
-              {level}
+    <Premium isPremium={isPremium} _id={_id}>
+      <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground border-2">
+        <CardHeader
+          shadow={false}
+          color="transparent"
+          className="m-0 rounded-none"
+        >
+          <img
+            src={display_image}
+            alt="story picture"
+            className="h-56 w-full object-cover"
+          />
+        </CardHeader>
+        <CardBody className="flex flex-col gap-1 p-4">
+          <Typography className="text-lg font-semibold" color="black">
+            {title}
+          </Typography>
+          <p className="text-xs">{convertDateFormat(updatedAt)} · {estimateReadingTime(contents[0].text)} min read</p>
+          <Typography color="gray" className="font-normal text-sm h-14">
+            <p className="line-clamp-3">
+              {description}
+            </p>
+          </Typography>
+        </CardBody>
+        <CardFooter className="flex items-center px-4 pt-0">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2 justify-between">
+              <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVEL_NUMBERS[level as Level]}</div>
+              <div className="text-sm">
+                {level}
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <TagIcon className="w-5 h-5" />
+              <span className="text-sm">
+                {category}
+              </span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            <TagIcon className="w-5 h-5" />
-            <span className="text-sm">
-              {category}
-            </span>
-          </div>
-        </div>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </Premium>
   )
 }
 
-export function MiniStoryCard({ data: { display_image, title, description, contents } }: StoryCard) {
+export function MiniStoryCard({ data: { display_image, title, description, contents, updatedAt } }: StoryCard) {
   return (
     <Link href='/stories/thispage'>
       <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground w-72">
@@ -84,7 +87,7 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
               {title}
             </p>
           </Typography>
-          <p className="text-xs text-black/50">{"Jan 08, 2024"} · {"10"} min read</p>
+          <p className="text-xs text-black/50">{updatedAt} · {"10"} min read</p>
           <p className="font-normal text-sm text-black/80 line-clamp-2">
             {description}
           </p>

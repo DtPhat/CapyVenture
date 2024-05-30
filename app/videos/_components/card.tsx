@@ -1,4 +1,5 @@
 "use client"
+import Premium from "@/components/premium";
 import { LEVEL_NUMBERS } from "@/lib/constants";
 import { Level, Video } from "@/lib/definitions";
 import { capText } from "@/lib/helpers/string";
@@ -16,49 +17,51 @@ import Link from "next/link";
 interface VideoCardProps {
   data: Video,
 }
-export default function VideoCard({ data: {_id, caption, channel, duration, thumbnail, videoId, category, level } }: VideoCardProps) {
+export default function VideoCard({ data: { _id, caption, channel, duration, thumbnail, videoId, category, level, isPremium } }: VideoCardProps) {
   return (
-    <Card className="overflow-hidden group relative hover:bg-primary/5 bg-foreground">
-      <CardHeader
-        shadow={false}
-        color="transparent"
-        className="m-0 rounded-none"
-      >
-        <img
-          src={thumbnail}
-          alt="ui/ux review check"
-          className="transition duration-400 ease-in-out group-hover:scale-105"
-        />
-        <div className="absolute-center hidden group-hover:block ">
-          <PlayCircleIcon className="w-28 h-28 opacity-50" />
-        </div>
-        <div className="absolute flex items-center gap-2 justify-between bottom-2 right-2 bg-black/50">
-          <div className="bg-black px-2 text-center rounded text-white">{formatSeconds(duration)}</div>
-        </div>
-      </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-4">
-        <Typography className="text-lg font-semibold h-16 line-clamp-2" color="black">
-          {caption}
-        </Typography>
-        <p className="text-sm">{channel}</p>
-      </CardBody>
-      <CardFooter className="flex items-center px-4 pt-0">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 justify-between">
-            <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVEL_NUMBERS[level as Level]}</div>
-            <div className="text-sm">
-              {level}
+    <Premium isPremium={isPremium} _id={_id}>
+      <Card className="overflow-hidden group relative hover:bg-primary/5 bg-foreground">
+        <CardHeader
+          shadow={false}
+          color="transparent"
+          className="m-0 rounded-none"
+        >
+          <img
+            src={thumbnail}
+            alt="ui/ux review check"
+            className="transition duration-400 ease-in-out group-hover:scale-105"
+          />
+          <div className="absolute-center hidden group-hover:block ">
+            <PlayCircleIcon className="w-28 h-28 opacity-50" />
+          </div>
+          <div className="absolute flex items-center gap-2 justify-between bottom-2 right-2 bg-black/50">
+            <div className="bg-black px-2 text-center rounded text-white">{formatSeconds(duration)}</div>
+          </div>
+        </CardHeader>
+        <CardBody className="flex flex-col gap-1 p-4">
+          <Typography className="text-lg font-semibold h-16 line-clamp-2" color="black">
+            {caption}
+          </Typography>
+          <p className="text-sm">{channel}</p>
+        </CardBody>
+        <CardFooter className="flex items-center px-4 pt-0">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2 justify-between">
+              <div className="bg-primary w-6 h-6 text-center rounded-md text-white">{LEVEL_NUMBERS[level as Level]}</div>
+              <div className="text-sm">
+                {level}
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <TagIcon className="w-5 h-5" />
+              <span className="text-sm">
+                {category}
+              </span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            <TagIcon className="w-5 h-5" />
-            <span className="text-sm">
-              {category}
-            </span>
-          </div>
-        </div>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </Premium>
   )
 }
 

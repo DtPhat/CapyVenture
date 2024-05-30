@@ -1,4 +1,4 @@
-import { LEVEL_NUMBERS } from "./constants"
+import { LEVEL_NUMBERS, subscriptionPlans } from "./constants"
 
 export type CollectionItem = {
   _id: string,
@@ -18,7 +18,7 @@ export type Collection = {
 export type Transcript = {
   sentence: string,
   timestamp: number,
-  translation: string 
+  translation: string
 }
 
 export type Video = {
@@ -30,7 +30,8 @@ export type Video = {
   caption: string,
   channel: string,
   level: string,
-  transcripts: Transcript[]
+  transcripts: Transcript[],
+  isPremium: boolean,
 }
 
 // export type Story = {
@@ -59,7 +60,12 @@ export type Story = {
   category?: string,
   comment?: []
   level?: string
+  updatedAt: string,
+  isPremium: boolean
 }
 
 
 export type Level = keyof typeof LEVEL_NUMBERS;
+
+export type SubscriptionPlan = keyof typeof subscriptionPlans;
+

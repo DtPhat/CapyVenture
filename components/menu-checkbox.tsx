@@ -18,9 +18,9 @@ interface MenuCheckbox {
 export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
   return (
     <Menu
-      dismiss={{
-        itemPress: false,
-      }}
+    dismiss={{
+      itemPress: false,
+    }}
     >
       <MenuHandler>
         <Button variant='text' className="normal-case text-md flex gap-2 py-2 px-4 border-black/50 border-2 bg-foreground">

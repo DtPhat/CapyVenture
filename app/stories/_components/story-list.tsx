@@ -21,9 +21,7 @@ const Storylist = async () => {
     <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
       {
         storyList.map(item =>
-          <Link href={`/stories/${item._id}`} key={item.title}>
-            <StoryCard data={item} />
-          </Link>
+          <StoryCard data={item} />
         )
       }
     </div>)

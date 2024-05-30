@@ -43,25 +43,25 @@ export default function Sidebar() {
   };
   const navigationList = [
     {
-      Icon: HomeIcon,
+      Icon: "/sidebar/home.png",
       name: "Home",
       link: "/home",
       index: 1
     },
     {
-      Icon: VideoCameraIcon,
+      Icon: "/sidebar/video.png",
       name: "Videos",
       link: "/videos",
       index: 3
     },
     {
-      Icon: BookOpenIcon,
+      Icon: "/sidebar/story.png",
       name: "Stories",
       link: "/stories",
       index: 2
     },
     {
-      Icon: PuzzlePieceIcon,
+      Icon: "/sidebar/game.png",
       name: "Game Center",
       link: "/game",
       index: 4,
@@ -95,19 +95,19 @@ export default function Sidebar() {
 
     //personal navigation
     {
-      Icon: BookmarkSquareIcon,
+      Icon: "/sidebar/collection.png",
       name: "My Collections",
       link: "/collections",
       index: 5
     },
+    // {
+    //   Icon: "WalletIcon",
+    //   name: "Saved Lessons",
+    //   link: "/save",
+    //   index: 6
+    // },
     {
-      Icon: WalletIcon,
-      name: "Saved Lessons",
-      link: "/save",
-      index: 6
-    },
-    {
-      Icon: UserIcon,
+      Icon: "/sidebar/user.png",
       name: "Account",
       link: "/user",
       index: 7
@@ -146,7 +146,7 @@ export default function Sidebar() {
                     <ListItem className="p-0" >
                       <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
                         <ListItemPrefix>
-                          <item.Icon className="h-6 w-6 text-black" />
+                          <img className="size-6" src={item.Icon}/>
                         </ListItemPrefix>
                         <Typography className="mr-auto tracking-wide text-black">
                           {item.name}
@@ -183,7 +183,7 @@ export default function Sidebar() {
                 : <Link href={item.link} key={item.index}>
                   <ListItem selected={pathname.includes(item.link)}>
                     <ListItemPrefix>
-                      <item.Icon className="h-6 w-6" />
+                      <img className="size-6" src={item.Icon}/>
                     </ListItemPrefix>
                     <Typography className="mr-auto tracking-wide">
                       {item.name}

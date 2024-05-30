@@ -22,9 +22,7 @@ export default function TranslatableSection({ children }: TranslatableSectionPro
     setShowingTranslator(true);
     setPosition({ x: event.pageX, y: event.pageY });
   };
-  const handleOpen = (value: any) => {
-    setOpen(open === value ? 0 : value);
-  };
+
   return (
     <section className="translatable">
       {showingTranslator && <Translator position={position} textToTranslate={selectedText} />}

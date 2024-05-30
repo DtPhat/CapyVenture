@@ -23,7 +23,7 @@ export default async function Videos() {
           <h1>Most interesting videos to learn.</h1>
         </div>
         <div className="absolute-center font-bold text-white text-4xl">
-          <PlayCircleIcon className="w-48 h-48 opacity-15"/>
+          <PlayCircleIcon className="w-48 h-48 opacity-15" />
         </div>
       </div>
       <Container>
@@ -39,9 +39,7 @@ export default async function Videos() {
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {
             videoList.map((video: Video) =>
-              <Link href={`/videos/${video._id}`} key={video._id}>
-                <VideoCard data={video} />
-              </Link>
+              <VideoCard data={video} />
             )
           }
         </div>

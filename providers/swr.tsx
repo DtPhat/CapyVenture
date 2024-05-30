@@ -6,8 +6,8 @@ const SWRProvider = ({ children }: { children: ReactNode }) => {
     <SWRConfig
       value={{
         revalidateIfStale: true,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
+        revalidateOnFocus: true,
+        revalidateOnReconnect: true,
         fetcher: fetcher,
       }}
     >

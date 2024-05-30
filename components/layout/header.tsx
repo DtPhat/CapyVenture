@@ -7,6 +7,11 @@ import {
   IconButton,
   Card,
   MobileNav,
+  MenuItem,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { Bars3Icon, Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -18,13 +23,14 @@ import { useAuth } from "@/providers/auth";
 import UserMenu from "../user-menu";
 import { postFetcher } from "@/lib/config/fetchter";
 import { BASE_URL } from "@/lib/constants";
+import { LoginDialog } from "../dialog";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
   const [openMobileNav, setOpenMobileNav] = useState(false);
+
   const { login, userInfo } = useAuth()
-  const googleAuthenticate = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault();
+  const googleAuthenticate = async (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
     signInWithPopup(auth, provider)
       .then(async (result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -42,11 +48,10 @@ export default function Header() {
           console.log("login response", response)
           login(response?.userInfo, response?.token)
         }
-
       }).catch((error) => {
         console.log(error)
       });
-  }
+  
 
   useEffect(() => {
     window.addEventListener(
@@ -130,12 +135,17 @@ export default function Header() {
                   >
                     <span>Register</span>
                   </Button>
-                  <Button
-                    onClick={(e) => googleAuthenticate(e)}
-                    className="bg-primary px-8"
-                  >
-                    Login
-                  </Button>
+                  <LoginDialog
+                    onConfirm={() => googleAuthenticate()}
+                    OpenButton={
+                      <Button
+                        className="bg-primary px-8"
+                      >
+                        Login
+                      </Button>
+                    }
+                  />
+
                 </div>
             }
             {/* <IconButton
@@ -182,6 +192,7 @@ export default function Header() {
           }
         </MobileNav> */}
       </Navbar>
+
     </div >
   );
 }
