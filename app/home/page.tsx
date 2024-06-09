@@ -1,8 +1,8 @@
 "use client"
-import React from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import SearchBar, { HomeSearchBar } from '@/components/searchbar'
+import SearchBar, { HomeSearchBar } from '@/components/search-bar'
 import { MiniStoryCard } from '../stories/_components/card'
 import { MiniVideoCard } from '../videos/_components/card'
 import { Button } from '@material-tailwind/react'
@@ -13,8 +13,51 @@ import Separator from '@/components/separator'
 import { storyList, videoList } from '../../lib/placeholders'
 import { Rat, Rocket } from 'lucide-react'
 import Container from '@/components/container'
+import { toast } from '@/components/ui/use-toast'
+import { useAuth } from '@/providers/auth'
+import { GettingStartedDialog } from '@/components/dialog'
+import RelatedStories from '@/app/stories/_components/related-stories'
+import { BASE_URL } from '@/lib/constants'
+import { Story, Video } from '@/lib/definitions'
 
 const Home = () => {
+  const { login } = useAuth()
+  const searchParams = useSearchParams()
+  const paymentSuccess = searchParams.get('payment_success')
+  const { userInfo } = useAuth()
+  const [stories, setStories] = useState<Story[]>([])
+  const [videos, setVideos] = useState<Video[]>([])
+  useEffect(() => {
+    const fetchStories = async () => {
+      const response = await fetch(`${BASE_URL}/story?page=1&size=4`)
+        .then(res => res.json())
+        .then(res => setStories(res?.data))
+        .catch(error => console.log(error))
+    }
+    const fetchVideos = async () => {
+      const response = await fetch(`${BASE_URL}/video?page=1&size=3`)
+        .then(res => res.json())
+        .then(res => setVideos(res?.data))
+        .catch(error => console.log(error))
+    }
+    fetchStories()
+    fetchVideos()
+  }, []);
+  useEffect(() => {
+    const storedUserInfo = localStorage.getItem('userInfo');
+    const currentUserInfo = JSON.parse(storedUserInfo || "null")
+    const token = localStorage.getItem('token');
+    if (paymentSuccess && currentUserInfo) {
+      login({ ...currentUserInfo, isPremium: true }, token!)
+    }
+  }, []);
+
+  if (paymentSuccess && userInfo) {
+    toast({
+      title: 'Subsribe to premium successfully!',
+      description: 'You now have full access to the premium content',
+    })
+  }
   return (
     <div className='w-full relative'>
       <div className='absolute w-full h-[70vh] bg-black/50 bg-gradient-to-r from-primary/80 to-accent/40 '>
@@ -26,10 +69,17 @@ const Home = () => {
             <HomeSearchBar placeholder='Search videos, stories,..' />
           </div>
           <div className='mt-6'>
-            {/* <Button className='font-normal text-xl underline underline-offset-4 bg-accent px-2'>Getting Started</Button> */}
-            <ButtonIcon text='GET STARTED' className='text-2xl text-green-100 underline underline-offset-4 group hover:-translate-y-0.5 hover:text-foreground'
-              Icon={<Rocket className='w-9 h-9 group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-2' />}
-            />
+            {
+              <GettingStartedDialog
+                OpenButton={
+                  <ButtonIcon text='GET STARTED' className='text-2xl text-green-100 underline underline-offset-4 group hover:-translate-y-0.5 hover:text-foreground'
+                    Icon={<Rocket className='w-9 h-9 group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-2' />}
+                  />
+                }
+                onConfirm={(): Promise<any> => {
+                  throw new Error('Function not implemented.')
+                }} />
+            }
           </div>
         </div>
         <Container clasName='!py-0 !px-0'>
@@ -38,9 +88,9 @@ const Home = () => {
               <h1 className='pb-4'>Best Videos for Learning</h1>
               <NavigateButtonIcon linkTo='/videos' text='Watch more' />
             </div>
-            <div className='flex gap-8'>
+            <div className='grid grid-cols-3 gap-4'>
               {
-                videoList.map(item =>
+                videos.map(item =>
                   <MiniVideoCard data={item} key={item.caption} />
                 )
               }
@@ -53,12 +103,14 @@ const Home = () => {
         <Container clasName='!py-0 !px-0'>
           <div className='p-8 text-2xl font-semibold'>
             <div className='flex justify-between'>
-              <h1 className='pb-4'>Top must-read educational writings</h1>
+              <h1 className='pb-4'>Top must-read writings</h1>
               <NavigateButtonIcon linkTo='/stories' text='Read more' />
             </div>
-            <div className='flex gap-4'>
+            <div className='grid grid-cols-4 gap-4'>
               {
-                storyList.map(item => <MiniStoryCard data={item} key={item.title} />)
+                stories.map(item =>
+                  <MiniStoryCard data={item} key={item._id} />
+                )
               }
             </div>
           </div>

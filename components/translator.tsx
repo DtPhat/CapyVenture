@@ -32,6 +32,7 @@ import { toast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { useRouter } from 'next/navigation'
 import useSWRMutation from "swr/mutation";
+import { useAuth } from "@/providers/auth";
 
 export default function Translator({ position, textToTranslate }: TranslatorProps) {
   const [translatedText, setTranslatedText] = useState<string>()

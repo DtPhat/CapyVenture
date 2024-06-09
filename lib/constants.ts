@@ -1,10 +1,10 @@
 import 'dotenv/config'
 export const ENGLISH_LEVELS = [
-  "1 - Beginner",
-  "2 - Elementary",
-  "3 - Intermediate",
-  "4 - Advanced",
-  "5 - Proficiency"
+  "Beginner",
+  "Elementary",
+  "Intermediate",
+  "Advanced",
+  "Proficiency"
 ]
 
 export const LEVEL_NUMBERS = {

@@ -1,6 +1,6 @@
 "use client"
 import Container from '@/components/container';
-import SearchBar from '@/components/searchbar';
+import SearchBar from '@/components/search-bar';
 import { Collection } from '@/lib/definitions';
 import {
   Option,

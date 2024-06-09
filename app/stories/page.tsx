@@ -1,12 +1,20 @@
 import { ENGLISH_LEVELS } from "@/lib/constants";
-import MenuCheckbox from "@/components/menu-checkbox";
-import SearchBar from "@/components/searchbar";
+import FilterSelect, { ClearFilter } from "@/components/filter-select";
+import SearchBar from "@/components/search-bar";
 import Container from "@/components/container";
 import Storylist from "./_components/story-list";
 import StoriesCarousel from "./_components/carousel";
 import { serverFetcher } from "@/lib/config/fetchter";
 
-export default async function Stories() {
+export default async function Stories({
+  searchParams,
+}: {
+  searchParams?: {
+    title?: string;
+    category?: string;
+    level?: string;
+  };
+}) {
   const carouselResponse = await Promise.all([
     serverFetcher('/story/6657ecb46e94f467a7d5f1d0'),
     serverFetcher('/story/6657ecd96e94f467a7d5f1d1'),
@@ -19,16 +27,17 @@ export default async function Stories() {
         carouselData={carouselData}
       />
       <Container>
-        <div className="grid grid-cols-2 border-b-2 pb-2 border-black/50">
+        <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50">
           <div className="pt-2">
             <SearchBar placeholder="Search stories..." />
           </div>
           <div className="flex justify-end items-center gap-4">
-            <MenuCheckbox name="Category" checklist={["News", "Business", "Education", "Technology", "Entertainment"]} />
-            <MenuCheckbox name="Level" checklist={ENGLISH_LEVELS} />
+            <FilterSelect name="category" checklist={["News", "Business", "Education", "Technology", "Fantasy", "Adventure"]} />
+            <FilterSelect name="level" checklist={ENGLISH_LEVELS} />
+            <ClearFilter />
           </div>
         </div>
-        <Storylist />
+        <Storylist title={searchParams?.title} level={searchParams?.level} category={searchParams?.category}/>
       </Container>
     </div>
   );

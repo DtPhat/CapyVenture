@@ -12,6 +12,7 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import Separator from './separator';
 import { subscribePremium } from '@/lib/actions/payment';
+import { useAuth } from '@/providers/auth';
 interface PremiumProps {
   children: ReactNode,
   isPremium?: boolean,
@@ -21,6 +22,7 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter()
   const pathname = usePathname()
+  const { userInfo } = useAuth()
 
   const handlePremium: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (event) => {
     setOpen(!open)
@@ -38,7 +40,7 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
     <>
       <div
         className='group relative cursor-pointer'
-        onClick={isPremium ? handlePremium : handleFreemium}
+        onClick={isPremium && !userInfo?.isPremium ? handlePremium : handleFreemium}
       >
         {children}
         {isPremium
@@ -69,11 +71,11 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
           <Typography variant="h4" className='text-yellow-900'>
             You need to subscribe to continue!
           </Typography>
-          <Typography className="text-center font-normal">
+          {/* <Typography className="text-center font-normal">
             We currently have 3 premium plan, choose the best plan for your needs.
-          </Typography>
-          <div className='grid grid-cols-3 gap-4'>
-            <div className='border-2 flex flex-col p-4 rounded-md bg-foreground gap-2'>
+          </Typography> */}
+          <div className=''>
+            <div className='border-2 w-64 flex flex-col p-4 rounded-md bg-foreground gap-2'>
               <h1 className='text-center font-bold text-black text-sm uppercase'>Monthly subscription</h1>
               <div className='text-center text-xs'>
                 Recurring charge monthly
@@ -82,7 +84,7 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
                 <Separator className='!my-0' />
               </div>
               <p className='text-center text-xl font-bold text-black'>
-                25,000VNĐ
+                50,000VNĐ
               </p>
               <div className='mx-2'>
                 <Separator className='!my-0' />
@@ -93,46 +95,6 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
               <Button color='green' onClick={async () => {
                 await subscribePremium('MONTHLY')
               }}>Subscribe</Button>
-            </div>
-
-            <div className='border-2 flex flex-col p-4 rounded-md bg-foreground gap-2'>
-              <h1 className='text-center font-bold text-black text-sm uppercase'>Yearly subscription</h1>
-              <div className='text-center text-xs'>
-                Recurring charge yearly
-              </div>
-              <div className='mx-2'>
-                <Separator className='!my-0' />
-              </div>
-              <p className='text-center text-xl font-bold text-black'>
-                199,000VNĐ
-              </p>
-              <div className='mx-2'>
-                <Separator className='!my-0' />
-              </div>
-              <div className='text-center h-20 text-sm'>
-                Full access to all videos and stories while your subscription is active.
-              </div>
-              <Button color='green'>Subscribe</Button>
-            </div>
-
-            <div className='border-2 flex flex-col p-4 rounded-md bg-foreground gap-2'>
-              <h1 className='text-center font-bold text-black text-sm uppercase'>Lifetime subscription</h1>
-              <div className='text-center text-xs'>
-                One-time charge
-              </div>
-              <div className='mx-2'>
-                <Separator className='!my-0' />
-              </div>
-              <p className='text-center text-xl font-bold text-black'>
-                699,000VNĐ
-              </p>
-              <div className='mx-2'>
-                <Separator className='!my-0' />
-              </div>
-              <div className='text-center h-20 text-sm'>
-                Full access to all videos and stories.
-              </div>
-              <Button color='green'>Subscribe</Button>
             </div>
           </div>
         </DialogBody>

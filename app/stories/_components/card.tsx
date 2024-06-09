@@ -63,10 +63,10 @@ export default function StoryCard({ data: { _id, display_image, title, descripti
   )
 }
 
-export function MiniStoryCard({ data: { display_image, title, description, contents, updatedAt } }: StoryCard) {
+export function MiniStoryCard({ data: { display_image, title, description, contents, updatedAt, level } }: StoryCard) {
   return (
     <Link href='/stories/thispage'>
-      <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground w-72">
+      <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground">
         <CardHeader
           shadow={false}
           color="transparent"
@@ -78,7 +78,7 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
             className="h-48 w-full object-cover"
           />
           <div className="flex items-center justify-center absolute bottom-2 left-2 border rounded-md">
-            <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">3</div>
+            <div className="bg-primary w-8 h-8 text-center rounded-md text-white pt-0.5 text-lg">{LEVEL_NUMBERS[level as Level]}</div>
           </div>
         </CardHeader>
         <CardBody className="flex flex-col gap-1 p-4">
@@ -87,7 +87,7 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
               {title}
             </p>
           </Typography>
-          <p className="text-xs text-black/50">{updatedAt} · {"10"} min read</p>
+          <p className="text-xs text-black/50">{convertDateFormat(updatedAt)} · {estimateReadingTime(contents[0].text)} min read</p>
           <p className="font-normal text-sm text-black/80 line-clamp-2">
             {description}
           </p>

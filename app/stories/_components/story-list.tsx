@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { BASE_URL } from '@/lib/constants';
 import { Story } from '@/lib/definitions';
 
-const Storylist = async () => {
+const Storylist = async ({ title = '', level = '', category = '' }: { title: string | undefined, level: string | undefined, category: string | undefined }) => {
   const response = await fetch(
-    `${BASE_URL}/story?page=1&size=10&sortBy=_id&direction=asc`, {
+    `${BASE_URL}/story?title=${title}&category=${category}&level=${level}`, {
     next: {
       revalidate: 60,
       tags: ['story']
@@ -20,11 +20,12 @@ const Storylist = async () => {
   return (
     <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
       {
-        storyList.map(item =>
+        storyList?.map(item =>
           <StoryCard data={item} />
         )
       }
-    </div>)
+    </div>
+  )
 }
 
 export default Storylist

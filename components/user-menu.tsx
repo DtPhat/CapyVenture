@@ -11,6 +11,7 @@ import {
   BookOpen,
   ChevronDown,
   ClipboardList,
+  Crown,
   LogOut,
   Settings,
   UserRound
@@ -29,11 +30,17 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center rounded bg-transparent hover:bg-slate-50 border-2 hover:bg-gray-100 border-gray-200 p-1 gap-2 justify-between cursor-pointer text-black">
+        <div className={`flex items-center rounded bg-transparent hover:bg-slate-50 border-2 hover:bg-gray-100 border-gray-200 p-1 gap-2 justify-between cursor-pointer text-black`}>
+          {
+            userInfo?.isPremium &&
+            <div className="absolute top-0 right-[200px] w-8 h-8 text-yellow-700 -rotate-45">
+              <Crown />
+            </div>
+          }
           <img
             src={userInfo?.picture || anonymous}
             alt="avatar"
-            className="rounded-full w-8 h-8"
+            className={`rounded-full w-8 h-8 ${userInfo?.isPremium ? 'border-2 border-yellow-700' : ''}`}
           />
           <span className="w-32 text-base truncate font-medium">
             {userInfo?.name}

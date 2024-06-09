@@ -1,5 +1,5 @@
-import MenuCheckbox from "@/components/menu-checkbox";
-import SearchBar from "@/components/searchbar";
+import FilterSelect, { ClearFilter } from "@/components/filter-select";
+import SearchBar from "@/components/search-bar";
 import Link from "next/link";
 import { ENGLISH_LEVELS } from "../../lib/constants";
 import { Video } from "../../lib/definitions";
@@ -9,9 +9,16 @@ import { getVideos } from "@/lib/actions/videos";
 import { videoList } from "@/lib/placeholders";
 import Image from "next/image";
 import { PlayCircleIcon } from "lucide-react";
-export default async function Videos() {
-  const response = await getVideos()
-  const videoList = response?.data
+import VideoList from "./_components/video-list";
+export default async function Videos({
+  searchParams,
+}: {
+  searchParams?: {
+    title?: string;
+    category?: string;
+    level?: string;
+  };
+}) {
   return (
     <div className="w-full">
       <div className="relative">
@@ -27,22 +34,17 @@ export default async function Videos() {
         </div>
       </div>
       <Container>
-        <div className="grid grid-cols-2 border-b-2 pb-2 border-black/50">
+        <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50 ">
           <div className="pt-2">
             <SearchBar placeholder="Search lessons..." />
           </div>
           <div className="flex justify-end items-center gap-4">
-            <MenuCheckbox name="Category" checklist={["News", "Business", "Education", "Technology", "Entertainment", "History"]} />
-            <MenuCheckbox name="Level" checklist={ENGLISH_LEVELS} />
+            <FilterSelect name="category" checklist={["Science", "Culture", "Education", "Technology", "Entertainment", "History"]} />
+            <FilterSelect name="level" checklist={ENGLISH_LEVELS} />
+            <ClearFilter />
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {
-            videoList.map((video: Video) =>
-              <VideoCard data={video} />
-            )
-          }
-        </div>
+        {<VideoList title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />}
       </Container>
     </div>
   );

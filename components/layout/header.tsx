@@ -29,29 +29,7 @@ const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 export default function Header() {
   const [openMobileNav, setOpenMobileNav] = useState(false);
 
-  const { login, userInfo } = useAuth()
-  const googleAuthenticate = async (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const googleToken = credential?.accessToken
-        console.log(googleToken)
-        if (googleToken) {
-          const response = await fetch(`${BASE_URL}/auth/login/google`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ token: googleToken })
-          })
-            .then(response => response.json())
-          console.log("login response", response)
-          login(response?.userInfo, response?.token)
-        }
-      }).catch((error) => {
-        console.log(error)
-      });
-  
+  const { login, userInfo, googleAuthenticate } = useAuth()
 
   useEffect(() => {
     window.addEventListener(
@@ -136,7 +114,7 @@ export default function Header() {
                     <span>Register</span>
                   </Button>
                   <LoginDialog
-                    onConfirm={() => googleAuthenticate()}
+                    onConfirm={googleAuthenticate}
                     OpenButton={
                       <Button
                         className="bg-primary px-8"
@@ -148,49 +126,8 @@ export default function Header() {
 
                 </div>
             }
-            {/* <IconButton
-              variant="text"
-              className="ml-auto h-6 w-6 text-black hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-              ripple={false}
-              onClick={() => setOpenMobileNav(!openMobileNav)}
-            >
-              {openMobileNav ? (
-                <XMarkIcon width={24} />
-              ) : (
-                <Bars2Icon width={24} />
-              )}
-            </IconButton> */}
           </div>
         </div>
-        {/* <MobileNav open={openMobileNav} className="py-2">
-          {
-            userInfo?.email
-              ? <div>
-                <UserMenu />
-              </div>
-              : < div className="flex items-center gap-x-1">
-                <Button fullWidth variant="text" size="sm" className="">
-                  <span>Sign Up</span>
-                </Button>
-                <Button fullWidth variant="filled" size="sm" className="bg-primary" onClick={(e) => googleAuthenticate(e)}>
-                  <span>Login</span>
-                </Button>
-
-                <Button
-                  variant="text"
-                  className="hidden lg:inline-block px-8"
-                >
-                  <span>Sign up</span>
-                </Button>
-                <Button
-
-                  className="hidden lg:inline-block bg-primary px-8"
-                >
-                  Login
-                </Button>
-              </div>
-          }
-        </MobileNav> */}
       </Navbar>
 
     </div >

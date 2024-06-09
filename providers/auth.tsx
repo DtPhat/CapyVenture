@@ -1,4 +1,7 @@
 "use client"
+import { auth, provider } from '@/firebase/config';
+import { BASE_URL } from '@/lib/constants';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { isNull } from 'lodash';
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
@@ -7,7 +10,8 @@ interface UserInfo {
   name: string;
   email: string;
   picture: string,
-  role: string
+  role: string,
+  isPremium: boolean
 }
 
 // Define types for authentication context
@@ -16,6 +20,7 @@ interface AuthContextType {
   token: string | null;
   login: (userInfo: UserInfo, token: string) => void;
   logout: () => void;
+  googleAuthenticate:  () => Promise<any>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -59,8 +64,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('token');
   };
 
+  const googleAuthenticate = async () => 
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const googleToken = credential?.accessToken
+        console.log(googleToken)
+        if (googleToken) {
+          const response = await fetch(`${BASE_URL}/auth/login/google`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token: googleToken })
+          })
+            .then(response => response.json())
+          console.log("login response", response)
+          login(response?.userInfo, response?.token)
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
+
   return (
-    <AuthContext.Provider value={{ userInfo, token, login, logout }}>
+    <AuthContext.Provider value={{ userInfo, token, login, logout, googleAuthenticate }}>
       {children}
     </AuthContext.Provider>
   );

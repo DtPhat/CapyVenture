@@ -6,6 +6,7 @@ import Link from "next/link";
 import { estimateReadingTime } from "../_lib/utils";
 import { BASE_URL } from "@/lib/constants";
 import Container from "@/components/container";
+import RelatedStories from "../_components/related-stories";
 export default async function Story({ params }: { params: { id: string } }) {
   // const response = await fetcherPublic('/story/' + params.slug)
   const response = await fetch(
@@ -38,14 +39,7 @@ export default async function Story({ params }: { params: { id: string } }) {
       <hr className="mt-16 mb-4 border-black/20" />
       <div>
         <h1 className="font-semibold pb-2">Similar stories</h1>
-        <div className="flex gap-4">
-          {
-            storyList.map(item =>
-              <Link href='/stories/thispage' className="space-y-2" key={item.title}>
-                <MiniStoryCard data={item} />
-              </Link>)
-          }
-        </div>
+        <RelatedStories />
       </div>
     </Container>
   );

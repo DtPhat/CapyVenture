@@ -1,8 +1,11 @@
 import { ArrowRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
-import { Button } from '@material-tailwind/react'
+import { Button, IconButton } from '@material-tailwind/react'
 import Link from 'next/link'
 import React from 'react'
 import type { variant } from '@material-tailwind/react/types/components/button'
+import _ from 'lodash'
+import { FilterX } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 
 interface ButtonIconProps extends React.ComponentProps<"button"> {
   Icon?: React.ReactNode,
@@ -24,7 +27,7 @@ const ButtonIcon = ({ Icon, iconDirection, text, className, onClick, variant = '
       `}
       onClick={onClick}>
       {iconDirection === "left" ? Icon : ""}
-        <span className="normal-case">{text}</span>
+      <span className="normal-case">{text}</span>
       {(!iconDirection || iconDirection === "right") ? Icon : ""}
     </Button>
   )
