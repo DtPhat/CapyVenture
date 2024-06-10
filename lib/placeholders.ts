@@ -65,7 +65,8 @@ export const videoList: Video[] = [
     category: "Health",
     transcripts: [
 
-    ]
+    ],
+    isPremium: false,
   },
   {
     _id: "https://www.youtube.com/watch?v=ER0Cu0KQFqM",
@@ -78,7 +79,8 @@ export const videoList: Video[] = [
     category: "History",
     transcripts: [
 
-    ]
+    ],
+    isPremium: false,
   },
   {
     _id: "https://www.youtube.com/watch?v=z-IR48Mb3W0",
@@ -91,7 +93,9 @@ export const videoList: Video[] = [
     category: "Education",
     transcripts: [
 
-    ]
+    ],
+    isPremium: false,
+
   },
 ]
 
