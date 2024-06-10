@@ -18,7 +18,7 @@ const StoriesCarousel = ({ carouselData }: { carouselData?: Story[] }) => {
       <Carousel transition={{ duration: 1 }} className="h-[18rem]" navigation={() => (null)} loop={true} autoplay={true}>
         {
           carouselData?.map((story) =>
-            <div className='relative h-[18rem] group cursor-pointer' onClick={() => router.push(`/stories/${story._id}`)}>
+            <div key={story._id} className='relative h-[18rem] group cursor-pointer' onClick={() => router.push(`/stories/${story._id}`)}>
               <img
                 src={story.display_image}
                 alt="image 1"

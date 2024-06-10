@@ -10,7 +10,7 @@ const VideoList = async ({ title = '', level = '', category = '' }: { title: str
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
       {
         videoList?.map(item =>
-          <VideoCard data={item} />
+          <VideoCard key={item._id} data={item} />
         )
       }
     </div>

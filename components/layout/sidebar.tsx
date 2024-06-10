@@ -109,7 +109,7 @@ export default function Sidebar() {
     {
       Icon: "/sidebar/user.png",
       name: "Account",
-      link: "/user",
+      link: "/account",
       index: 7
     },
   ]

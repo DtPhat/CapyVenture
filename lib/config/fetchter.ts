@@ -21,7 +21,7 @@ const mutationFetcher = (method: 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
         throw new Error('Unauthorized');
       }
       throw new Error('An error occurred while fetching the data.');
-    }
+    }   
 
     return response.json();
   };
