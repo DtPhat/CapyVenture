@@ -4,14 +4,14 @@ import shuffle from "lodash/shuffle";
 export const splitAndShuffleCollection = (data: CollectionItem[]) => {
   const slitData: DataToSplit = []
   data.forEach(item => {
-    const { id, sourceText, translation } = item
+    const { _id, sourceText, translation } = item
     slitData.push(
       {
-        id,
+        id : _id,
         text: sourceText,
       },
       {
-        id,
+        id : _id,
         text: translation,
       }
     )
