@@ -10,6 +10,7 @@ import { videoList } from "@/lib/placeholders";
 import Image from "next/image";
 import { PlayCircleIcon } from "lucide-react";
 import VideoList from "./_components/video-list";
+import { Suspense } from "react";
 export default async function Videos({
   searchParams,
 }: {
@@ -36,7 +37,9 @@ export default async function Videos({
       <Container>
         <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50 ">
           <div className="pt-2">
-            <SearchBar placeholder="Search lessons..." />
+            <Suspense>
+              <SearchBar placeholder="Search lessons..." />
+            </Suspense>
           </div>
           <div className="flex justify-end items-center gap-4">
             <FilterSelect name="category" checklist={["Science", "Culture", "Education", "Technology", "Entertainment", "History"]} />

@@ -5,6 +5,7 @@ import Container from "@/components/container";
 import Storylist from "./_components/story-list";
 import StoriesCarousel from "./_components/carousel";
 import { serverFetcher } from "@/lib/config/fetchter";
+import { Suspense } from "react";
 
 export default async function Stories({
   searchParams,
@@ -29,7 +30,9 @@ export default async function Stories({
       <Container>
         <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50">
           <div className="pt-2">
-            <SearchBar placeholder="Search stories..." />
+            <Suspense>
+              <SearchBar placeholder="Search stories..." />
+            </Suspense>
           </div>
           <div className="flex justify-end items-center gap-4">
             <FilterSelect name="category" checklist={["News", "Business", "Education", "Technology", "Fantasy", "Adventure"]} />
@@ -37,7 +40,7 @@ export default async function Stories({
             <ClearFilter />
           </div>
         </div>
-        <Storylist title={searchParams?.title} level={searchParams?.level} category={searchParams?.category}/>
+        <Storylist title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />
       </Container>
     </div>
   );
