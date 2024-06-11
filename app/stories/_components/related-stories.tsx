@@ -17,7 +17,7 @@ const RelatedStories = async ({ currentId }: { currentId: string }) => {
     <div className="grid grid-cols-4 gap-4">
       {
         storyList?.map(item =>
-          item._id != currentId ? <MiniStoryCard data={item} /> : null
+          item._id != currentId ? <MiniStoryCard key={item._id} data={item} /> : null
         )
       }
     </div>
