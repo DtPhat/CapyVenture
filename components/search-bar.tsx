@@ -2,7 +2,7 @@
 import { MagnifyingGlassIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { Button } from '@material-tailwind/react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 interface SearchBarProps {
@@ -35,25 +35,28 @@ const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }:
   const resetSearchBar = () => {
     params.set('title', '')
     replace(`${pathname}?${params.toString()}`);
-    if(searchRef.current){
+    if (searchRef.current) {
       searchRef.current.value = '';
     }
   }
   const keyword = searchParams.get('title')?.toString()
 
   return (
-    <div className={`flex items-center border-2 border-black/50 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
-      <label htmlFor='search' className='absolute left-2'>
-        <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-black/50' />
-      </label>
-      <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-black/90 dark:text-white px-12'
-        placeholder={placeholder} id='search' autoComplete='off'
-        onChange={(e) => handleSearch(e.target.value)}
-        ref={searchRef}
-        defaultValue={searchParams.get('title')?.toString()}
-      />
-      {keyword && <button onClick={resetSearchBar} className='absolute right-2'><XCircleIcon className='w-7 h-7 text-black/50 dark:hover:fill-gray-800 hover:fill-black' /></button>}
-    </div>
+    <Suspense>
+      <div className={`flex items-center border-2 border-black/50 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
+        <label htmlFor='search' className='absolute left-2'>
+          <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-black/50' />
+        </label>
+        <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-black/90 dark:text-white px-12'
+          placeholder={placeholder} id='search' autoComplete='off'
+          onChange={(e) => handleSearch(e.target.value)}
+          ref={searchRef}
+          defaultValue={searchParams.get('title')?.toString()}
+        />
+        {keyword && <button onClick={resetSearchBar} className='absolute right-2'><XCircleIcon className='w-7 h-7 text-black/50 dark:hover:fill-gray-800 hover:fill-black' /></button>}
+      </div>
+    </Suspense>
+
   )
 }
 

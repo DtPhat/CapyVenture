@@ -1,20 +1,12 @@
 'use client'
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
-  Menu,
-  MenuHandler,
-  Button,
-  MenuList,
-  MenuItem,
-  Checkbox,
   IconButton,
-  Select,
-  Option
+  Option,
+  Select
 } from "@material-tailwind/react";
 import { FilterX } from "lucide-react";
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 interface MenuCheckbox {
   name: string,
   checklist?: string[],
@@ -34,24 +26,27 @@ export default function MenuCheckbox({ name, checklist }: MenuCheckbox) {
     replace(`${pathname}?${params.toString()}`);
   }
   return (
-    <div className="w-52">
-      <Select color="gray"
-        label={`Select ${name}`}
-        className="normal-case text-md flex gap-2 py-2 px-4 bg-foreground border-2"
-        onChange={(val) => handleSelect(val)}
-      >
-        {
-          checklist?.map(item =>
-            <Option
-            className="bg-foreground"
-            key={item}
-            value={item}>
-              {item}
-            </Option>
-          )
-        }
-      </Select>
-    </div>
+    <Suspense>
+      <div className="w-52">
+        <Select color="gray"
+          label={`Select ${name}`}
+          className="normal-case text-md flex gap-2 py-2 px-4 bg-foreground border-2"
+          onChange={(val) => handleSelect(val)}
+        >
+          {
+            checklist?.map(item =>
+              <Option
+                className="bg-foreground"
+                key={item}
+                value={item}>
+                {item}
+              </Option>
+            )
+          }
+        </Select>
+      </div>
+    </Suspense>
+
   );
 }
 

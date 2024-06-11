@@ -1,11 +1,10 @@
-import { ENGLISH_LEVELS } from "@/lib/constants";
+import Container from "@/components/container";
 import FilterSelect, { ClearFilter } from "@/components/filter-select";
 import SearchBar from "@/components/search-bar";
-import Container from "@/components/container";
-import Storylist from "./_components/story-list";
-import StoriesCarousel from "./_components/carousel";
 import { serverFetcher } from "@/lib/config/fetchter";
-import { Suspense } from "react";
+import { ENGLISH_LEVELS } from "@/lib/constants";
+import StoriesCarousel from "./_components/carousel";
+import Storylist from "./_components/story-list";
 
 export default async function Stories({
   searchParams,
@@ -30,9 +29,7 @@ export default async function Stories({
       <Container>
         <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50">
           <div className="pt-2">
-            <Suspense>
-              <SearchBar placeholder="Search stories..." />
-            </Suspense>
+            <SearchBar placeholder="Search stories..." />
           </div>
           <div className="flex justify-end items-center gap-4">
             <FilterSelect name="category" checklist={["News", "Business", "Education", "Technology", "Fantasy", "Adventure"]} />
