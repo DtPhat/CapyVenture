@@ -278,7 +278,7 @@ export function GettingStartedDialog({
           >
             <div>
               <img
-                src="/instruction/1.png"
+                src="instruction/instruction_1.png"
                 alt="image 1"
                 className="h-96 w-full object-cover"
               />
@@ -289,7 +289,7 @@ export function GettingStartedDialog({
             </div>
             <div>
               <img
-                src="/instruction/2.png"
+                src="instruction/instruction_2.png"
                 alt="image 2"
                 className="h-96 w-full object-cover"
               />
@@ -300,7 +300,7 @@ export function GettingStartedDialog({
             </div>
             <div>
               <img
-                src="/instruction/3.png"
+                src="instruction/instruction_3.png"
                 alt="image 3"
                 className="h-96 w-full object-cover"
               />
