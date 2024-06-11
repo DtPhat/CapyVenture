@@ -17,11 +17,12 @@ interface PremiumProps {
   children: ReactNode,
   isPremium?: boolean,
   _id: string,
+  contentType: 'videos' | 'stories'
 }
-const Premium = ({ children, isPremium, _id }: PremiumProps) => {
+const Premium = ({ children, isPremium, _id, contentType }: PremiumProps) => {
   const [open, setOpen] = React.useState(false);
   const router = useRouter()
-  const pathname = usePathname()
+  // const pathname = usePathname()
   const { userInfo } = useAuth()
 
   const handlePremium: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (event) => {
@@ -34,7 +35,7 @@ const Premium = ({ children, isPremium, _id }: PremiumProps) => {
   };
 
   const handleFreemium = () => {
-    router.push(`${pathname}/${_id}`)
+    router.push(`/${contentType}/${_id}`)
   }
   return (
     <>

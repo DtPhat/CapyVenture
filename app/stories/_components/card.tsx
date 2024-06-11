@@ -18,7 +18,7 @@ interface StoryCard {
 }
 export default function StoryCard({ data: { _id, display_image, title, description, level, category, contents, isPremium, updatedAt } }: StoryCard) {
   return (
-    <Premium isPremium={isPremium} _id={_id}>
+    <Premium isPremium={isPremium} _id={_id} contentType="stories">
       <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground border-2">
         <CardHeader
           shadow={false}
@@ -63,9 +63,9 @@ export default function StoryCard({ data: { _id, display_image, title, descripti
   )
 }
 
-export function MiniStoryCard({ data: { display_image, title, description, contents, updatedAt, level } }: StoryCard) {
+export function MiniStoryCard({ data: { display_image, title, description, contents, updatedAt, level, isPremium, _id } }: StoryCard) {
   return (
-    <Link href='/stories/thispage'>
+    <Premium isPremium={isPremium} _id={_id} contentType="stories">
       <Card className="hover:bg-accent/5 overflow-hidden relative bg-foreground">
         <CardHeader
           shadow={false}
@@ -93,6 +93,6 @@ export function MiniStoryCard({ data: { display_image, title, description, conte
           </p>
         </CardBody>
       </Card>
-    </Link>
+    </Premium>
   )
 }

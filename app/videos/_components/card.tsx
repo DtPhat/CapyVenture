@@ -19,7 +19,7 @@ interface VideoCardProps {
 }
 export default function VideoCard({ data: { _id, caption, channel, duration, thumbnail, videoId, category, level, isPremium } }: VideoCardProps) {
   return (
-    <Premium isPremium={isPremium} _id={_id}>
+    <Premium isPremium={isPremium} _id={_id} contentType="videos">
       <Card className="overflow-hidden group relative hover:bg-primary/5 bg-foreground">
         <CardHeader
           shadow={false}
@@ -65,9 +65,9 @@ export default function VideoCard({ data: { _id, caption, channel, duration, thu
   )
 }
 
-export function MiniVideoCard({ data: { _id, caption, channel, duration, thumbnail, category, level } }: VideoCardProps) {
+export function MiniVideoCard({ data: { _id, caption, channel, duration, thumbnail, category, level, isPremium } }: VideoCardProps) {
   return (
-    <Link href={`/videos/${_id}`}>
+    <Premium isPremium={isPremium} _id={_id} contentType="videos">
       <Card className="overflow-hidden group relative">
         <CardHeader
           shadow={false}
@@ -96,6 +96,7 @@ export function MiniVideoCard({ data: { _id, caption, channel, duration, thumbna
           <p className="text-sm">{channel}</p>
         </CardBody>
       </Card>
-    </Link>
+    </Premium>
+
   )
 }
