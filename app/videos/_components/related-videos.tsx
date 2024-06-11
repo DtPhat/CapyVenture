@@ -18,7 +18,7 @@ const RelatedVideos = async ({ currentId }: { currentId: string }) => {
     <div className="grid grid-cols-3 gap-4">
       {
         videoList?.map(item =>
-          item._id != currentId ? < MiniVideoCard data={item} /> : null
+          item._id != currentId ? < MiniVideoCard key={item._id} data={item}/> : null
         )
       }
     </div>
