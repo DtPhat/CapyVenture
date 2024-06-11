@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import { MiniStoryCard } from './card';
 
-const RelatedStories = async () => {
+const RelatedStories = async ({ currentId }: { currentId: string }) => {
   const response = await fetch(
     `${BASE_URL}/story?page=1&size=4`, {
     next: {
@@ -17,9 +17,8 @@ const RelatedStories = async () => {
     <div className="grid grid-cols-4 gap-4">
       {
         storyList?.map(item =>
-          <Link href={`/${item._id}`} className="space-y-2" key={item._id}>
-            <MiniStoryCard data={item} />
-          </Link>)
+          item._id != currentId ? <MiniStoryCard data={item} /> : null
+        )
       }
     </div>
   )

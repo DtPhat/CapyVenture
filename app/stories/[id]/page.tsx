@@ -39,7 +39,7 @@ export default async function Story({ params }: { params: { id: string } }) {
       <hr className="mt-16 mb-4 border-black/20" />
       <div>
         <h1 className="font-semibold pb-2">Similar stories</h1>
-        <RelatedStories />
+        <RelatedStories currentId={params.id}/>
       </div>
     </Container>
   );

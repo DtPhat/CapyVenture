@@ -4,7 +4,8 @@ import Link from 'next/link';
 import React from 'react'
 import { MiniVideoCard } from './card';
 
-const RelatedVideos = async () => {
+
+const RelatedVideos = async ({ currentId }: { currentId: string }) => {
   const response = await fetch(
     `${BASE_URL}/video?page=1&size=3`, {
     next: {
@@ -17,9 +18,8 @@ const RelatedVideos = async () => {
     <div className="grid grid-cols-3 gap-4">
       {
         videoList?.map(item =>
-          <Link href={`/${item._id}`} key={item._id}>
-            <MiniVideoCard data={item} />
-          </Link>)
+          item._id != currentId ? < MiniVideoCard data={item} /> : null
+        )
       }
     </div>
   )
