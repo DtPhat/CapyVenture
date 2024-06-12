@@ -1,44 +1,197 @@
-'use client'
-import React, { useState } from 'react'
+'use client';
+import React, { useContext, useEffect, useState } from 'react';
 import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+	Card,
+	CardBody,
+	CardFooter,
+	Typography,
+	Button,
+} from '@material-tailwind/react';
 import { collection } from '@/lib/placeholders';
-import { splitAndShuffleCollection } from '@/lib/helpers/array';
-const data = splitAndShuffleCollection(collection)
+import { splitAndShuffleCollectionForMatchingGame } from '@/lib/helpers/array';
+import useSWR from 'swr';
+import { GameContext } from '@/providers/game';
+import MatchingGameCard from './_components/MatchingGameCard';
+import Loader from '@/components/loader';
+import { delay } from 'lodash';
+import CorrectAnswerFooter from '../_components/CorrectAnswerFooter';
+import WrongAnswerFooter from '../_components/WrongAnswerFooter';
+import { Heart } from 'lucide-react';
 
 const Page = () => {
-  const [selectedCards, setSelectedCards] = useState()
-  const handleSelectCard = (text: string) => {
-  }
-  return (
-    <div className='w-full'>
-      <Typography variant="h5" color="blue-gray" className="mb-2 text-center">
-        Match the source text with its translation
-      </Typography>
-      <div className='flex justify-center'>
-        <div className='flex gap-4 flex-wrap justify-center'>
-          {
-            data.map(item =>
-              <Card className="bg-foreground w-80 h-40 border-2 hover:bg-accent/10 cursor-pointer" key={item.text}
-                onClick={() => handleSelectCard(item.text)}
-              >
-                <CardBody className='flex justify-center items-center h-full' >
-                  <Typography className='font-semibold'>
-                    {item.text}
-                  </Typography>
-                </CardBody>
-              </Card>
-            )
-          }
-        </div>
-      </div>
-    </div>
-  )
-}
+	const { chosenCollection } = useContext(GameContext);
 
-export default Page
+	const { data } = useSWR('/vocabulary/' + chosenCollection);
+
+	const [shouldWait, setShouldWait] = useState<boolean>(false);
+
+	const [shuffledSourceTexts, setShuffledSourceTexts] = useState<
+		{ id: string; text: string }[]
+	>([]);
+	const [shuffledTranslations, setShuffledTranslations] = useState<
+		{ id: string; text: string }[]
+	>([]);
+
+	const [selectedSourceCards, setSelectedSourceCards] = useState<{
+		id: string;
+		text: string;
+	} | null>(null);
+	const [selectedTranslationCards, setSelectedTranslationCards] = useState<{
+		id: string;
+		text: string;
+	} | null>(null);
+
+	const [numberOfQuestionAnswered, setNumberOfQuestionAnswered] = useState(0);
+	const [toggleLevelReset, setToggleLevelReset] = useState<boolean>(false);
+	const [numberOfLives, setNumberOfLives] = useState(5);
+
+	const handleSelectSourceCard = (item: { id: string; text: string }) => {
+		if (selectedTranslationCards !== null && selectedSourceCards !== null)
+			return;
+		if (selectedSourceCards?.id === item.id) {
+			setSelectedSourceCards(null);
+		} else {
+			setSelectedSourceCards(item);
+		}
+	};
+
+	const handleSelectTranslationCard = (item: {
+		id: string;
+		text: string;
+	}) => {
+		if (selectedTranslationCards !== null && selectedSourceCards !== null)
+			return;
+
+		if (selectedTranslationCards?.id === item.id) {
+			setSelectedTranslationCards(null);
+		} else {
+			setSelectedTranslationCards(item);
+		}
+	};
+
+	const resetChosenCard = () => {
+		setSelectedTranslationCards(null);
+		setSelectedSourceCards(null);
+	};
+
+	const resetCurrentLevel = () => {
+		setSelectedTranslationCards(null);
+		setSelectedSourceCards(null);
+		setNumberOfQuestionAnswered(0);
+		setShouldWait(false);
+		setNumberOfLives(5);
+		setToggleLevelReset((prev) => !prev);
+	};
+
+	const nextQuestionSet = () => {
+		setSelectedTranslationCards(null);
+		setSelectedSourceCards(null);
+		setNumberOfQuestionAnswered(0);
+		setNumberOfLives(5);
+		setShouldWait(false);
+		setToggleLevelReset((prev) => !prev);
+		getShuffledData();
+	};
+
+	const getShuffledData = () => {
+		const shuffledData = splitAndShuffleCollectionForMatchingGame(
+			data?.data
+		);
+
+		setShuffledSourceTexts(shuffledData.shuffledSourceTexts);
+		setShuffledTranslations(shuffledData.shuffledTranslations);
+	};
+
+	useEffect(() => {
+		if (!data) return;
+
+		getShuffledData();
+	}, [data]);
+
+	useEffect(() => {
+		setShouldWait(true);
+		if (selectedSourceCards !== null && selectedTranslationCards !== null) {
+			if (selectedSourceCards.id === selectedTranslationCards.id) {
+				setNumberOfQuestionAnswered((prev) => prev + 1);
+			} else {
+				if (numberOfLives > 0) {
+					setNumberOfLives((prev) => prev - 1);
+				}
+			}
+			delay(() => resetChosenCard(), 400);
+		}
+		setShouldWait(false);
+	}, [selectedSourceCards, selectedTranslationCards]);
+
+	// useEffect(()=>{
+	// 	if(numberOfLives === 0) {
+	// 		resetCurrentLevel()
+
+	// 	}
+	// },[numberOfLives])
+
+	if (!data) return <Loader />;
+
+	return (
+		<>
+			<div className='w-full relative '>
+				<Card className='w-full mb-4'>
+					<CardBody className=' h-full'>
+						<Typography
+							variant='h5'
+							color='blue-gray'
+							className='mb-2 text-center'
+						>
+							Match the source text with its translation
+						</Typography>
+						<Typography
+							variant='h5'
+							color='blue-gray'
+							key={numberOfLives}
+							className='mb-2 text-center text-red-600 font-semibold text-lg animate-wiggle duration-200 repeat-[2] flex items-center justify-center gap-2'
+						>
+							{numberOfLives}{' '}
+							<Heart color='#e53935' fill='#e53935' />
+						</Typography>
+					</CardBody>
+				</Card>
+				<div className='grid grid-cols-2 grid-rows-1 gap-4  px-20'>
+					<div className='flex flex-col  gap-4 items-center h-full justify-between'>
+						{shuffledSourceTexts?.map((item) => (
+							<MatchingGameCard
+								shouldWait={shouldWait}
+								item={item}
+								toggleLevelReset={toggleLevelReset}
+								selectedOne={selectedSourceCards}
+								selectedTwo={selectedTranslationCards}
+								onClick={handleSelectSourceCard}
+							/>
+						))}
+					</div>
+					<div className=' flex flex-col  gap-4 items-center justify-between h-full'>
+						{shuffledTranslations?.map((item) => (
+							<MatchingGameCard
+								shouldWait={shouldWait}
+								item={item}
+								toggleLevelReset={toggleLevelReset}
+								selectedOne={selectedSourceCards}
+								selectedTwo={selectedTranslationCards}
+								onClick={handleSelectTranslationCard}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+			<CorrectAnswerFooter
+				shown={numberOfQuestionAnswered === shuffledSourceTexts?.length}
+				onClick={nextQuestionSet}
+			/>
+			<WrongAnswerFooter
+				shown={numberOfLives === 0}
+				onClick={resetCurrentLevel}
+			/>
+		</>
+	);
+};
+
+export default Page;

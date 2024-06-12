@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Flashcard from '@/app/game/game/flashcard';
 import TranslatableSection from '@/components/layout/translatable-section';
 import { Button, Card, CardBody, CardHeader, Chip, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
@@ -8,14 +8,19 @@ import { CreateCollection } from "@/app/collections/_components/create";
 import Link from 'next/link';
 import Separator from '@/components/loader';
 import { collection } from '@/lib/placeholders';
+import useSWR from 'swr';
+import { GameContext } from '@/providers/game';
 const GamePage = () => {
-  const data = {
-    question: "string 1",
-    answer: "string 2",
-  };
+
+  const {chosenCollection} = useContext(GameContext)
+  
+  const {data} = useSWR('/vocabulary/' + chosenCollection)
+
+  
+
   return (
     <div className=''>
-      <Flashcard data={collection}/>
+      <Flashcard data={data?.data}/>
     </div>
   )
 }
