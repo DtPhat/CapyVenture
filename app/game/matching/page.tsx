@@ -159,6 +159,7 @@ const Page = () => {
 					<div className='flex flex-col  gap-4 items-center h-full justify-between'>
 						{shuffledSourceTexts?.map((item) => (
 							<MatchingGameCard
+								key={item.text}
 								shouldWait={shouldWait}
 								item={item}
 								toggleLevelReset={toggleLevelReset}
@@ -171,6 +172,7 @@ const Page = () => {
 					<div className=' flex flex-col  gap-4 items-center justify-between h-full'>
 						{shuffledTranslations?.map((item) => (
 							<MatchingGameCard
+								key={item.text}
 								shouldWait={shouldWait}
 								item={item}
 								toggleLevelReset={toggleLevelReset}

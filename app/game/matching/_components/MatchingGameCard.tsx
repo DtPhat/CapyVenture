@@ -81,7 +81,6 @@ const MatchingGameCard = (props: Props) => {
 					? 'text-gray-400 cursor-default'
 					: 'hover:bg-accent/10 active:border-b-2 active:mt-1 '
 			)}
-			key={item.text}
 			onClick={handleOnClick}
 		>
 			<div
