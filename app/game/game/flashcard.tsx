@@ -1,11 +1,12 @@
 'use client'
 import { Button, IconButton } from '@material-tailwind/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { Stepper, Step, Progress } from "@material-tailwind/react";
 import { ChevronLeftIcon, ChevronRightIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
 import ButtonIcon from '@/components/button-icon';
 import { CollectionItem } from '@/lib/definitions';
+import Loader from '@/components/loader';
 
 
 const Flashcard = ({ data }: { data: CollectionItem[] }) => {
@@ -16,9 +17,14 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
   const styles = {
     card: `bg-foreground  text-black w-[52rem] h-96 rounded-xl cursor-pointer flex justify-center items-center font-semibold shadow-xl text-xl transition-transform duration-100`
   }
+  let isLastStep: boolean 
+  let isFirstStep: boolean
+  useEffect(()=>{
+    isLastStep = activeStep == data?.length - 1
+    isFirstStep = activeStep == 0
+  },[data])
 
-  let isLastStep = activeStep == data.length - 1
-  let isFirstStep = activeStep == 0
+  
   const handleNext = () => {
     !(isLastStep) && setActiveStep((cur) => cur + 1)
   };
@@ -26,9 +32,11 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
     !(isFirstStep) && setActiveStep((cur) => cur - 1)
   };
 
+  if(!data) return <Loader/>
+
   return (
     <>
-      {!data.length ? <div>No data</div>
+      {!data?.length ? <div>No data</div>
         : < div className='w-full flex flex-col items-center'>
           <div>
             <div onClick={() => setFlip(!flip)} >
