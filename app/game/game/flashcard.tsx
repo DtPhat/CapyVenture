@@ -17,19 +17,12 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
   const styles = {
     card: `bg-foreground  text-black w-[52rem] h-96 rounded-xl cursor-pointer flex justify-center items-center font-semibold shadow-xl text-xl transition-transform duration-100`
   }
-  let isLastStep: boolean 
-  let isFirstStep: boolean
-  useEffect(()=>{
-    isLastStep = activeStep == data?.length - 1
-    isFirstStep = activeStep == 0
-  },[data])
-
   
   const handleNext = () => {
-    !(isLastStep) && setActiveStep((cur) => cur + 1)
+    !(activeStep === data?.length - 1) && setActiveStep((cur) => cur + 1)
   };
   const handlePrev = () => {
-    !(isFirstStep) && setActiveStep((cur) => cur - 1)
+    !(activeStep === 0) && setActiveStep((cur) => cur - 1)
   };
 
   if(!data) return <Loader/>
