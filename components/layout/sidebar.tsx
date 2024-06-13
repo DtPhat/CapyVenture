@@ -190,7 +190,7 @@ export default function Sidebar() {
                   </Accordion >
                   {item.link === '/game' && <hr className="my-2 border-black" />}
                 </div>
-                : <div onClick={(e) => handleAccess(e, item.link)}>
+                : <div onClick={(e) => handleAccess(e, item.link)} key={item.name}>
                   <ListItem selected={pathname.includes(item.link)}>
                     <ListItemPrefix>
                       <img className="size-6" src={item.Icon} />
