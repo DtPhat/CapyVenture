@@ -17,11 +17,13 @@ import { useRouter } from 'next/navigation'
 import { Abril_Fatface } from "next/font/google";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Separator from "./separator";
+import { subscribePremium } from "@/lib/actions/payment";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 interface DialogProps {
-  OpenButton: ReactNode
-  onConfirm: () => Promise<any>;
+  OpenButton?: ReactNode
+  onConfirm?: () => Promise<any>;
   loading?: boolean;
   data?: any;
   message?: string;
@@ -29,6 +31,7 @@ interface DialogProps {
   toastMessage?: string;
   toastDescription?: string;
   open?: boolean;
+  handleOpen?: () => void
 }
 
 export function ConfirmDialog({
@@ -44,14 +47,16 @@ export function ConfirmDialog({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(prevState => !prevState);
   const handleConfirm = () => {
-    onConfirm()
-      .finally(() => {
-        toast({
-          title: toastMessage,
-          description: toastDescription,
-        })
-        handleOpen()
-      });
+    if (onConfirm) {
+      onConfirm()
+        .finally(() => {
+          toast({
+            title: toastMessage,
+            description: toastDescription,
+          })
+          handleOpen()
+        });
+    }
   }
 
   return (
@@ -91,22 +96,32 @@ export function LoginDialog({
   OpenButton,
   toastMessage = 'Login successfully ✔️',
   toastDescription = '',
-  open: defaultOpen = false
+  open: openProp,
+  handleOpen: handleOpenProp
 }: DialogProps) {
-  const [open, setOpen] = useState(defaultOpen);
-  const handleOpen = () => setOpen(prevState => !prevState);
+  const [open, setOpen] = useState(openProp !== undefined ? openProp : false);
+  console.log(open)
+  const handleOpen =
+    handleOpenProp !== undefined
+      ? handleOpenProp
+      : () => setOpen(prevState => !prevState);
+
+  console.log(openProp)
   const handleConfirm = () => {
-    onConfirm()
-      .then(() => {
-        toast({
-          title: toastMessage,
-          description: toastDescription,
+    if (onConfirm) {
+      onConfirm()
+        .then(() => {
+          toast({
+            title: toastMessage,
+            description: toastDescription,
+          })
+          handleOpen()
         })
-        handleOpen()
-      })
-      .catch(error => {
-        console.log(error)
-      });
+        .catch(error => {
+          console.log(error)
+        });
+    }
+
   }
 
   return (
@@ -116,7 +131,7 @@ export function LoginDialog({
           {OpenButton}
         </button>
       }
-      <Dialog size="xs" open={open} handler={handleOpen} className="p-4">
+      <Dialog size="xs" open={openProp !== undefined ? openProp : open} handler={handleOpen} className="p-4">
         <DialogHeader className="justify-between">
           <div>
             <Typography variant="h5" color="blue-gray">
@@ -202,7 +217,74 @@ export function LoginDialog({
   );
 }
 
-
+export const PremiumDialog = ({
+  onConfirm,
+  loading,
+  OpenButton,
+  open = false,
+  handleOpen = () => { console.log('Do something') }
+}: DialogProps) => {
+  return (
+    <Dialog open={open} handler={handleOpen} >
+      <DialogHeader>
+        <Typography variant="h5" color="blue-gray">
+          Premium Subscription
+        </Typography>
+      </DialogHeader>
+      <DialogBody divider className="grid place-items-center gap-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="h-16 w-16 text-yellow-700"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+        <Typography variant="h4" className='text-yellow-900'>
+          You need to subscribe to continue!
+        </Typography>
+        {/* <Typography className="text-center font-normal">
+            We currently have 3 premium plan, choose the best plan for your needs.
+          </Typography> */}
+        <div className=''>
+          <div className='border-2 w-64 flex flex-col p-4 rounded-md bg-foreground gap-2'>
+            <h1 className='text-center font-bold text-black text-sm uppercase'>Monthly subscription</h1>
+            <div className='text-center text-xs'>
+              Recurring charge monthly
+            </div>
+            <div className='mx-2'>
+              <Separator className='!my-0' />
+            </div>
+            <p className='text-center text-xl font-bold text-black'>
+              50,000VNĐ
+            </p>
+            <div className='mx-2'>
+              <Separator className='!my-0' />
+            </div>
+            <div className='text-center h-20 text-sm'>
+              Full access to all videos and stories while your subscription is active.
+            </div>
+            <Button color='green' onClick={async () => {
+              await subscribePremium('MONTHLY')
+            }}>Subscribe</Button>
+          </div>
+        </div>
+      </DialogBody>
+      <DialogFooter className="space-x-2">
+        <Button variant="text" color="blue-gray" onClick={handleOpen}>
+          close
+        </Button>
+        <Button variant='text' onClick={handleOpen}>
+          Ok, Got it
+        </Button>
+      </DialogFooter>
+    </Dialog >
+  )
+}
 
 export function GettingStartedDialog({
   onConfirm,
@@ -212,16 +294,6 @@ export function GettingStartedDialog({
 }: DialogProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(prevState => !prevState);
-  const handleConfirm = () => {
-    onConfirm()
-      .finally(() => {
-        toast({
-          title: toastMessage,
-          description: toastDescription,
-        })
-        handleOpen()
-      });
-  }
   const router = useRouter()
   return (
     <>

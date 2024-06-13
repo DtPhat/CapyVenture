@@ -61,11 +61,11 @@ const Home = () => {
   return (
     <Suspense>
       <div className='w-full relative'>
-        <div className='absolute w-full h-[70vh] bg-black/50 bg-gradient-to-r from-primary/80 to-accent/40 '>
+        <div className='absolute w-full h-[65vh] bg-black/50 bg-gradient-to-r from-primary/80 to-accent/40 '>
           <div className='font-semibold flex justify-center h-full px-16 flex-col tracking-wide '>
             <div className='text-5xl text-foreground'>LEARN & PLAY.</div>
-            <div className='text-5xl pt-2 text-white'>Start a joyful journey of mastering English.</div>
-            <div className='font-normal mt-6 text-4xl text-white/85'>Study English through most interesting stories and videos.</div>
+            <div className='text-4xl pt-2 text-white'>Start a joyful journey of mastering English.</div>
+            <div className='font-normal mt-6 text-3xl text-white/80'>Study English through most interesting stories and videos.</div>
             <div className='pt-12'>
               <HomeSearchBar placeholder='Search videos, stories,..' />
             </div>
@@ -84,7 +84,7 @@ const Home = () => {
             </div>
           </div>
           <Container clasName='!py-0 !px-0'>
-            <div className='mt-8 p-8 text-2xl font-semibold'>
+            <div className='mt-4 p-8 text-2xl font-semibold'>
               <div className='flex justify-between'>
                 <h1 className='pb-4'>Best Videos for Learning</h1>
                 <NavigateButtonIcon linkTo='/videos' text='Watch more' />
@@ -118,7 +118,7 @@ const Home = () => {
           </Container>
         </div>
         <div className='w-full h-full'>
-          <Image src="/background.png" alt="background" className='w-full h-[70vh] object-cover' height={512} width={512} />
+          <Image src="/background.png" alt="background" className='w-full h-[65vh] object-cover' height={512} width={512} />
         </div>
       </div>
     </Suspense>

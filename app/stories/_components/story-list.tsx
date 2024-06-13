@@ -8,13 +8,13 @@ import { Story } from '@/lib/definitions';
 
 const Storylist = async ({ title = '', level = '', category = '' }: { title: string | undefined, level: string | undefined, category: string | undefined }) => {
   const response = await fetch(
-    `${BASE_URL}/story?title=${title}&category=${category}&level=${level}`, {
+    `${BASE_URL}/story?size=100&title=${title}&category=${category}&level=${level}`, {
     next: {
       revalidate: 60,
       tags: ['story']
     }
   }).then(res => res.json());
-
+  console.log(response)
   const storyList: Story[] = response?.data
 
   return (
