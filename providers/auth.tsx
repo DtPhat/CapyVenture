@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!userInfo || !token) return;
     setUserInfo(userInfo);
     if(userInfo.role == 'admin') {
-      window.location.href = 'http://localhost:3000/dashboard';
+      window.location.href = 'https://capy-venture.vercel.app/dashboard';
     }
     setToken(token);
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
