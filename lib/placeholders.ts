@@ -137,3 +137,30 @@ export const storyList: any[] = [
     topic: "Mystery",
   },
 ]
+
+export const chartData = [
+  {
+    name: 'Jan',
+    total: 50000
+  },
+  {
+    name: 'Feb',
+    total: 100000
+  },
+  {
+    name: 'Mar',
+    total: 50000
+  },
+  {
+    name: 'Apr',
+    total: 400000
+  },
+  {
+    name: 'May',
+    total: 350000
+  },
+  {
+    name: 'Jun',
+    total: 500000
+  },
+];

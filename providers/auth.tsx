@@ -4,7 +4,7 @@ import { BASE_URL } from '@/lib/constants';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { isNull } from 'lodash';
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-
+import { redirect } from 'next/navigation'
 // Define types for user information
 interface UserInfo {
   name: string;
@@ -52,6 +52,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (userInfo: UserInfo, token: string) => {
     if (!userInfo || !token) return;
     setUserInfo(userInfo);
+    if(userInfo.role == 'admin') {
+      window.location.href = 'http://localhost:3000/dashboard';
+    }
     setToken(token);
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
     localStorage.setItem('token', token);

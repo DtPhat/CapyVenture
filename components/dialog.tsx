@@ -106,7 +106,6 @@ export function LoginDialog({
       ? handleOpenProp
       : () => setOpen(prevState => !prevState);
 
-  console.log(openProp)
   const handleConfirm = () => {
     if (onConfirm) {
       onConfirm()
