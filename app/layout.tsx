@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       )}>
         <Providers>
           <Header />
-          <section className="flex bg-white w-full">
+          <section className="flex w-full">
             <Sidebar />
             <div className="w-full flex justify-center">
               {children}

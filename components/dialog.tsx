@@ -286,10 +286,7 @@ export const PremiumDialog = ({
 }
 
 export function GettingStartedDialog({
-  onConfirm,
   OpenButton,
-  toastMessage = 'Success',
-  toastDescription = 'Your action was completed',
 }: DialogProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(prevState => !prevState);

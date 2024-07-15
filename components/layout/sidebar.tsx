@@ -108,6 +108,7 @@ export default function Sidebar() {
     setOpen(open === value ? 0 : value);
   };
 
+  const { setOpenSidebar } = useContext(DisplayContext)
   const pathname = usePathname()
   const router = useRouter()
 
@@ -131,7 +132,7 @@ export default function Sidebar() {
       handleOpenLogin()
       return
     }
-    if (requiredPremiumLinks.includes(link)) {
+    if (!userInfo?.isPremium && requiredPremiumLinks.includes(link)) {
       handleOpenPremium()
       return
     }
@@ -140,7 +141,7 @@ export default function Sidebar() {
 
 
   useEffect(() => {
-
+    
   }, [pathname]);
 
   return (

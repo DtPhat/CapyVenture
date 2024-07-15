@@ -21,7 +21,7 @@ export function Overview() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          width={75}
+          width={92}
           tickFormatter={(value) => `${value} VND`}
         />
         <Bar

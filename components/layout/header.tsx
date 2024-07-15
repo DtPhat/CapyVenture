@@ -107,12 +107,6 @@ export default function Header() {
                   <UserMenu />
                 </div>
                 : <div className="flex items-center gap-x-2">
-                  <Button
-                    variant="text"
-                    className="px-8"
-                  >
-                    <span>Register</span>
-                  </Button>
                   <LoginDialog
                     onConfirm={googleAuthenticate}
                     OpenButton={
@@ -129,7 +123,6 @@ export default function Header() {
           </div>
         </div>
       </Navbar>
-
     </div >
   );
 }

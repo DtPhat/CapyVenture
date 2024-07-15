@@ -4,7 +4,7 @@ import { BASE_URL } from '@/lib/constants';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { isNull } from 'lodash';
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 // Define types for user information
 interface UserInfo {
   name: string;
@@ -38,7 +38,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [token, setToken] = useState<string | null>(null);
-
+  const router = useRouter()
   // Simulated login check on component mount
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('userInfo');
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!userInfo || !token) return;
     setUserInfo(userInfo);
     if(userInfo.role == 'admin') {
-      window.location.href = 'https://capy-venture.vercel.app/dashboard';
+      router.push('/dashboard')
     }
     setToken(token);
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
