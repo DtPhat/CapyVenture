@@ -28,7 +28,7 @@ const Features = () => (
       >
         <div className='flex flex-col gap-2'>
           <img
-            src="/showcase/feature-3.png"
+            src="showcase/feature-3.png"
             alt="feature"
             className="w-full h-96 object-cover rounded-xl"
           />
@@ -49,12 +49,12 @@ const Features = () => (
       >
         <div className='flex flex-col'>
           <img
-            src="/showcase/feature-4.1.png"
+            src="showcase/feature-4.1.png"
             alt="feature"
             className="w-full h-48 object-cover rounded-t-xl"
           />
           <img
-            src="/showcase/feature-4.2.png"
+            src="showcase/feature-4.2.png"
             alt="feature"
             className="w-full h-48 object-cover rounded-b-xl"
           />
