@@ -46,16 +46,16 @@ const TABLE_ROWS = [
 
   {
     img: "https://random-image.jpg",
-    name: "Đoàn Tiến Phát",
-    email: "phatdtse170440@fpt.edu.vn",
+    name: "Nguyễn Văn Quân",
+    email: "nguyenvanquan@gmail.com",
     completed: true,
     date: "18/07/2024",
     amount: 50000,
   },
   {
     img: "https://random-image.jpg",
-    name: "Nguyễn An Khánh",
-    email: "ankhanh123@email.com",
+    name: "Trần Thị Lan",
+    email: "tranthilan@gmail.com",
     completed: true,
     date: "18/07/2024",
     amount: 50000,
