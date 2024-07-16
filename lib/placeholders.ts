@@ -140,27 +140,27 @@ export const storyList: any[] = [
 
 export const chartData = [
   {
-    name: 'Jan',
-    total: 50000
-  },
-  {
     name: 'Feb',
-    total: 100000
+    total: 0
   },
   {
     name: 'Mar',
-    total: 50000
+    total: 0
   },
   {
     name: 'Apr',
-    total: 400000
+    total: 0
   },
   {
     name: 'May',
-    total: 350000
+    total: 0
   },
   {
     name: 'Jun',
     total: 500000
+  },
+  {
+    name: 'July',
+    total: 1250000
   },
 ];

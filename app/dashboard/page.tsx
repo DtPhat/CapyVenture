@@ -7,12 +7,12 @@ import { Overview } from "./_components/overview";
 import { RecentSales } from "./_components/recent-sales";
 import Container from "@/components/container";
 import { chartData } from "@/lib/placeholders";
+import Link from "next/link";
 
 const tabData = {
   totalRevenue: chartData.reduce((total, item) => total + item.total, 0),
-  subscriptions: 24,
-  sales: 1200,
-  activeNow: 573
+  subscriptions: 35,
+  visitors: 992,
 }
 export default function DashboardPage() {
   return (
@@ -89,9 +89,9 @@ export default function DashboardPage() {
                       </svg>
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold">+{tabData.subscriptions}</div>
+                      <div className="text-2xl font-bold">{tabData.subscriptions}</div>
                       <p className="text-xs text-muted-foreground">
-                        +18.1% from last month
+                        +150% from last month
                       </p>
                     </CardContent>
                   </Card>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
                   <Card className="bg-foreground">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Active Clients
+                        Monthly Users
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -115,9 +115,9 @@ export default function DashboardPage() {
                       </svg>
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold">73</div>
+                      <div className="text-2xl font-bold">{tabData.visitors}</div>
                       <p className="text-xs text-muted-foreground">
-                        +20 since last month
+                        +42% since last month
                       </p>
                     </CardContent>
                   </Card>
@@ -133,7 +133,12 @@ export default function DashboardPage() {
                   </Card>
                   <Card className="col-span-3 bg-foreground">
                     <CardHeader>
-                      <CardTitle>Recent Update</CardTitle>
+                      <div className="flex justify-between">
+                        <CardTitle>Recent Update</CardTitle>
+                        <Link href={'dashboard/transactions'}>
+                          <Button variant={"outline"} color="green">View all</Button>
+                        </Link>
+                      </div>
                       <CardDescription>
                         Newly updated subscription
                       </CardDescription>
