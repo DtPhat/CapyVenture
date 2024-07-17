@@ -27,7 +27,7 @@ export default function TranslatableSection({ children }: TranslatableSectionPro
   };
 
   return (
-    <section className="translatable">
+    <section className="translatable text-black">
       {showingTranslator
         ? userInfo
           ? <Translator position={position} textToTranslate={selectedText} />

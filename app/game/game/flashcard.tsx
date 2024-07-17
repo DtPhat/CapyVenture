@@ -38,7 +38,7 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
 			{!data?.length ? (
 				<div>No data</div>
 			) : (
-				<div className='w-full flex flex-col items-center'>
+				<div className='w-full flex flex-col items-center text-black'>
 					<div>
 						<div onClick={() => setFlip(!flip)}>
 							<ReactCardFlip
@@ -86,7 +86,7 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
 									</svg>
 								</IconButton>
 							</div>
-							<div className='flex gap-6 items-center'>
+							<div className='flex gap-6 items-center !text-black'>
 								<ButtonIcon
 									className='text-primary'
 									Icon={
@@ -96,7 +96,7 @@ const Flashcard = ({ data }: { data: CollectionItem[] }) => {
 									text='PREV'
 									onClick={handlePrev}
 								/>
-								<div className='font-semibold text-2xl'>
+								<div className='font-semibold text-2xl text-black'>
 									{activeStep + 1} / {data.length}
 								</div>
 								<ButtonIcon

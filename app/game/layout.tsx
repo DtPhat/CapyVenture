@@ -39,11 +39,11 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 		}
 	}, [data]);
 	return (
-		<div className='px-16 py-8 flex flex-col gap-4 w-full'>
+		<div className='px-16 py-8 flex flex-col gap-4 w-full h-full'>
 			<div className='flex w-full justify-center'>
 				<Menu offset={10}>
 					<div className='flex items-center text-xl font-semibold gap-4'>
-						<div>Playing with:</div>
+						<div className='text-black asdasd'>Playing with:</div>
 						<MenuHandler>
 							<Button
 								variant='outlined'

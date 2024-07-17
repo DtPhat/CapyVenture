@@ -79,7 +79,7 @@ const MatchingGameCard = (props: Props) => {
 					: '',
 				disabled
 					? 'text-gray-400 cursor-default'
-					: 'hover:bg-accent/10 active:border-b-2 active:mt-1 '
+					: 'hover:text-accent hover:font-bold active:border-b-2 active:mt-1 '
 			)}
 			onClick={handleOnClick}
 		>

@@ -29,7 +29,7 @@ export default async function Story({ params }: { params: { id: string } }) {
             <p>Jan 08, 2024 · {estimateReadingTime(story.contents[0].text)} minute{story.contents[0].text.length > 1 ? 's' : ''} read</p>
           </div>
         </div>
-        <h1 className="text-xl text-center font-semibold mb-4">{story.title}</h1>
+        <h1 className="text-xl text-center font-semibold mb-4 text-black">{story.title}</h1>
         <TranslatableSection>
           <p className="text-lg whitespace-pre-line">
             {story.contents[0].text}

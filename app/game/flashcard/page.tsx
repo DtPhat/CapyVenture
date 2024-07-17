@@ -19,7 +19,7 @@ const GamePage = () => {
   
 
   return (
-    <div className=''>
+    <div className='text-black'>
       <Flashcard data={data?.data}/>
     </div>
   )
