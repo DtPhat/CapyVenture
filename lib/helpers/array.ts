@@ -136,22 +136,22 @@ export const getWordGuessingData = (data: CollectionItem[]) => {
 				});
 			}
 		} else {
-			const word = element.sourceText;
+			const word = element.sourceText.trim();
 			randomWordsData.push(word);
 
 			const randomIndex = Math.floor(Math.random() * word.length);
+			console.log('dasd ', randomIndex);
+			console.log('dasd ', word);
 			const replacedCharacter = word.charAt(randomIndex);
-			const newWord =
-				word.substring(0, randomIndex) +
-				'_' +
-				word.substring(randomIndex + 1);
-
-			console.log({
-				index: randomIndex,
-				question: newWord.split(''),
-				answer: replacedCharacter,
-				isSentence: false,
-			});
+			let newWord = '';
+			if (randomIndex === word.length - 1) {
+				newWord = word.substring(0, randomIndex) + '_';
+			} else {
+				newWord =
+					word.substring(0, randomIndex) +
+					'_' +
+					word.substring(randomIndex + 1);
+			}
 
 			questionsBank.push({
 				index: randomIndex,
