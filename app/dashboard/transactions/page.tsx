@@ -325,22 +325,22 @@ const TABLE_ROWS = [
     date: "22/06/2024",
     amount: 50000,
   },
-  {
-    img: "https://random-image.jpg",
-    name: "Lê Thị Ngọc",
-    email: "lethingoc@gmail.com",
-    completed: true,
-    date: "16/06/2024",
-    amount: 50000,
-  },
-  {
-    img: "https://random-image.jpg",
-    name: "Nguyễn Văn Phú",
-    email: "nguyenvanphu@gmail.com",
-    completed: true,
-    date: "13/06/2024",
-    amount: 50000,
-  }
+  // {
+  //   img: "https://random-image.jpg",
+  //   name: "Lê Thị Ngọc",
+  //   email: "lethingoc@gmail.com",
+  //   completed: true,
+  //   date: "16/06/2024",
+  //   amount: 50000,
+  // },
+  // {
+  //   img: "https://random-image.jpg",
+  //   name: "Nguyễn Văn Phú",
+  //   email: "nguyenvanphu@gmail.com",
+  //   completed: true,
+  //   date: "13/06/2024",
+  //   amount: 50000,
+  // }
 ];
 
 const totalPages = 4;
