@@ -64,7 +64,7 @@ export default function DashboardPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">{tabData.totalRevenue} VND</div>
                       <p className="text-xs text-muted-foreground">
-                        +42.8% from last month
+                        {/* +42.8% from last month */}
                       </p>
                     </CardContent>
                   </Card>
@@ -91,7 +91,7 @@ export default function DashboardPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">{tabData.subscriptions}</div>
                       <p className="text-xs text-muted-foreground">
-                        +150% from last month
+                        {/* +150% from last month */}
                       </p>
                     </CardContent>
                   </Card>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
                   <Card className="bg-foreground">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Monthly Users
+                        Web Traffic (In 2 months)
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export default function DashboardPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">{tabData.visitors}</div>
                       <p className="text-xs text-muted-foreground">
-                        +42% since last month
+                        {/* +42% since last month */}
                       </p>
                     </CardContent>
                   </Card>
