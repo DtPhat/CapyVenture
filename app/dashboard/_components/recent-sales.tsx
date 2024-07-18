@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { TABLE_ROWS } from '../transactions/page';
-const salesData = TABLE_ROWS.slice(0, 5)
+import { subscribersData } from '@/lib/placeholders';
+const salesData = subscribersData.slice(0, 5)
 
 export function RecentSales() {
   return (
