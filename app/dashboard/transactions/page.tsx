@@ -43,7 +43,7 @@ const TABS = [
 
 const TABLE_HEAD = ["Member", "Status", "Amount", "Date", "Action"];
 
-export const TABLE_ROWS = subscribersData
+const TABLE_ROWS = subscribersData
 
 const totalPages = 4;
 export default function SortableTable() {
