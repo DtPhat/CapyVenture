@@ -16,7 +16,7 @@ const RootPage = () => {
     }
   }, []);
   return (
-    <div className='w-full bg-gradient-to-r from-primary via-secondary to-tertiary '>
+    <div className='w-full bg-gradient-to-r from-primary via-secondary to-tertiary overflow-hidden '>
       <Hero />
       <Features />
       <Footer />
