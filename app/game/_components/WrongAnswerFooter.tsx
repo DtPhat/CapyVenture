@@ -4,7 +4,7 @@ import React from 'react';
 type Props = {
     shown: boolean,
     onClick: ()=>void,
-	subText: string
+	subText?: string
 };
 
 const WrongAnswerFooter = (props: Props) => {
