@@ -24,6 +24,7 @@ import UserMenu from "../user-menu";
 import { postFetcher } from "@/lib/config/fetchter";
 import { BASE_URL } from "@/lib/constants";
 import { LoginDialog } from "../dialog";
+import { LucideLayoutDashboard } from "lucide-react";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {
@@ -100,10 +101,19 @@ export default function Header() {
               <span className={`${abrilFatface.className} text-2xl text-primary`}>Venture</span>
             </Link>
           </div>
+
           <div className="flex items-center gap-4">
             {
               userInfo?.email
-                ? <div>
+                ? <div className="flex gap-2">
+                  {
+                    userInfo?.role == "admin" &&
+                    <Link href={"/dashboard"}>
+                      <IconButton variant="text" className="flex items-end gap-2" >
+                        <LucideLayoutDashboard className="size-6" />
+                      </IconButton>
+                    </Link>
+                  }
                   <UserMenu />
                 </div>
                 : <div className="flex items-center gap-x-2">
