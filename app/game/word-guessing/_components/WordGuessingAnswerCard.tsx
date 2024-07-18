@@ -12,11 +12,10 @@ type Props = {
 	selectedCard: string;
 	onClick: (text: string) => void;
 	fillerAnswers: string[];
-	slotRef: React.RefObject<HTMLDivElement>;
 };
 
 const WordGuessingAnswerCard = (props: Props) => {
-	const { fillerAnswers, slotRef, onClick, selectedCard, questionData} = props;
+	const { fillerAnswers,  onClick, selectedCard, questionData} = props;
 	const { index, question, answer, isSentence } = questionData;
 
 	const [answers, setAnswers] = useState<string[]>([]);
@@ -62,14 +61,13 @@ const WordGuessingAnswerCard = (props: Props) => {
 			});
 			setAnswers(shuffle(array));
 		}
-	}, [questionData]);
+	}, [questionData, fillerAnswers, isSentence, answer]);
 
 	return (
 		<div className='flex justify-center gap-4 w-full'>
 			{answers.map((item, index) => (
 				<SingleAnswerCard
 					key={index + item}
-					parentRef={slotRef}
 					item={item}
 					isSentence={isSentence}
 					selectedCard={selectedCard}

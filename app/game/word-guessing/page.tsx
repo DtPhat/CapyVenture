@@ -23,8 +23,6 @@ const Page = () => {
 
 	const { data } = useSWR('/vocabulary/' + chosenCollection);
 
-	const answerSlotRef = useRef<HTMLDivElement>(null);
-
 	const [step, setStep] = useState<number>(0);
 	const [disabled, setDisabled] = useState<boolean>(false);
 	const [fillerWords, setFillerWords] = useState<string[]>([]);
@@ -101,7 +99,6 @@ const Page = () => {
 				<CardBody className='flex justify-center items-center h-full'>
 					{questionSet.length > 0 && question && (
 						<WordGuessingQuestion
-							ref={answerSlotRef}
 							questionSet={question}
 						/>
 					)}
@@ -112,7 +109,6 @@ const Page = () => {
 					<WordGuessingAnswerCard
 						onClick={handleSelectCard}
 						selectedCard={selectedCards}
-						slotRef={answerSlotRef}
 						fillerAnswers={fillerWords}
 						questionData={question}
 					/>

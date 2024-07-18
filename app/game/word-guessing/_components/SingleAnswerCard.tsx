@@ -12,12 +12,11 @@ type Props = {
 	item: string;
 	onClick: (text: string) => void;
 	isSentence: boolean;
-	parentRef: React.RefObject<HTMLDivElement>;
     selectedCard: string
 };
 
 const SingleAnswerCard = (props: Props) => {
-	const { item, onClick, isSentence, parentRef, selectedCard } = props;
+	const { item, onClick, isSentence,  selectedCard } = props;
 
 	const elementRef = useRef<HTMLDivElement>(null);
 	const tl = useRef<any>();
@@ -25,7 +24,7 @@ const SingleAnswerCard = (props: Props) => {
     const slot = document.querySelector('#answer-slot')
 	const { contextSafe } = useGSAP(() => {
 
-		if (slot == null || parentRef.current == null || elementRef.current == null) {
+		if (slot == null ||  elementRef.current == null) {
 			return;
 		}
 
@@ -41,7 +40,7 @@ const SingleAnswerCard = (props: Props) => {
 			y: p.y - 2,
             duration: 0.3
 		});
-	},{dependencies: [elementRef, parentRef, slot]});
+	},{dependencies: [elementRef, slot]});
 
     useGSAP(()=>{
         if(selectedCard !== item) {
