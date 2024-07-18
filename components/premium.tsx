@@ -13,6 +13,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Separator from './separator';
 import { subscribePremium } from '@/lib/actions/payment';
 import { useAuth } from '@/providers/auth';
+import { useToast } from './ui/use-toast';
 interface PremiumProps {
   children: ReactNode,
   isPremium?: boolean,
@@ -24,7 +25,7 @@ const Premium = ({ children, isPremium, _id, contentType }: PremiumProps) => {
   const router = useRouter()
   // const pathname = usePathname()
   const { userInfo } = useAuth()
-
+  const { toast } = useToast()
   const handlePremium: MouseEventHandler<HTMLDivElement | HTMLButtonElement> = (event) => {
     setOpen(!open)
     if (typeof event === 'boolean') {
@@ -93,8 +94,14 @@ const Premium = ({ children, isPremium, _id, contentType }: PremiumProps) => {
               <div className='text-center h-20 text-sm'>
                 Full access to all videos and stories while your subscription is active.
               </div>
-              <Button color='green' onClick={async () => {
-                await subscribePremium('MONTHLY')
+              <Button color='green' disabled={!userInfo} onClick={async () => {
+                // await subscribePremium('MONTHLY')
+                setOpen(!open)
+                toast({
+                  variant: "destructive",
+                  title: "Payment is currently locked!",
+                  description: "Please try later!",
+                })
               }}>Subscribe</Button>
             </div>
           </div>

@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={cn(
-        "min-h-screen font-sans antialiased bg-background",
+        "min-h-screen font-sans antialiased bg-background text-black",
         fontSans.variable
       )}>
         <Providers>

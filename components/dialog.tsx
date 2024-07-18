@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { ReactNode, useState } from "react";
-import { toast } from "./ui/use-toast";
+import { toast, useToast } from "./ui/use-toast";
 import { useRouter } from 'next/navigation'
 
 import { Abril_Fatface } from "next/font/google";
@@ -19,6 +19,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Separator from "./separator";
 import { subscribePremium } from "@/lib/actions/payment";
+import { Toast } from "./ui/toast";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 interface DialogProps {
@@ -223,6 +224,8 @@ export const PremiumDialog = ({
   open = false,
   handleOpen = () => { console.log('Do something') }
 }: DialogProps) => {
+  const { toast } = useToast()
+
   return (
     <Dialog open={open} handler={handleOpen} >
       <DialogHeader>
@@ -267,9 +270,16 @@ export const PremiumDialog = ({
             <div className='text-center h-20 text-sm'>
               Full access to all videos and stories while your subscription is active.
             </div>
-            <Button color='green' onClick={async () => {
-              await subscribePremium('MONTHLY')
-            }}>Subscribe</Button>
+            <Button color='green'
+              // onClick={async () => { await subscribePremium('MONTHLY') }}
+              onClick={() => toast({
+                variant: "destructive",
+                title: "Payment is currently locked!",
+                description: "Please try later!",
+              })}
+            >
+              Subscribe
+            </Button>
           </div>
         </div>
       </DialogBody>

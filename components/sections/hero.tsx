@@ -22,10 +22,10 @@ const Hero = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
-        className={`mx-auto flex flex-col`}
+        className={`mx-auto flex flex-col w-full relative`}
       >
 
-        <div className="flex flex-col justify-center items-center absolute-center gap-4 pb-12 z-10">
+        <div className="flex flex-col justify-center items-center absolute-center gap-4 pb-12 z-10 w-full text-center">
           <motion.h1 variants={textVariant(1.2)}>
             <div className="flex items-center justify-between select-none">
               <span className={`${abrilFatface.className} text-[3rem] text-brown-50`}>Effective & Enjoyable</span>
@@ -36,7 +36,7 @@ const Hero = () => {
             variants={textVariant(1.1)}
             className="flex flex-row justify-center items-center"
           >
-            <span className={`${abrilFatface.className} text-[3rem] text-foreground uppercase w-full`}>English learning adventure</span>
+            <span className={`${abrilFatface.className} text-[3rem] text-foreground uppercase`}>English learning adventure</span>
           </motion.div>
           <motion.div
             variants={textVariant(1.1)}

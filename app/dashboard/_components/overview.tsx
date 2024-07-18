@@ -6,7 +6,7 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 export function Overview() {
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={360} className=''>
       <BarChart data={chartData}>
         <XAxis
           dataKey="name"
@@ -21,7 +21,7 @@ export function Overview() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          width={92}
+          width={104}
           tickFormatter={(value) => `${value} VND`}
         />
         <Bar
