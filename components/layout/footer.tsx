@@ -44,13 +44,15 @@ const Footer = () => (
             Copyright © 2024 - 2025 CapyVenture. All rights reserved.
           </p>
 
-          <div className="flex gap-4">
-            <img
-              src="/facebook.svg"
-              alt={"Facebook"}
-              className="w-[24px] h-[24px] object-contain cursor-pointer"
-            />
-          </div>
+          <Link href={"https://www.facebook.com/CapyVenture"}>
+            <div className="flex gap-4">
+              <img
+                src="/facebook.svg"
+                alt={"Facebook"}
+                className="w-[24px] h-[24px] object-contain cursor-pointer"
+              />
+            </div>
+          </Link>
         </div>
       </div>
     </div>

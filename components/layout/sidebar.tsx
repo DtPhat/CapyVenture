@@ -123,7 +123,7 @@ export default function Sidebar() {
   const handleOpenPremium = () => {
     setOpenPremium(prev => !prev)
   }
-  const requiredAuthenticationLinks = ['/game/flashcard', '/game/multiple-choice', '/game/matching', '/game/word-guessing', '/collections']
+  const requiredAuthenticationLinks = ['/game/flashcard', '/game/multiple-choice', '/game/matching', '/game/word-guessing', '/collections', '/account']
   const requiredPremiumLinks = ['/game/word-guessing', '/game/multiple-choice']
 
 
