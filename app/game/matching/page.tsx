@@ -132,6 +132,15 @@ const Page = () => {
 
 	if (!data) return <Loader />;
 
+	if (data.data.length < 5) return (
+		<Typography
+		variant='h5'
+				color='blue-gray'
+				className='mb-2 text-center'>
+			The collection does not have enough vocabulary. Please add more
+			or select another collection!
+		</Typography>);
+
 	return (
 		<>
 			<div className='w-full relative '>

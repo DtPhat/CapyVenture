@@ -35,20 +35,22 @@ const SingleAnswerCard = (props: Props) => {
 			{ x: 0, y: 0 }
 		);
 
-		tl.current = gsap.timeline().to(elementRef.current, {
+		tl.current = gsap.timeline().from(elementRef.current, {
 			x: p.x,
 			y: p.y - 2,
             duration: 0.3
 		});
-	},{dependencies: [elementRef, slot]});
+	},{dependencies: [elementRef, slot, item]});
 
     useGSAP(()=>{
+		if(!tl || !tl.current) return;
+		
         if(selectedCard !== item) {
-		    tl.current.reversed(true);
+		    tl.current.reversed(false);
             console.log(item, " is reversing")
         } else {
             console.log(item, " is playing")
-		    tl.current.reversed(false);
+		    tl.current.reversed(true);
         }
     },{dependencies: [selectedCard, tl, item]})
 
