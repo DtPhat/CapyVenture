@@ -7,16 +7,10 @@ import { estimateReadingTime } from "../_lib/utils";
 import { BASE_URL } from "@/lib/constants";
 import Container from "@/components/container";
 import RelatedStories from "../_components/related-stories";
+import { getStory } from "@/lib/actions/stories";
 export default async function Story({ params }: { params: { id: string } }) {
-  // const response = await fetcherPublic('/story/' + params.slug)
-  const response = await fetch(
-    `${BASE_URL}/story/${params.id}`, {
-    next: {
-      revalidate: 60,
-      tags: ['story']
-    }
-  }).then(res => res.json());
-  const story: Story = response.data
+  const response = await getStory(params.id)
+  const story: Story = response?.data
   return (
     <Container>
       <div>
@@ -39,7 +33,7 @@ export default async function Story({ params }: { params: { id: string } }) {
       <hr className="mt-16 mb-4 border-black/20" />
       <div>
         <h1 className="font-semibold pb-2">Similar stories</h1>
-        <RelatedStories currentId={params.id}/>
+        <RelatedStories currentId={params.id} />
       </div>
     </Container>
   );

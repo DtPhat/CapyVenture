@@ -15,7 +15,7 @@ export const LEVEL_NUMBERS = {
   "Proficiency": 5
 }
 
-export const BASE_URL = "https://capyventure.eastasia.cloudapp.azure.com"
+export const BASE_URL = "http://localhost:4000"
 
 // process.env.NODE_ENV === "development"
 //   ? `http://localhost:4000`

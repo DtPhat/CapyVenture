@@ -43,9 +43,9 @@ const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }:
 
   return (
     <Suspense>
-      <div className={`flex items-center border-2 border-black/50 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
+      <div className={`flex items-center border-2 border-blue-gray-200 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
         <label htmlFor='search' className='absolute left-2'>
-          <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-black/50' />
+          <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-blue-gray-200' />
         </label>
         <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-black/90 dark:text-white px-12'
           placeholder={placeholder} id='search' autoComplete='off'
