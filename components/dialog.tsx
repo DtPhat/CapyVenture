@@ -165,10 +165,10 @@ export function LoginDialog({
             </svg>
           </IconButton>
         </DialogHeader>
-        <DialogBody className="overflow-y-scroll !px-5">
+        <DialogBody className="!px-5">
           <div className="mb-6">
             <ul className="mt-3 -ml-2 flex flex-col gap-1">
-              <MenuItem className="mb-4 flex items-center justify-center gap-3 !py-4 shadow-md" onClick={() => handleConfirm()}>
+              <MenuItem className="mb-4 flex items-center justify-center gap-3 !py-4 shadow-md bg-white" onClick={() => handleConfirm()}>
                 <img
                   src="/auth/google-logo.jpg"
                   alt="google-icon"
@@ -182,7 +182,7 @@ export function LoginDialog({
                   Log in with Google
                 </Typography>
               </MenuItem>
-              <MenuItem className="mb-1 flex items-center justify-center gap-3 !py-4 shadow-md">
+              <MenuItem className="mb-1 flex items-center justify-center gap-3 !py-4 shadow-md bg-white">
                 <img
                   src="https://i.pinimg.com/736x/42/75/49/427549f6f22470ff93ca714479d180c2.jpg"
                   alt="facebook logo"

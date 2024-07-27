@@ -41,3 +41,8 @@ export const subscriptionPlans = {
   YEARLY: "YEARLY",
   LIFETIME: "LIFETIME"
 }
+
+export const restrictedRoutes = {
+  authentication: ['/game/flashcard', '/game/multiple-choice', '/game/matching', '/game/word-guessing', '/collections', '/account'],
+  premium: ['/game/word-guessing', '/game/multiple-choice']
+}

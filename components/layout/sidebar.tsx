@@ -19,60 +19,60 @@ import {
   ListItemPrefix,
   Typography,
 } from "@material-tailwind/react";
-import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { LoginDialog, PremiumDialog } from "../dialog";
 import { useRouter } from "next/navigation";
 import { Crown } from "lucide-react";
+import { restrictedRoutes } from "@/lib/constants";
 
 const navigationList = [
   {
     Icon: "/sidebar/home.png",
     name: "Home",
-    link: "/home",
+    route: "/home",
     index: 1
   },
   {
     Icon: "/sidebar/video.png",
     name: "Videos",
-    link: "/videos",
+    route: "/videos",
     index: 3
   },
   {
     Icon: "/sidebar/story.png",
     name: "Stories",
-    link: "/stories",
+    route: "/stories",
     index: 2
   },
   {
     Icon: "/sidebar/game.png",
     name: "Game Center",
-    link: "/game",
+    route: "/game",
     index: 4,
     subPages: [
       {
         Icon: Square2StackIcon,
         name: "Flashcard",
-        link: "/game/flashcard",
+        route: "/game/flashcard",
         index: 4.1
       },
       {
         Icon: RectangleGroupIcon,
         name: "Matching",
-        link: "/game/matching",
+        route: "/game/matching",
         index: 4.2
       },
       {
         Icon: QuestionMarkCircleIcon,
         name: "Word Guessing",
-        link: "/game/word-guessing",
+        route: "/game/word-guessing",
         index: 4.3
       },
       {
         Icon: Squares2X2Icon,
         name: "Multiple Choice",
-        link: "/game/multiple-choice",
+        route: "/game/multiple-choice",
         index: 4.4
       },
     ],
@@ -82,19 +82,19 @@ const navigationList = [
   {
     Icon: "/sidebar/collection.png",
     name: "My Collections",
-    link: "/collections",
+    route: "/collections",
     index: 5
   },
   // {
   //   Icon: "WalletIcon",
   //   name: "Saved Lessons",
-  //   link: "/save",
+  //   route: "/save",
   //   index: 6
   // },
   {
     Icon: "/sidebar/user.png",
     name: "Account",
-    link: "/account",
+    route: "/account",
     index: 7
   },
 ]
@@ -123,20 +123,21 @@ export default function Sidebar() {
   const handleOpenPremium = () => {
     setOpenPremium(prev => !prev)
   }
-  const requiredAuthenticationLinks = ['/game/flashcard', '/game/multiple-choice', '/game/matching', '/game/word-guessing', '/collections', '/account']
-  const requiredPremiumLinks = ['/game/word-guessing', '/game/multiple-choice']
+
+  const requringAuthenticationRoutes = restrictedRoutes.authentication
+  const requringPremiumRoutes = restrictedRoutes.premium
 
 
-  const handleAccess = (e: SyntheticEvent, link: string) => {
-    if (!userInfo && requiredAuthenticationLinks.includes(link)) {
+  const handleAccess = (e: SyntheticEvent, route: string) => {
+    if (!userInfo && requringAuthenticationRoutes.includes(route)) {
       handleOpenLogin()
       return
     }
-    if (!userInfo?.isPremium && requiredPremiumLinks.includes(link)) {
+    if (!userInfo?.isPremium && requringPremiumRoutes.includes(route)) {
       handleOpenPremium()
       return
     }
-    router.push(link)
+    router.push(route)
   }
 
 
@@ -173,15 +174,15 @@ export default function Sidebar() {
                     </ListItem>
                     <AccordionBody className="p-1 text-black flex flex-col gap-1 pl-1.5">
                       {item.subPages.map(subItem =>
-                        <div key={subItem.index} onClick={(e) => handleAccess(e, subItem.link)} className="relative">
-                          <ListItem selected={pathname.includes(subItem.link)}>
+                        <div key={subItem.index} onClick={(e) => handleAccess(e, subItem.route)} className="relative">
+                          <ListItem selected={pathname.includes(subItem.route)}>
                             <ListItemPrefix>
-                              <subItem.Icon className={`size-6 ${requiredPremiumLinks.includes(subItem.link) ? 'text-yellow-900' : ''}`} />
+                              <subItem.Icon className={`size-6 ${requringPremiumRoutes.includes(subItem.route) ? 'text-yellow-900' : ''}`} />
                             </ListItemPrefix>
                             <Typography>
                               {subItem.name}
                             </Typography>
-                            {requiredPremiumLinks.includes(subItem.link) && < div className="ml-1 absolute left-6 top-1">
+                            {requringPremiumRoutes.includes(subItem.route) && < div className="ml-1 absolute left-6 top-1">
                               <Crown className="size-5 rotate-45 text-yellow-700" />
                             </div>}
                           </ListItem>
@@ -189,10 +190,10 @@ export default function Sidebar() {
                       )}
                     </AccordionBody>
                   </Accordion >
-                  {item.link === '/game' && <hr className="my-2 border-black" />}
+                  {item.route === '/game' && <hr className="my-2 border-black" />}
                 </div>
-                : <div onClick={(e) => handleAccess(e, item.link)} key={item.name}>
-                  <ListItem selected={pathname.includes(item.link)}>
+                : <div onClick={(e) => handleAccess(e, item.route)} key={item.name}>
+                  <ListItem selected={pathname.includes(item.route)}>
                     <ListItemPrefix>
                       <img className="size-6" src={item.Icon} />
                     </ListItemPrefix>
