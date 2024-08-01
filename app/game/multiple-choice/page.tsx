@@ -12,8 +12,8 @@ import useSWR from 'swr';
 import { Loader } from 'lucide-react';
 import { splitAndShuffleFourAnswers } from '@/lib/helpers/array';
 import MultipleChoiceCard from './_components/MultipleChoiceCard';
-import CorrectAnswerFooter from '../_components/CorrectAnswerFooter';
-import WrongAnswerFooter from '../_components/WrongAnswerFooter';
+import CorrectAnswerFooter from '../_components/correct-answer-footer';
+import WrongAnswerFooter from '../_components/wrong-answer-footer';
 
 type MultipleChoiceData = {
 	id: string;

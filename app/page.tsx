@@ -1,5 +1,5 @@
 "use client"
-import Footer from '@/components/layout/footer'
+import Footer from '@/components/sections/footer'
 import Features from '@/components/sections/features'
 import Hero from '@/components/sections/hero'
 import { useAuth } from '@/providers/auth'

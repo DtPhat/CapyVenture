@@ -10,8 +10,6 @@ const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react';
 import { DisplayContext } from '@/providers/display';
-import Feedback from './features';
-
 
 const Hero = () => {
   const router = useRouter()

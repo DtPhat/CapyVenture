@@ -73,8 +73,8 @@ const Home = () => {
               {
                 <GettingStartedDialog
                   OpenButton={
-                    <ButtonIcon text='GET STARTED' className='text-2xl text-green-100 underline underline-offset-4 group hover:-translate-y-0.5 hover:text-foreground'
-                      Icon={<Rocket className='w-9 h-9 group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-2' />}
+                    <ButtonIcon text='HOW TO GET STARTED?' className='text-xl text-green-100 underline underline-offset-4 group hover:-translate-y-0.5 hover:text-foreground'
+                      Icon={<Rocket className='w-7 h-7 group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 pt-1' />}
                     />
                   }
                   onConfirm={(): Promise<any> => {

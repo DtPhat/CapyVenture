@@ -11,11 +11,11 @@ import { collection } from '@/lib/placeholders';
 import { splitAndShuffleCollectionForMatchingGame } from '@/lib/helpers/array';
 import useSWR from 'swr';
 import { GameContext } from '@/providers/game';
-import MatchingGameCard from './_components/MatchingGameCard';
+import MatchingGameCard from './_components/matching-game-card';
 import Loader from '@/components/loader';
 import { delay } from 'lodash';
-import CorrectAnswerFooter from '../_components/CorrectAnswerFooter';
-import WrongAnswerFooter from '../_components/WrongAnswerFooter';
+import CorrectAnswerFooter from '../_components/correct-answer-footer';
+import WrongAnswerFooter from '../_components/wrong-answer-footer';
 import { Heart } from 'lucide-react';
 
 const Page = () => {

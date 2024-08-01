@@ -15,8 +15,8 @@ import WordGuessingQuestion from './_components/WordGuessingQuestion';
 import Loader from '@/components/loader';
 import WordGuessingAnswerCard from './_components/WordGuessingAnswerCard';
 import clsx from 'clsx';
-import CorrectAnswerFooter from '../_components/CorrectAnswerFooter';
-import WrongAnswerFooter from '../_components/WrongAnswerFooter';
+import CorrectAnswerFooter from '../_components/correct-answer-footer';
+import WrongAnswerFooter from '../_components/wrong-answer-footer';
 
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);

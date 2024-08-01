@@ -40,6 +40,11 @@ const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }:
     }
   }
   const keyword = searchParams.get('title')?.toString()
+  useEffect(() => {
+    if (!params?.size) {
+      resetSearchBar()
+    }
+  }, [pathname, params?.size]);
 
   return (
     <Suspense>
@@ -72,13 +77,14 @@ export const HomeSearchBar = ({ givenKeyword, handleEnter, placeholder = 'Search
     }
   }, [keyword]);
   return (
-    <div className={`py-2 flex items-center border-4 border-white focus-within:border-white relative bottom-1 flex-1 w-full cursor-pointer bg-accent/10 text-black ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} `}>
+    <div className={`py-2.5 opacity-95 flex items-center border-2 bg-white border-black/50 focus-within:border-black/70 relative bottom-1 flex-1 w-full cursor-pointer text-black ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} `}>
       <label htmlFor='search' className='absolute left-2'>
-        <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-white/70 stroke-2' />
+        <MagnifyingGlassIcon className='w-9 h-9 cursor-pointer text-black/70' />
       </label>
-      <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-white dark:text-white px-12 text-xl' placeholder={placeholder} id='search' autoComplete='off'
+      <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-black dark:text-white px-14 text-xl placeholder:text-black/50'
+        placeholder={placeholder} id='search' autoComplete='off'
         value={keyword} onChange={(e) => setKeyword(e.target.value)} onKeyDown={handleEnter} ref={searchRef} />
-      {keyword && <button onClick={() => setKeyword('')} className='absolute right-2'><XCircleIcon className='w-7 h-7 text-white/50 dark:hover:fill-gray-200 hover:fill-white' /></button>}
+      {keyword && <button onClick={() => setKeyword('')} className='absolute right-2'><XCircleIcon className='w-7 h-7 text-black/50 dark:hover:fill-gray-200 hover:fill-black' /></button>}
     </div>
   )
 }

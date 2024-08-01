@@ -6,7 +6,7 @@ import styles from '@/lib/styles';
 import { fadeIn, staggerContainer, zoomIn } from '@/lib/motion';
 
 const Features = () => (
-  <section className='space-y-16'>
+  <section className='space-y-16' id='explore'>
     <motion.div
       initial="hidden"
       whileInView="show"

@@ -47,7 +47,7 @@ const navigationList = [
   },
   {
     Icon: "/sidebar/game.png",
-    name: "Game Center",
+    name: "Games",
     route: "/game",
     index: 4,
     subPages: [

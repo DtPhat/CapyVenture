@@ -1,5 +1,27 @@
 import { BASE_URL } from '../constants';
 
+export const fetcher = async (endpoint: string) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    },
+  });
+
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userInfo');
+      window.location.href = '/'
+      throw new Error('Unauthorized');
+    }
+    throw new Error('An error occurred while fetching the data.');
+  }
+
+  return response.json();
+};
+
 const mutationFetcher = (method: 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
   async (endpoint: string, { arg }: { arg?: any }) => {
     const token = localStorage.getItem('token');
@@ -26,27 +48,6 @@ const mutationFetcher = (method: 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
     return response.json();
   };
 
-export const fetcher = async (endpoint: string) => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `${token}`
-    },
-  });
-
-  if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userInfo');
-      window.location.href = '/'
-      throw new Error('Unauthorized');
-    }
-    throw new Error('An error occurred while fetching the data.');
-  }
-
-  return response.json();
-};
 
 export const serverFetcher = async (endpoint: string) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
