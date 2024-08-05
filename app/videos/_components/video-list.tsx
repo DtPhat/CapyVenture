@@ -6,11 +6,11 @@ import NoData from '@/components/no-data'
 
 const VideoList = async ({ title = '', level = '', category = '' }: { title: string | undefined, level: string | undefined, category: string | undefined }) => {
   const response = await getVideos(title, level, category)
-  const videoList: Video[] = response?.data
+  const videoList: Video[] = response
   return (
     <>
       {
-        !videoList.length
+        !videoList?.length
           ? <NoData />
           : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {

@@ -14,13 +14,13 @@ const GamePage = () => {
 
   const {chosenCollection} = useContext(GameContext)
   
-  const {data} = useSWR('/vocabulary/' + chosenCollection)
+  const {data} = useSWR('/vocabularies/' + chosenCollection)
 
   
 
   return (
     <div className='text-black'>
-      <Flashcard data={data?.data}/>
+      <Flashcard data={data}/>
     </div>
   )
 }

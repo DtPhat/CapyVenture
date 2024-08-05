@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from '@/components/ui/use-toast';
-import { postFetcher, putFetcher } from '@/lib/config/fetchter';
+import { postFetcher, patchFetcher } from '@/lib/config/fetchter';
 import { collectionPictures } from '@/lib/constants';
 import { Collection } from '@/lib/definitions';
 import { cn } from '@/lib/helpers/utils';
@@ -60,18 +60,23 @@ export function UpdateCollection({ OpenButton, collection }: UpdateCollectionPro
   const { toast } = useToast()
   console.log(form.getValues())
   form.watch('picture')
-  const {trigger} = useSWRMutation(`/collection/${collection.id}`, putFetcher)
+  const { trigger } = useSWRMutation(`/collections/${collection._id}`, patchFetcher)
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await trigger(values)
+      .then(response => {
+        if (response) {
+          toast({
+            title: "Collection updated successfully",
+            description: "Your action was completed",
+          })
+        }
+      })
       .finally(() => {
-        mutate('/collection')
+        mutate('/collections')
         mutate(`vocabulary/${collection.name}`)
         form.reset()
         handleOpen();
-        toast({
-          title: "Collection created successfully",
-          description: "Your action was completed",
-        })
+
       })
   }
 
@@ -90,8 +95,8 @@ export function UpdateCollection({ OpenButton, collection }: UpdateCollectionPro
               iconDirection="left"
               className="max-w-64"
               text="Create Collection"
-              variant="filled" 
-              />
+              variant="filled"
+            />
           </div>
       }
       <Dialog open={open} size="md" handler={handleOpen}>

@@ -33,7 +33,7 @@ const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }:
   }, 300);
 
   const resetSearchBar = () => {
-    params.set('title', '')
+    params.delete('title');
     replace(`${pathname}?${params.toString()}`);
     if (searchRef.current) {
       searchRef.current.value = '';

@@ -21,7 +21,7 @@ import WrongAnswerFooter from '../_components/wrong-answer-footer';
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabulary/' + chosenCollection);
+	const { data } = useSWR('/vocabularies/' + chosenCollection);
 
 	const [step, setStep] = useState<number>(0);
 	const [disabled, setDisabled] = useState<boolean>(false);

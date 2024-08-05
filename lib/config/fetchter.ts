@@ -5,7 +5,7 @@ export const fetcher = async (endpoint: string) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `${token}`
+      'Authorization': `Bearer ${token}`
     },
   });
 
@@ -13,7 +13,7 @@ export const fetcher = async (endpoint: string) => {
     if (response.status === 401 || response.status === 403) {
       localStorage.removeItem('token');
       localStorage.removeItem('userInfo');
-      window.location.href = '/'
+      // window.location.href = '/'
       throw new Error('Unauthorized');
     }
     throw new Error('An error occurred while fetching the data.');
@@ -30,7 +30,7 @@ const mutationFetcher = (method: 'POST' | 'PUT' | 'DELETE' | 'PATCH') =>
       method: method,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${token}`
+        'Authorization': `Bearer ${token}`
       },
       ...(arg && { body: JSON.stringify(arg) })
     });
@@ -69,5 +69,6 @@ export const serverFetcher = async (endpoint: string) => {
 
 export const postFetcher = mutationFetcher('POST')
 export const deleteFetcher = mutationFetcher('DELETE')
+export const patchFetcher = mutationFetcher('PATCH')
 export const putFetcher = mutationFetcher('PUT')
 

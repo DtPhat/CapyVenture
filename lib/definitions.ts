@@ -4,15 +4,16 @@ export type CollectionItem = {
   _id: string,
   sourceText: string,
   translation: string,
-  collection?: string
+  collectionId?: string
 }
 
 export type Collection = {
-  id: string
-  accountId: string,
+  _id: string
+  userId?: string,
   name: string,
   picture: string,
   totalVocab?: number,
+  vocabularies?: CollectionItem[]
   description: string
 }
 export type Transcript = {
@@ -33,17 +34,6 @@ export type Video = {
   transcripts: Transcript[],
   isPremium: boolean,
 }
-
-// export type Story = {
-//   image: string,
-//   title: string,
-//   lastUpdated: string,
-//   length: number,
-//   summary: string,
-//   level?: number,
-//   topic?: string,
-// }
-
 
 export type Story = {
   _id: string,

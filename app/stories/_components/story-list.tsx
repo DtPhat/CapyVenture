@@ -8,14 +8,15 @@ import { Story } from '@/lib/definitions';
 import { getStories } from '@/lib/actions/stories';
 import NoData from '@/components/no-data';
 
-const Storylist = async ({ title = '', level = '', category = '' }: { title: string | undefined, level: string | undefined, category: string | undefined }) => {
+const Storylist = async (
+  { title = '', level = '', category = '' }: { title: string | undefined, level: string | undefined, category: string | undefined }) => {
   const response = await getStories(title, level, category)
-  const storyList: Story[] = response?.data
+  const storyList: Story[] = response
 
   return (
     <>
       {
-        !storyList.length
+        !storyList?.length
           ? <NoData />
           : <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {

@@ -19,13 +19,12 @@ import useSWR from 'swr';
 import { Skeleton } from '@/components/ui/skeleton';
 import RelatedVideos from '../_components/related-videos';
 const VideoPlayer = ({ id }: { id: string }) => {
-  const { data, isLoading, error } = useSWR(`/video/${id}`)
+  const { data, isLoading, error } = useSWR(`/videos/${id}`)
   const playerRef = useRef<YouTubePlayer>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [translatingsenteces, setTranslatingSentences] = useState<string[]>([])
   const [videoWidth, videoHeight] = [720, 500]
-  const video: Video = data?.data
-  console.log(video)
+  const video: Video = data
   const videoTranscripts: Transcript[] = video?.transcripts || []
 
   const jumpToTimestamp = (timestamp: number) => {

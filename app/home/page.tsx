@@ -16,7 +16,6 @@ import Container from '@/components/container'
 import { toast } from '@/components/ui/use-toast'
 import { useAuth } from '@/providers/auth'
 import { GettingStartedDialog } from '@/components/dialog'
-import RelatedStories from '@/app/stories/_components/related-stories'
 import { BASE_URL } from '@/lib/constants'
 import { Story, Video } from '@/lib/definitions'
 
@@ -29,15 +28,15 @@ const Home = () => {
   const [videos, setVideos] = useState<Video[]>([])
   useEffect(() => {
     const fetchStories = async () => {
-      const response = await fetch(`${BASE_URL}/story?page=1&size=4`)
+      const response = await fetch(`${BASE_URL}/stories?page=1&size=4`)
         .then(res => res.json())
-        .then(res => setStories(res?.data))
+        .then(res => setStories(res))
         .catch(error => console.log(error))
     }
     const fetchVideos = async () => {
-      const response = await fetch(`${BASE_URL}/video?page=1&size=3`)
+      const response = await fetch(`${BASE_URL}/videos?page=1&size=3`)
         .then(res => res.json())
-        .then(res => setVideos(res?.data))
+        .then(res => setVideos(res))
         .catch(error => console.log(error))
     }
     fetchStories()
@@ -91,7 +90,7 @@ const Home = () => {
               </div>
               <div className='grid grid-cols-3 gap-4'>
                 {
-                  videos.map(item =>
+                  videos?.map(item =>
                     <MiniVideoCard data={item} key={item.caption} />
                   )
                 }
@@ -109,7 +108,7 @@ const Home = () => {
               </div>
               <div className='grid grid-cols-4 gap-4'>
                 {
-                  stories.map(item =>
+                  stories?.map(item =>
                     <MiniStoryCard data={item} key={item._id} />
                   )
                 }

@@ -29,7 +29,7 @@ type ShuffleDataType = {
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabulary/' + chosenCollection);
+	const { data } = useSWR('/vocabularies/' + chosenCollection);
 
 	const [questionsBank, setQuestionsBank] = useState<ShuffleDataType>([]);
 
@@ -63,7 +63,7 @@ const Page = () => {
 	};
 
 	useEffect(() => {
-		const shuffleData = splitAndShuffleFourAnswers(data?.data);
+		const shuffleData = splitAndShuffleFourAnswers(data);
 
 		console.log('asdawd ', shuffleData);
 

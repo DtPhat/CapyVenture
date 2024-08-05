@@ -26,9 +26,9 @@ interface CollectionCardProps {
   collection: Collection
 }
 export default function CollectionCard({ collection }: CollectionCardProps) {
-  const { name, description, picture = "", totalVocab, accountId, id } = collection
+  const { _id, name, description, picture = "", totalVocab } = collection
   const router = useRouter()
-  const { data, trigger, isMutating } = useSWRMutation(`/collection/${id}`, deleteFetcher)
+  const { data, trigger, isMutating } = useSWRMutation(`/collections/${_id}`, deleteFetcher)
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function CollectionCard({ collection }: CollectionCardProps) {
                 </IconButton>
               </MenuHandler>
               <MenuList className="flex flex-col divide-y-2 border-black/20 p-1 bg-foreground gap-1">
-                <MenuItem className="flex items-center gap-4" onClick={() => router.push("/collections/" + name)}>
+                <MenuItem className="flex items-center gap-4" onClick={() => router.push("/collections/" + collection._id)}>
                   <div className="flex items-center gap-2">
                     <EyeIcon className="w-5 h-5" />
                     <Typography color="gray" className="font-semibold">
@@ -77,10 +77,14 @@ export default function CollectionCard({ collection }: CollectionCardProps) {
                   }
                 />
                 <ConfirmDialog
-                  onConfirm={() => trigger().then((reposne) => {
-                    mutate('/collection')
-                    return reposne
-                  })}
+                  onConfirm={() => trigger()
+                    .then(response => {
+                      mutate('/collections')
+                      mutate(`/collections/${collection._id}`)
+                      mutate(`/vocabularies/${collection._id}`)
+                      return response
+                    })
+                  }
                   loading={isMutating}
                   data={data}
                   toastMessage={`Collection ${name} was deleted successfully`}

@@ -2,15 +2,14 @@
 import { BASE_URL } from "../constants";
 
 export const getVideos = async (title: string, level: string, category: string) => {
-  console.log(`${BASE_URL}/video?title=${title}&category=${category}&level=${level}`)
   try {
     const response = await fetch(
-      `${BASE_URL}/video?size=100&caption=${title}&category=${category}&level=${level}`, {
-        next: {
-          revalidate: 60,
-          tags: ['video']
-        }
-      })
+      `${BASE_URL}/videos?size=100&caption=${title}&category=${category}&level=${level}`, {
+      next: {
+        revalidate: 60,
+        tags: ['video']
+      }
+    })
     if (!response.ok) {
       throw new Error('Network response was not ok: ' + response.statusText);
     }

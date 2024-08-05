@@ -21,7 +21,7 @@ import { Heart } from 'lucide-react';
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabulary/' + chosenCollection);
+	const { data } = useSWR('/vocabularies/' + chosenCollection);
 
 	const [shouldWait, setShouldWait] = useState<boolean>(false);
 

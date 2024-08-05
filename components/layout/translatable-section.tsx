@@ -32,7 +32,7 @@ export default function TranslatableSection({ children }: TranslatableSectionPro
         ? userInfo
           ? <Translator position={position} textToTranslate={selectedText} />
           : <LoginDialog
-           onConfirm={googleAuthenticate}
+            onConfirm={googleAuthenticate}
             OpenButton={<div
               style={{ position: 'absolute', left: position?.x, top: position?.y }}>
             </div>

@@ -39,9 +39,7 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
   const [showingTranslation, setShowingTranslation] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { data, isLoading } = useSWR('/collection')
-  const collections: Collection[] = data?.data
-
+  const { data: collections, isLoading } = useSWR<Collection[]>('/collections')
   const callTranslateAPI = async () => {
     if (showingTranslation) {
       setShowingTranslation(false);
@@ -57,28 +55,36 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
       .then(data => { setTranslatedText(data.text); })
       .finally(() => setLoading(false))
   }
-  const { trigger } = useSWRMutation('/vocabulary', postFetcher)
-  const addVocabToCollection = async (collection: string) => {
+  const { trigger } = useSWRMutation('/vocabularies', postFetcher)
+  const addVocabToCollection = async (collection: Collection) => {
+    console.log(collection)
     if (!collection) return
     await trigger({
       sourceText: textToTranslate,
       translation: translatedText,
-      collection: collection
-    }).finally(() => {
-      mutate('/collection')
-      mutate(`/vocabulary/${collection}`)
-      toast({
-        title: `Add to ${collection}`,
-        description: "The source text and its translation has been added.",
-        variant: "default",
-        action: <ToastAction
-          onClick={() => router.push('/collections')}
-          altText="My Collection"
-          className="border-black hover:bg-gray-200">
-          My Collections
-        </ToastAction>,
-      })
+      collectionId: collection._id
     })
+      .then(response => {
+        console.log(response)
+        if (response) {
+          toast({
+            title: `Add to ${collection.name}`,
+            description: "The source text and its translation has been added.",
+            variant: "default",
+            action: <ToastAction
+              onClick={() => router.push('/collections')}
+              altText="My Collection"
+              className="border-black hover:bg-gray-200">
+              My Collections
+            </ToastAction>,
+          })
+        }
+      })
+      .finally(() => {
+        mutate('/collections')
+        mutate(`/vocabularies/${collection._id}`)
+
+      })
   }
 
 
@@ -110,15 +116,15 @@ export default function Translator({ position, textToTranslate }: TranslatorProp
             {
               collections?.map(collection =>
                 <MenuItem
-                  key={collection.id}
+                  key={collection._id}
                   className="flex gap-4 border-2 items-center justify-between py-0.5"
-                  onClick={() => addVocabToCollection(collection?.name)}>
+                  onClick={() => addVocabToCollection(collection)}>
                   <div className="rounded-full border-2">
                     <img className="w-8 h-8" src={collection.picture} />
                   </div>
                   <div className="text-ellipsis max-w-32">
                     <p className="truncate">
-                      {collection?.name}
+                      {collection.name}
                     </p>
                   </div>
                   <Chip value={collection.totalVocab} size="sm" variant="ghost" className="rounded-full" />

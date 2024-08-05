@@ -2,17 +2,13 @@
 import Container from '@/components/container';
 import SearchBar from '@/components/search-bar';
 import { Collection } from '@/lib/definitions';
-import {
-  Option,
-  Select
-} from "@material-tailwind/react";
 import useSWR from 'swr';
 import CollectionCard from './_components/card';
 import { CreateCollection } from './_components/create';
 
 export default function Collections() {
-  const { data, isLoading, error } = useSWR('/collection')
-  const collectionList: Collection[] = data?.data || []
+  const { data, isLoading, error } = useSWR('/collections')
+  const collectionList: Collection[] = data || []
   const countTotal = collectionList.reduce((total, item) => total + (item.totalVocab || 0), 0)
   return (
     <Container>
@@ -37,7 +33,7 @@ export default function Collections() {
       <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4'>
         {collectionList.map(collection =>
           <CollectionCard
-            key={collection.id}
+            key={collection._id}
             collection={collection}
           />
         )}

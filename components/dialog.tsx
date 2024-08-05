@@ -50,11 +50,15 @@ export function ConfirmDialog({
   const handleConfirm = () => {
     if (onConfirm) {
       onConfirm()
+        .then(response => {
+          if (response) {
+            toast({
+              title: toastMessage,
+              description: toastDescription,
+            })
+          }
+        })
         .finally(() => {
-          toast({
-            title: toastMessage,
-            description: toastDescription,
-          })
           handleOpen()
         });
     }

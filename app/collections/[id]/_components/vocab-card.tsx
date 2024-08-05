@@ -21,8 +21,8 @@ interface VocabCardProps {
   vocabulary: CollectionItem
 }
 export default function VocabCard({ vocabulary }: VocabCardProps) {
-  const { _id, sourceText, translation, collection } = vocabulary
-  const { data, trigger, isMutating } = useSWRMutation(`/vocabulary/${_id}`, deleteFetcher)
+  const { _id, sourceText, translation, collectionId } = vocabulary
+  const { data, trigger, isMutating } = useSWRMutation(`/vocabularies/${_id}`, deleteFetcher)
   return (
     <>
       <Card className="mt-4 border-2 bg-foreground">
@@ -53,14 +53,16 @@ export default function VocabCard({ vocabulary }: VocabCardProps) {
                 </IconButton>
               </MenuHandler>
               <ConfirmDialog
-                onConfirm={() => trigger().then(reposne => {
-                  mutate('/collection')
-                  mutate(`/vocabulary/${collection}`)
-                  mutate(
-                    key => typeof key === 'string' && key.startsWith('/vocabulary')
-                  )
-                  return reposne
-                })}
+                onConfirm={() => trigger()
+                  .then(reposne => {
+                    mutate('/collections')
+                    mutate(`/collections/${collectionId}`)
+                    mutate(`/vocabularies/${collectionId}`)
+                    mutate(
+                      key => typeof key === 'string' && key.startsWith('/vocabularies')
+                    )
+                    return reposne
+                  })}
                 loading={isMutating}
                 data={data}
                 toastMessage={`Chosen vocab was deleted successfully`}

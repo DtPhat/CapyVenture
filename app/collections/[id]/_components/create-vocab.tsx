@@ -9,11 +9,9 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast, useToast } from '@/components/ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 import { postFetcher } from '@/lib/config/fetchter';
-import { collectionPictures } from '@/lib/constants';
 import { Collection } from '@/lib/definitions';
-import { cn } from '@/lib/helpers/utils';
 import { LanguageIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -25,10 +23,9 @@ import {
   IconButton,
   Typography
 } from "@material-tailwind/react";
-import { LanguagesIcon } from "lucide-react";
-import { ReactNode, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import useSWR, { mutate } from 'swr';
+import { mutate } from 'swr';
 import useSWRMutation from "swr/mutation";
 import { z } from "zod";
 const formSchema = z.object({
@@ -36,7 +33,7 @@ const formSchema = z.object({
     message: "Name must be at least 2 characters.",
   }),
 })
-export function CreateVocab({ collection }: { collection: string }) {
+export function CreateVocab({ collection }: { collection: Collection }) {
   const [open, setOpen] = useState(false);
   const [translatedText, setTranslatedText] = useState('');
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,7 +50,7 @@ export function CreateVocab({ collection }: { collection: string }) {
       .then(response => { return response.json() })
       .then(data => { setTranslatedText(data.text); })
   }
-  const { trigger } = useSWRMutation('/vocabulary', postFetcher)
+  const { trigger } = useSWRMutation('/vocabularies', postFetcher)
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let submittingTranslation
     if (!translatedText) {
@@ -67,19 +64,25 @@ export function CreateVocab({ collection }: { collection: string }) {
     await trigger({
       sourceText: values.sourceText,
       translation: translatedText || submittingTranslation,
-      collection: collection
-    }).finally(() => {
-      mutate('/collection')
-      mutate(`/vocabulary/${collection}`)
-      form.reset()
-      setTranslatedText("")
-      handleOpen()
-      toast({
-        title: `Add to ${collection}`,
-        description: "The source text and its translation has been added.",
-        variant: "default",
-      })
+      collectionId: collection._id
     })
+      .then(response => {
+        if (response) {
+          toast({
+            title: `Add to ${collection.name}`,
+            description: "The source text and its translation has been added.",
+            variant: "default",
+          })
+        }
+      })
+      .finally(() => {
+        mutate(`/collections`)
+        mutate(`/collections/${collection._id}`)
+        mutate(`/vocabularies/${collection._id}`)
+        form.reset()
+        setTranslatedText("")
+        handleOpen()
+      })
   }
 
   const handleOpen = () => setOpen(!open);

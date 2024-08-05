@@ -7,8 +7,7 @@ type CollectionMenuProps = {
   handleSelect: ({ ...arg }) => void
 }
 const CollectionMenu = ({ handleSelect }: CollectionMenuProps) => {
-  const { data, isLoading } = useSWR('/collection')
-  const collections: Collection[] = data?.data
+  const { data, isLoading } = useSWR('/collections')
   return (
     <div>CollectionMenu</div>
   )

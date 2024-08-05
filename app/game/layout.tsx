@@ -30,9 +30,9 @@ import useSWR from 'swr';
 import { Collection } from '@/lib/definitions';
 import { GameContext} from '@/providers/game';
 const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
-	const { data, isLoading } = useSWR('/collection');
+	const { data, isLoading } = useSWR('/collections');
 	const [chosenCollection, setChosenCollection] = useState('');
-	const collections: Collection[] = data?.data;
+	const collections: Collection[] = data;
 	useEffect(() => {
 		if (collections?.length) {
 			setChosenCollection(collections[0].name);
@@ -59,7 +59,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 					<MenuList className='p-1 text-black bg-foreground flex flex-col gap-1'>
 						{collections?.map((collection) => (
 							<MenuItem
-								key={collection.id}
+								key={collection._id}
 								className='flex gap-4 border-2 items-center justify-between py-0.5'
 								onClick={() => {
 									setChosenCollection(collection?.name);

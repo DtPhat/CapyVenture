@@ -27,7 +27,6 @@ import {
 } from "@material-tailwind/react";
 import { ReactNode, useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
-import useSWR from 'swr';
 import useSWRMutation from "swr/mutation";
 import { z } from "zod";
 
@@ -53,18 +52,21 @@ export function CreateCollection({ OpenButton }: { OpenButton?: ReactNode }) {
     },
   })
   const { toast } = useToast()
-  console.log(form.getValues())
   form.watch('picture')
-  const {trigger} = useSWRMutation("/collection", postFetcher, {revalidate: true})
+  const { trigger } = useSWRMutation("/collections", postFetcher, { revalidate: true })
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await trigger(values)
+      .then(response => {
+        if (response) {
+          toast({
+            title: "Collection created successfully",
+            description: "Your action was completed",
+          })
+        }
+      })
       .finally(() => {
-        form.reset()
         handleOpen();
-        toast({
-          title: "Collection created successfully",
-          description: "Your action was completed",
-        })
+        form.reset()
       })
   }
 
@@ -83,8 +85,8 @@ export function CreateCollection({ OpenButton }: { OpenButton?: ReactNode }) {
               iconDirection="left"
               className="max-w-64"
               text="Create Collection"
-              variant="filled" 
-              />
+              variant="filled"
+            />
           </div>
         // : <Button onClick={handleOpen} className="flex items-center justify-center gap-1 bg-primary text-lg max-w-64 py-2 rounded-lg">
         //   <PlusIcon className="w-8 h-8" />
