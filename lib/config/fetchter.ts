@@ -55,7 +55,6 @@ export const serverFetcher = async (endpoint: string) => {
       'Content-Type': 'application/json',
     },
   });
-
   if (!response.ok) {
     if (response.status === 401 || response.status === 403) {
       window.location.href = '/'
@@ -63,7 +62,6 @@ export const serverFetcher = async (endpoint: string) => {
     }
     throw new Error('An error occurred while fetching the data.');
   }
-
   return response.json();
 };
 

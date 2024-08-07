@@ -22,7 +22,7 @@ export const getVideos = async (title: string, level: string, category: string) 
 export const getVideo = async (id: string) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/video/${id}`, {
+      `${BASE_URL}/videos/${id}`, {
       next: {
         revalidate: 60,
         tags: ['story']

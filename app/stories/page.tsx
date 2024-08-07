@@ -5,6 +5,7 @@ import { serverFetcher } from "@/lib/config/fetchter";
 import { ENGLISH_LEVELS } from "@/lib/constants";
 import StoriesCarousel from "./_components/carousel";
 import Storylist from "./_components/story-list";
+import { getStory } from "@/lib/actions/stories";
 
 export default async function Stories({
   searchParams,
@@ -15,12 +16,11 @@ export default async function Stories({
     level?: string;
   };
 }) {
-  const carouselResponse = await Promise.all([
-    serverFetcher('/story/6657ecb46e94f467a7d5f1d0'),
-    serverFetcher('/story/6657ecd96e94f467a7d5f1d1'),
-    serverFetcher('/story/6656abf899f29ac57156ce09'),
+  const carouselData = await Promise.all([
+    getStory('6657ecb46e94f467a7d5f1d0'),
+    getStory('6657ecd96e94f467a7d5f1d1'),
+    getStory('6656abf899f29ac57156ce09')
   ])
-  const carouselData = carouselResponse.map(res => res.data)
   return (
     <div className="w-full">
       <StoriesCarousel
