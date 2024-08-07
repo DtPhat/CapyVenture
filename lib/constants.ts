@@ -18,7 +18,7 @@ export const LEVEL_NUMBERS = {
 // export const BASE_URL = "https://capyventure.eastasia.cloudapp.azure.com"
 // export const BASE_URL = "http://localhost:4000"
 // export const BASE_URL = "https://capy-venture-b9cddebcczdca3gw.eastus-01.azurewebsites.net"
-export const BASE_URL = "https://capynest.onrender.com/"
+export const BASE_URL = "https://capynest.onrender.com"
 
 // process.env.NODE_ENV === "development"
 //   ? `http://localhost:4000`

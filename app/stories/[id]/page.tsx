@@ -9,8 +9,7 @@ import Container from "@/components/container";
 import RelatedStories from "../_components/related-stories";
 import { getStory } from "@/lib/actions/stories";
 export default async function Story({ params }: { params: { id: string } }) {
-  const response = await getStory(params.id)
-  const story: Story = response?.data
+  const story: Story = await getStory(params.id)
   return (
     <Container>
       <div>
