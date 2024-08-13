@@ -1,7 +1,6 @@
 import { Card, CardBody, Typography } from '@material-tailwind/react';
 import clsx from 'clsx';
-import { delay } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
 	item: {

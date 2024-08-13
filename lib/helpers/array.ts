@@ -140,8 +140,6 @@ export const getWordGuessingData = (data: CollectionItem[]) => {
 			randomWordsData.push(word);
 
 			const randomIndex = Math.floor(Math.random() * word.length);
-			console.log('dasd ', randomIndex);
-			console.log('dasd ', word);
 			const replacedCharacter = word.charAt(randomIndex);
 			let newWord = '';
 			if (randomIndex === word.length - 1) {

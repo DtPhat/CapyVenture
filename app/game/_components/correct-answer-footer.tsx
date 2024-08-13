@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
 import { Typography } from '@material-tailwind/react';
-import React from 'react';
 
 type Props = {
     shown: boolean | undefined,

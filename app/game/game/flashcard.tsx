@@ -1,16 +1,15 @@
 'use client';
-import { Button, IconButton } from '@material-tailwind/react';
-import React, { useCallback, useEffect, useState } from 'react';
-import ReactCardFlip from 'react-card-flip';
-import { Stepper, Step, Progress } from '@material-tailwind/react';
+import ButtonIcon from '@/components/button-icon';
+import Loader from '@/components/loader';
+import { CollectionItem } from '@/lib/definitions';
 import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	Cog6ToothIcon,
 } from '@heroicons/react/24/solid';
-import ButtonIcon from '@/components/button-icon';
-import { CollectionItem } from '@/lib/definitions';
-import Loader from '@/components/loader';
+import { IconButton, Progress } from '@material-tailwind/react';
+import { useCallback, useState } from 'react';
+import ReactCardFlip from 'react-card-flip';
 
 const Flashcard = ({ data }: { data: CollectionItem[] }) => {
 	const [flip, setFlip] = useState(false);

@@ -1,4 +1,4 @@
-import 'dotenv/config'
+// import 'dotenv/config'
 export const ENGLISH_LEVELS = [
   "Beginner",
   "Elementary",
@@ -15,13 +15,15 @@ export const LEVEL_NUMBERS = {
   "Proficiency": 5
 }
 
+// export const BASE_URL = "http://localhost:8080"
 // export const BASE_URL = "https://capyventure.eastasia.cloudapp.azure.com"
-// export const BASE_URL = "http://localhost:4000"
-// export const BASE_URL = "https://capy-venture-b9cddebcczdca3gw.eastus-01.azurewebsites.net"
-export const BASE_URL = "https://capynest.onrender.com"
+// export const BASE_URL = "https://capynest.onrender.com"
+// export const BASE_URL = "https://capynest.azurewebsites.net"
+export const BASE_URL = process.env.NEXT_PUBLIC_SERVER_BASE_URL
+
 
 // process.env.NODE_ENV === "development"
-//   ? `http://localhost:4000`
+//   ? `http://localhost:8080`
 //   : "https://capyventure.eastasia.cloudapp.azure.com"
 
 

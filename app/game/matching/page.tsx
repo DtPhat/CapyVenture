@@ -1,22 +1,19 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
+import Loader from '@/components/loader';
+import { splitAndShuffleCollectionForMatchingGame } from '@/lib/helpers/array';
+import { GameContext } from '@/providers/game';
 import {
 	Card,
 	CardBody,
-	CardFooter,
-	Typography,
-	Button,
+	Typography
 } from '@material-tailwind/react';
-import { collection } from '@/lib/placeholders';
-import { splitAndShuffleCollectionForMatchingGame } from '@/lib/helpers/array';
-import useSWR from 'swr';
-import { GameContext } from '@/providers/game';
-import MatchingGameCard from './_components/matching-game-card';
-import Loader from '@/components/loader';
 import { delay } from 'lodash';
+import { Heart } from 'lucide-react';
+import { useContext, useEffect, useState } from 'react';
+import useSWR from 'swr';
 import CorrectAnswerFooter from '../_components/correct-answer-footer';
 import WrongAnswerFooter from '../_components/wrong-answer-footer';
-import { Heart } from 'lucide-react';
+import MatchingGameCard from './_components/matching-game-card';
 
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);

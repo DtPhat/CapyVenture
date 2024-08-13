@@ -105,7 +105,6 @@ export function LoginDialog({
   handleOpen: handleOpenProp
 }: DialogProps) {
   const [open, setOpen] = useState(openProp !== undefined ? openProp : false);
-  console.log(open)
   const handleOpen =
     handleOpenProp !== undefined
       ? handleOpenProp

@@ -1,23 +1,20 @@
 "use client"
-import React, { Suspense, useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import Image from 'next/image'
-import SearchBar, { HomeSearchBar } from '@/components/search-bar'
-import { MiniStoryCard } from '../stories/_components/card'
-import { MiniVideoCard } from '../videos/_components/card'
-import { Button } from '@material-tailwind/react'
-import { ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
 import ButtonIcon, { NavigateButtonIcon } from '@/components/button-icon'
-import Separator from '@/components/separator'
-import { storyList, videoList } from '../../lib/placeholders'
-import { Rat, Rocket } from 'lucide-react'
 import Container from '@/components/container'
-import { toast } from '@/components/ui/use-toast'
-import { useAuth } from '@/providers/auth'
 import { GettingStartedDialog } from '@/components/dialog'
+import { HomeSearchBar } from '@/components/search-bar'
+import Separator from '@/components/separator'
+import Skeleton from '@/components/skeleton'
+import { toast } from '@/components/ui/use-toast'
 import { BASE_URL } from '@/lib/constants'
 import { Story, Video } from '@/lib/definitions'
+import { useAuth } from '@/providers/auth'
+import { Rocket } from 'lucide-react'
+import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
+import { MiniStoryCard } from '../stories/_components/card'
+import { MiniVideoCard } from '../videos/_components/card'
 
 const Home = () => {
   const { login } = useAuth()
@@ -26,17 +23,24 @@ const Home = () => {
   const { userInfo } = useAuth()
   const [stories, setStories] = useState<Story[]>([])
   const [videos, setVideos] = useState<Video[]>([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const fetchStories = async () => {
       const response = await fetch(`${BASE_URL}/stories?page=1&size=4`)
         .then(res => res.json())
-        .then(res => setStories(res))
+        .then(res => {
+          setLoading(false)
+          setStories(res)
+        })
         .catch(error => console.log(error))
     }
     const fetchVideos = async () => {
       const response = await fetch(`${BASE_URL}/videos?page=1&size=3`)
         .then(res => res.json())
-        .then(res => setVideos(res))
+        .then(res => {
+          setLoading(false)
+          setVideos(res)
+        })
         .catch(error => console.log(error))
     }
     fetchStories()
@@ -90,9 +94,13 @@ const Home = () => {
               </div>
               <div className='grid grid-cols-3 gap-4'>
                 {
-                  videos?.map(item =>
-                    <MiniVideoCard data={item} key={item.caption} />
-                  )
+                  loading ?
+                    Array.from({ length: 3 }).map((_, index) =>
+                      <Skeleton key={index} />
+                    )
+                    : videos?.map(item =>
+                      <MiniVideoCard data={item} key={item.caption} />
+                    )
                 }
               </div>
             </div>
@@ -108,9 +116,13 @@ const Home = () => {
               </div>
               <div className='grid grid-cols-4 gap-4'>
                 {
-                  stories?.map(item =>
-                    <MiniStoryCard data={item} key={item._id} />
-                  )
+                  loading ?
+                    Array.from({ length: 4 }).map((_, index) =>
+                      <Skeleton key={index} />
+                    )
+                    : stories?.map(item =>
+                      <MiniStoryCard data={item} key={item._id} />
+                    )
                 }
               </div>
             </div>
