@@ -1,30 +1,19 @@
 'use client'
-import React, { useContext, useEffect, useState } from "react";
+import { useAuth } from "@/providers/auth";
+import { DisplayContext } from "@/providers/display";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import {
-  Navbar,
-  Typography,
   Button,
   IconButton,
-  Card,
-  MobileNav,
-  MenuItem,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
+  Navbar,
+  Typography
 } from "@material-tailwind/react";
-import Link from "next/link";
-import { Bars3Icon, Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import { Abril_Fatface } from "next/font/google";
-import { DisplayContext } from "@/providers/display";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, provider } from "@/firebase/config";
-import { useAuth } from "@/providers/auth";
-import UserMenu from "../user-menu";
-import { postFetcher } from "@/lib/config/fetchter";
-import { BASE_URL } from "@/lib/constants";
-import { LoginDialog } from "../dialog";
 import { LucideLayoutDashboard } from "lucide-react";
+import { Abril_Fatface } from "next/font/google";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import { LoginDialog } from "../dialog";
+import UserMenu from "../user-menu";
 const abrilFatface = Abril_Fatface({ weight: "400", subsets: ["latin"] });
 
 export default function Header() {

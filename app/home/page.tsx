@@ -4,7 +4,7 @@ import Container from '@/components/container'
 import { GettingStartedDialog } from '@/components/dialog'
 import { HomeSearchBar } from '@/components/search-bar'
 import Separator from '@/components/separator'
-import Skeleton from '@/components/skeleton'
+import { CardSkeleton } from '@/components/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { BASE_URL } from '@/lib/constants'
 import { Story, Video } from '@/lib/definitions'
@@ -96,7 +96,7 @@ const Home = () => {
                 {
                   loading ?
                     Array.from({ length: 3 }).map((_, index) =>
-                      <Skeleton key={index} />
+                      <CardSkeleton key={index} />
                     )
                     : videos?.map(item =>
                       <MiniVideoCard data={item} key={item.caption} />
@@ -118,7 +118,7 @@ const Home = () => {
                 {
                   loading ?
                     Array.from({ length: 4 }).map((_, index) =>
-                      <Skeleton key={index} />
+                      <CardSkeleton key={index} />
                     )
                     : stories?.map(item =>
                       <MiniStoryCard data={item} key={item._id} />

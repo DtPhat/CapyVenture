@@ -1,13 +1,9 @@
-import { MiniStoryCard } from "@/app/stories/_components/card";
-import TranslatableSection from "@/components/layout/translatable-section";
-import { Story } from "@/lib/definitions";
-import { storyList } from "@/lib/placeholders";
-import Link from "next/link";
-import { estimateReadingTime } from "../_lib/utils";
-import { BASE_URL } from "@/lib/constants";
 import Container from "@/components/container";
-import RelatedStories from "../_components/related-stories";
+import TranslatableSection from "@/components/layout/translatable-section";
 import { getStory } from "@/lib/actions/stories";
+import { Story } from "@/lib/definitions";
+import RelatedStories from "../_components/related-stories";
+import { estimateReadingTime } from "../_lib/utils";
 export default async function Story({ params }: { params: { id: string } }) {
   const story: Story = await getStory(params.id)
   return (

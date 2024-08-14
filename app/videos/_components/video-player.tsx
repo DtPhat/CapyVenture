@@ -1,9 +1,7 @@
 'use client'
-import { formatSeconds } from '@/lib/helpers/time';
-import { MiniVideoCard } from '@/app/videos/_components/card';
-import TranslatableSection from '@/components/layout/translatable-section';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Transcript, Video } from '@/lib/definitions';
-import { videoList } from '@/lib/placeholders';
+import { formatSeconds } from '@/lib/helpers/time';
 import { LanguageIcon, PlayIcon } from '@heroicons/react/24/solid';
 import {
   Tab,
@@ -12,12 +10,9 @@ import {
   TabsBody,
   TabsHeader
 } from "@material-tailwind/react";
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import YouTube, { YouTubePlayer } from 'react-youtube';
 import useSWR from 'swr';
-import { Skeleton } from '@/components/ui/skeleton';
-import RelatedVideos from '../_components/related-videos';
 const VideoPlayer = ({ id }: { id: string }) => {
   const { data, isLoading, error } = useSWR(`/videos/${id}`)
   const playerRef = useRef<YouTubePlayer>(null);
@@ -32,8 +27,6 @@ const VideoPlayer = ({ id }: { id: string }) => {
       playerRef.current?.internalPlayer.seekTo(timestamp);
     }
   };
-
-  console.log(videoTranscripts);
 
 
   const onReady = (event: { target: YouTubePlayer }) => {
@@ -123,45 +116,46 @@ const VideoPlayer = ({ id }: { id: string }) => {
 
 
   return (
-
-    <div className='flex gap-4 translatable'>
-      <div>
-        {
-          isLoading ?
-            <Skeleton className="w-[720px] h-[500px]" />
-            : <YouTube
-              videoId={video?.videoId}
-              opts={opts}
-              onReady={onReady}
-              onStateChange={handleStateChange}
-              ref={playerRef}
-            />
-        }
+    <section>
+      <h1 className='font-bold text-xl mb-2'>{video?.caption}</h1>
+      <div className='flex flex-col lg:flex-row gap-4 translatable'>
+        <div className='w-3/4'>
+          {
+            isLoading ?
+              <Skeleton className="w-full h-[28rem]" />
+              : <YouTube
+                videoId={video?.videoId}
+                opts={opts}
+                onReady={onReady}
+                onStateChange={handleStateChange}
+                ref={playerRef}
+              />
+          }
+        </div>
+        <div className='bg-white rounded w-1/2'>
+          {
+            isLoading ?
+              <Skeleton className="w-full h-[28rem]" />
+              : <Tabs value="transcript" >
+                <TabsHeader className='rounded-none rounded-t-lg py-2'>
+                  {TabData.map(({ label, value }) => (
+                    <Tab key={value} value={value} className='text-normal text-black'>
+                      {label}
+                    </Tab>
+                  ))}
+                </TabsHeader>
+                <TabsBody className='rounded'>
+                  {TabData.map(({ value, panel }) => (
+                    <TabPanel key={value} value={value} className='p-0 border-2 border-gray-200 rounded h-[28rem] overflow-auto'>
+                      {panel}
+                    </TabPanel>
+                  ))}
+                </TabsBody>
+              </Tabs>
+          }
+        </div>
       </div>
-      <div className='bg-white rounded'>
-        {
-          isLoading ?
-            <Skeleton className="w-[24rem] h-[28rem]" />
-            : <Tabs value="transcript" >
-              <TabsHeader className='rounded-none rounded-t-lg py-2'>
-                {TabData.map(({ label, value }) => (
-                  <Tab key={value} value={value} className='text-normal text-black'>
-                    {label}
-                  </Tab>
-                ))}
-              </TabsHeader>
-              <TabsBody className='rounded'>
-                {TabData.map(({ value, panel }) => (
-                  <TabPanel key={value} value={value} className='p-0 border-2 border-gray-200 rounded h-[28rem] overflow-auto'>
-                    {panel}
-                  </TabPanel>
-                ))}
-              </TabsBody>
-            </Tabs>
-        }
-      </div>
-    </div>
-
+    </section>
   );
 };
 

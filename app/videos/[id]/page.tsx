@@ -2,7 +2,6 @@ import TranslatableSection from '@/components/layout/translatable-section';
 import RelatedVideos from '../_components/related-videos';
 import VideoPlayer from '../_components/video-player';
 const Video = ({ params }: { params: { id: string } }) => {
-
   return (
     <div className='w-full px-16 py-8 max-w-7xl'>
       <TranslatableSection>

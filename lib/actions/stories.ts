@@ -1,10 +1,10 @@
 'use server'
 import { BASE_URL } from "../constants";
 
-export const getStories = async (title: string, level: string, category: string) => {
+export const getStories = async (title: string = "", level: string = "", category: string = "", page: number = 1, size: number = 100) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/stories?size=100&title=${title}&category=${category}&level=${level}`, {
+      `${BASE_URL}/stories?page=${page}&size=${size}&title=${title}&category=${category}&level=${level}`, {
       next: {
         revalidate: 60,
         tags: ['story']

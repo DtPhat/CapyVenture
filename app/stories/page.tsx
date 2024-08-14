@@ -6,6 +6,8 @@ import { ENGLISH_LEVELS } from "@/lib/constants";
 import StoriesCarousel from "./_components/carousel";
 import Storylist from "./_components/story-list";
 import { getStory } from "@/lib/actions/stories";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default async function Stories({
   searchParams,
@@ -27,7 +29,7 @@ export default async function Stories({
         carouselData={carouselData}
       />
       <Container>
-        <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50">
+        <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-16 border-b-2 pb-2 border-black/50">
           <div className="pt-2">
             <SearchBar placeholder="Search stories..." />
           </div>

@@ -14,7 +14,6 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }: SearchBarProps) => {
-  // const [keyword, setKeyword] = useState(givenKeyword || "")
   const searchRef = useRef<HTMLInputElement>(null)
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -48,11 +47,11 @@ const SearchBar = ({ givenKeyword, placeholder = 'Search', fullRounded = true }:
 
   return (
     <Suspense>
-      <div className={`flex items-center border-2 border-blue-gray-200 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-xl' : 'rounded-t-xl'} bg-foreground`}>
+      <div className={`flex items-center border-2 border-blue-gray-200 focus-within:border-black relative bottom-1 flex-1 w-full cursor-pointer ${fullRounded ? 'rounded-lg' : 'rounded-t-xl'} bg-foreground`}>
         <label htmlFor='search' className='absolute left-2'>
           <MagnifyingGlassIcon className='w-7 h-7 cursor-pointer text-blue-gray-200' />
         </label>
-        <input className='bg-transparent rounded-xl focus:outline-none focus:bg-gray w-full p-2 text-black/90 dark:text-white px-12'
+        <input className='bg-transparent rounded-lg focus:outline-none focus:bg-gray w-full p-2 text-black/90 dark:text-white px-12'
           placeholder={placeholder} id='search' autoComplete='off'
           onChange={(e) => handleSearch(e.target.value)}
           ref={searchRef}

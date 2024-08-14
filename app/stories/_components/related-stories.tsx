@@ -3,16 +3,11 @@ import { Story } from '@/lib/definitions';
 import Link from 'next/link';
 import React from 'react'
 import { MiniStoryCard } from './card';
+import { getStories } from '@/lib/actions/stories';
 
 const RelatedStories = async ({ currentId }: { currentId: string }) => {
-  const response = await fetch(
-    `${BASE_URL}/story?page=1&size=4`, {
-    next: {
-      revalidate: 60,
-      tags: ['story']
-    }
-  }).then(res => res.json());
-  const storyList: Story[] = response?.data
+  const response = await getStories("", "", "", 1, 4)
+  const storyList: Story[] = response
   return (
     <div className="grid grid-cols-4 gap-4">
       {

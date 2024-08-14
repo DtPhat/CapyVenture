@@ -4,6 +4,8 @@ import SearchBar from "@/components/search-bar";
 import { PlayCircleIcon } from "lucide-react";
 import { ENGLISH_LEVELS } from "../../lib/constants";
 import VideoList from "./_components/video-list";
+import { Suspense } from "react";
+import Loading from "../stories/loading";
 export default async function Videos({
   searchParams,
 }: {
@@ -28,9 +30,9 @@ export default async function Videos({
         </div>
       </div>
       <Container>
-        <div className="grid grid-cols-2 gap-16 border-b-2 pb-2 border-black/50 ">
+        <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-16 border-b-2 pb-2 border-black/50">
           <div className="pt-2">
-            <SearchBar placeholder="Search lessons..." />
+            <SearchBar placeholder="Search videos..." />
           </div>
           <div className="flex justify-end items-center gap-4">
             <FilterSelect name="category" checklist={["Science", "Culture", "Education", "Technology", "Entertainment", "History"]} />
@@ -38,7 +40,9 @@ export default async function Videos({
             <ClearFilter />
           </div>
         </div>
-        {<VideoList title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />}
+        <Suspense fallback={<Loading />}>
+          <VideoList title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />
+        </Suspense>
       </Container>
     </div>
   );
