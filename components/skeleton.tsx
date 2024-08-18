@@ -38,7 +38,7 @@ export const ContentSkeleton = () => {
       <div className='grid grid-cols-4 gap-4 mt-8'>
         {
           Array.from({ length: 4 }, (_, index) => (
-            <SkeletonUI className="h-72 bg-primary/20" />
+            <SkeletonUI key={index} className="h-72 bg-primary/20" />
           ))
         }
       </div>
