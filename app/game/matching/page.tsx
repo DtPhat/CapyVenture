@@ -14,11 +14,12 @@ import useSWR from 'swr';
 import CorrectAnswerFooter from '../_components/correct-answer-footer';
 import WrongAnswerFooter from '../_components/wrong-answer-footer';
 import MatchingGameCard from './_components/matching-game-card';
+import { Collection } from '@/lib/definitions';
 
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabularies/' + chosenCollection);
+  const { data } = useSWR('/vocabularies/' + chosenCollection?._id)
 
 	const [shouldWait, setShouldWait] = useState<boolean>(false);
 
@@ -92,7 +93,7 @@ const Page = () => {
 
 	const getShuffledData = () => {
 		const shuffledData = splitAndShuffleCollectionForMatchingGame(
-			data?.data
+			data
 		);
 
 		setShuffledSourceTexts(shuffledData.shuffledSourceTexts);
@@ -129,7 +130,7 @@ const Page = () => {
 
 	if (!data) return <Loader />;
 
-	if (data.data.length < 5) return (
+	if (data.length < 5) return (
 		<Typography
 		variant='h5'
 				color='blue-gray'

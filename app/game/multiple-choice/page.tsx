@@ -29,7 +29,7 @@ type ShuffleDataType = {
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabularies/' + chosenCollection);
+	const { data } = useSWR('/vocabularies/' + chosenCollection?._id);
 
 	const [questionsBank, setQuestionsBank] = useState<ShuffleDataType>([]);
 
@@ -79,7 +79,7 @@ const Page = () => {
 
 	if (!data) return <Loader />;
 
-	if (data.data.length < 5)
+	if (data.length < 5)
 		return (
 			<Typography variant='h5'
 			color='blue-gray'

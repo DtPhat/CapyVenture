@@ -1,12 +1,13 @@
+import { Collection } from '@/lib/definitions';
 import { Dispatch, SetStateAction, createContext } from 'react';
 
 export const GameContext = createContext<GameContextProps>({
-  chosenCollection: '',
-  setChosenCollection: ()=>{},
+  chosenCollection: null,
+  setChosenCollection: () => { },
 });
 
 
 interface GameContextProps {
-  chosenCollection: string,
-  setChosenCollection: Dispatch<SetStateAction<string>>
+  chosenCollection: Collection | null,
+  setChosenCollection: Dispatch<SetStateAction<Collection | null>>
 }

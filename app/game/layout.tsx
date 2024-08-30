@@ -28,14 +28,14 @@ import Link from 'next/link';
 import Separator from '@/components/separator';
 import useSWR from 'swr';
 import { Collection } from '@/lib/definitions';
-import { GameContext} from '@/providers/game';
+import { GameContext } from '@/providers/game';
 const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 	const { data, isLoading } = useSWR('/collections');
-	const [chosenCollection, setChosenCollection] = useState('');
+	const [chosenCollection, setChosenCollection] = useState<Collection | null>(null);
 	const collections: Collection[] = data;
 	useEffect(() => {
 		if (collections?.length) {
-			setChosenCollection(collections[0].name);
+			setChosenCollection(collections[0]);
 		}
 	}, [data]);
 	return (
@@ -50,7 +50,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 								className='px-2 py-1 border-black/50 border-2 rounded-lg flex items-center gap-1 text-primary border-primary'
 							>
 								<span className='normal-case text-lg'>
-									{chosenCollection || 'Choose collection'}
+									{chosenCollection?.name || 'Choose collection'}
 								</span>
 								<ChevronDownIcon className='w-6 h-6' />
 							</Button>
@@ -62,7 +62,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 								key={collection._id}
 								className='flex gap-4 border-2 items-center justify-between py-0.5'
 								onClick={() => {
-									setChosenCollection(collection?.name);
+									setChosenCollection(collection);
 								}}
 							>
 								<div className='rounded-full border-2'>

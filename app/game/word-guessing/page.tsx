@@ -7,7 +7,6 @@ import {
 	Typography,
 	Button,
 } from '@material-tailwind/react';
-import { collection } from '@/lib/placeholders';
 import useSWR from 'swr';
 import { GameContext } from '@/providers/game';
 import { getWordGuessingData } from '@/lib/helpers/array';
@@ -21,7 +20,7 @@ import WrongAnswerFooter from '../_components/wrong-answer-footer';
 const Page = () => {
 	const { chosenCollection } = useContext(GameContext);
 
-	const { data } = useSWR('/vocabularies/' + chosenCollection);
+	const { data } = useSWR('/vocabularies/' + chosenCollection?._id);
 
 	const [step, setStep] = useState<number>(0);
 	const [disabled, setDisabled] = useState<boolean>(false);
@@ -74,11 +73,10 @@ const Page = () => {
 
 	useEffect(() => {
 		if (data) {
-			const questionsBank = getWordGuessingData(data.data);
+			const questionsBank = getWordGuessingData(data);
 			setQuestionSet(questionsBank.questions);
 			setFillerWords(questionsBank.fillerAnswers);
 		}
-		console.log("data: ", data)
 	}, [data]);
 
   useEffect(()=>{
@@ -87,7 +85,7 @@ const Page = () => {
 
 	if (!data) return <Loader />;
 
-	if (data.data.length < 5) return (
+	if (data.length < 5) return (
 	<Typography
 	variant='h5'
 			color='blue-gray'
