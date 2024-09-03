@@ -34,8 +34,8 @@ export default function Collections() {
       <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4'>
         {
           isLoading
-            ? Array.from({ length: 3 }).map(_ =>
-              <CollectionCardSkeleton />
+            ? Array.from({ length: 3 }).map((_, index) =>
+              <CollectionCardSkeleton key={index} />
             )
             : collectionList.map(collection =>
               <CollectionCard
