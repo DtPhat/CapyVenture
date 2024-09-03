@@ -8,6 +8,7 @@ import Storylist from "./_components/story-list";
 import { getStory } from "@/lib/actions/stories";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { PaginationDemo } from "@/components/pagination";
 
 export default async function Stories({
   searchParams,
@@ -40,6 +41,7 @@ export default async function Stories({
           </div>
         </div>
         <Storylist title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />
+        <PaginationDemo />
       </Container>
     </div>
   );

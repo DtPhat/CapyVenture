@@ -6,6 +6,7 @@ import { ENGLISH_LEVELS } from "../../lib/constants";
 import VideoList from "./_components/video-list";
 import { Suspense } from "react";
 import Loading from "../stories/loading";
+import { PaginationDemo } from "@/components/pagination";
 export default async function Videos({
   searchParams,
 }: {
@@ -43,6 +44,7 @@ export default async function Videos({
         <Suspense fallback={<Loading />}>
           <VideoList title={searchParams?.title} level={searchParams?.level} category={searchParams?.category} />
         </Suspense>
+        <PaginationDemo />
       </Container>
     </div>
   );

@@ -5,6 +5,7 @@ import { Collection } from '@/lib/definitions';
 import useSWR from 'swr';
 import CollectionCard from './_components/card';
 import { CreateCollection } from './_components/create';
+import { CardSkeleton, CollectionCardSkeleton } from '@/components/skeleton';
 
 export default function Collections() {
   const { data, isLoading, error } = useSWR('/collections')
@@ -31,12 +32,18 @@ export default function Collections() {
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4'>
-        {collectionList.map(collection =>
-          <CollectionCard
-            key={collection._id}
-            collection={collection}
-          />
-        )}
+        {
+          isLoading
+            ? Array.from({ length: 3 }).map(_ =>
+              <CollectionCardSkeleton />
+            )
+            : collectionList.map(collection =>
+              <CollectionCard
+                key={collection._id}
+                collection={collection}
+              />
+            )
+        }
       </div>
     </Container >
   )

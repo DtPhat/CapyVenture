@@ -125,7 +125,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 							</CardHeader>
 						</Card>
 					</Link>
-					<Link href='/game/matching' className='space-y-2'>
+					<Link href='/game/word-guessing' className='space-y-2'>
 						<Card className='overflow-hidden hover:bg-accent/10 p-4 flex justify-center flex-col items-center gap-8 group bg-foreground'>
 							<QuestionMarkCircleIcon className='w-40 h-40 text-red-700/50' />
 							<CardHeader
@@ -137,7 +137,7 @@ const GameLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 							</CardHeader>
 						</Card>
 					</Link>
-					<Link href='/game/matching' className='space-y-2'>
+					<Link href='/game/multiple-choice' className='space-y-2'>
 						<Card className='overflow-hidden hover:bg-accent/10 p-4 flex justify-center flex-col items-center gap-8 group bg-foreground'>
 							<Squares2X2Icon className='w-40 h-40 text-orange-700/50' />
 							<CardHeader

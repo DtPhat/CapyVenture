@@ -26,7 +26,7 @@ interface CollectionCardProps {
   collection: Collection
 }
 export default function CollectionCard({ collection }: CollectionCardProps) {
-  const { _id, name, description, picture = "", totalVocab } = collection
+  const { _id, name, description, picture = "", totalVocab = 0 } = collection
   const router = useRouter()
   const { data, trigger, isMutating } = useSWRMutation(`/collections/${_id}`, deleteFetcher)
 
@@ -113,7 +113,7 @@ export default function CollectionCard({ collection }: CollectionCardProps) {
         </div> */}
         </CardBody>
         <CardFooter className="p-2 flex justify-end pr-4">
-          <NavigateButtonIcon linkTo="/game/flashcard" text="Go Practice" />
+          <NavigateButtonIcon linkTo="/game/flashcard" text="Go Practice" disabled={totalVocab <= 1} />
         </CardFooter>
       </Card>
     </>

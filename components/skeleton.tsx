@@ -12,6 +12,14 @@ export const CardSkeleton = () => {
   )
 }
 
+export const CollectionCardSkeleton = () => {
+  return (
+    <div className="flex flex-col space-y-3">
+      <SkeletonUI className="h-52 w-full rounded-xl bg-primary/20" />
+    </div>
+  )
+}
+
 export const PageSkeleton = () => {
   return (
     <div className="w-full flex flex-col p-2 gap-4">

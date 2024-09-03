@@ -32,10 +32,10 @@ const ButtonIcon = ({ Icon, iconDirection, text, className, onClick, variant = '
     </Button>
   )
 }
-export const NavigateButtonIcon = ({ text, className, linkTo = '/' }: ButtonIconProps) => {
+export const NavigateButtonIcon = ({ text, className, linkTo = '/', disabled = false }: ButtonIconProps) => {
   return (
-    <Link href={linkTo} className='group'>
-      <Button variant="text" className={`text-sm flex items-center gap-2 px-4 py-2 !${className}`}>
+    <Link href={linkTo} className={`group ${disabled ? 'pointer-events-none' : ''}`}>
+      <Button variant="text" className={`text-sm flex items-center gap-2 px-4 py-2 !${className}`} disabled={disabled}>
         <span className='transition duration-400 group-hover:-translate-x-1'>{text}</span>
         <div>
           <ArrowRightIcon className='w-5 h-5 transition duration-400 group-hover:translate-x-1' />
