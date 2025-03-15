@@ -12,14 +12,13 @@ export const CardSkeleton = () => {
   )
 }
 
-export const CollectionCardSkeleton = () => {
+export const BarSkeleton = () => {
   return (
     <div className="flex flex-col space-y-3">
       <SkeletonUI className="h-52 w-full rounded-xl bg-primary/20" />
     </div>
   )
 }
-
 export const VocabCardSkeleton = () => {
   return (
     <div className="flex flex-col space-y-3">
