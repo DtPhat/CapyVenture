@@ -79,7 +79,7 @@ const MatchingCard = (props: Props) => {
 					: '',
 				disabled
 					? 'text-gray-400 cursor-default'
-					: `hover:${cardStyles.gradient} to-accent/10 active:border-b-2 active:mt-1 `
+					: `${cardStyles.gradient} active:border-b-2 active:mt-1 `
 			)}
 			onClick={handleOnClick}
 		>

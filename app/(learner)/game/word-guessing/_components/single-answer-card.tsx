@@ -69,7 +69,7 @@ const SingleAnswerCard = (props: Props) => {
 			className={clsx(
 				'font-semibold text-2xl border shadow-md bg-white rounded-md cursor-pointer select-none flex items-center justify-center',
 				isSentence ? 'px-2 py-1' : ' min-w-3 max-w-5 ',
-				`hover:${cardStyles.gradient}`
+				`${cardStyles.gradient}`
 			)}
 		>
 			{item}

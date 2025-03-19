@@ -24,7 +24,7 @@ import { toast } from '@/components/ui/use-toast';
 const MatchingGame = () => {
   const { chosenCollection } = useContext(GameContext);
 
-  const { data = [], isLoading, isValidating } = useSWR('/vocabularies/' + chosenCollection?._id)
+  const { data, isLoading, isValidating } = useSWR('/vocabularies/' + chosenCollection?._id)
 
   const [shouldWait, setShouldWait] = useState<boolean>(false);
 
@@ -133,7 +133,7 @@ const MatchingGame = () => {
 
   if (isLoading || !data) return <RectangleSkeleton />;
 
-  if (data?.length < 5) return (
+  if (data.length < 5) return (
     <NoData text='The collection does not have enough vocabulary. Please add more
 		or select another collection!'/>
   );
