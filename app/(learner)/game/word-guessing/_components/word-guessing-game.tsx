@@ -1,8 +1,8 @@
 'use client';
 import { GameContext } from '@/app/(learner)/game/_lib/context';
 import { getWordGuessingData } from '@/app/(learner)/game/_lib/utils';
-import NoData from '@/components/no-data';
-import { RectangleSkeleton } from '@/components/skeleton';
+import NoData from '@/components/sections/no-data';
+import { RectangleSkeleton } from '@/components/sections/skeleton';
 import {
   Button,
   Card,
@@ -83,9 +83,9 @@ const WordGuessingGame = () => {
     setQuestion(questionSet[step])
   }, [step, questionSet])
 
-  if (isLoading || !data) return <RectangleSkeleton />;
+  if (isLoading) return <RectangleSkeleton />;
 
-  if (data?.length < 5) return (
+  if (!data || data?.length < 5) return (
     <NoData text='The collection does not have enough vocabulary. Please add more
 		or select another collection!'/>
   );
